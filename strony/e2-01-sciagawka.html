@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ściągawka rozszerzona</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Ściągawka języka „assembly” (rozszerzona)</h1><div class="sub">Quick reference for the “assembly” language (extended)</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/e2-01-sciagawka.pdf" download>Pobierz PDF / Download PDF</a></span>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Rozumiem każde polecenie, także skoki warunkowe.<br><span class="en">I understand every command, including conditional jumps.</span></li><li>Potrafię wybrać między dwoma sposobami zapisu „jeśli … to … w przeciwnym razie”.<br><span class="en">I can choose between two ways of writing “if … then … otherwise”.</span></li></ul></div>
+<h2>Język „assembly” w InstaLogik – ściągawka <span class="en">/ The InstaLogik “assembly” language – quick reference</span></h2>
+<p>Program to ponumerowana lista poleceń. Komputer wykonuje je od linii 1 w dół, chyba że polecenie skoku każe iść gdzie indziej. Dane przechowujemy w czterech <strong>pudełkach</strong>: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>. W każdym pudełku jest jedna liczba całkowita (na początku 0).</p>
+<p class="en">A program is a numbered list of commands. The computer runs them from line 1 downwards unless a jump sends it elsewhere. Data live in four <strong>boxes</strong>: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>. Each box holds one whole number (it starts as 0).</p>
+<table><thead><tr><th>Polecenie / Command</th><th>Co robi / What it does</th></tr></thead><tbody><tr><td class="mono">Wczytaj do A</td><td>Bierze kolejną liczbę z wejścia i wkłada ją do A.<br><span class="en">Takes the next number from the input and puts it into A.</span></td></tr><tr><td class="mono">Ustaw A na 5<br>Ustaw A na B</td><td>Wkłada do A liczbę 5 (albo kopię liczby z B; B się nie zmienia).<br><span class="en">Puts 5 in A (or a copy of B; B does not change).</span></td></tr><tr><td class="mono">Zwiększ A o 3<br>Zwiększ A o B</td><td>A staje się A + 3 (albo A + B).<br><span class="en">A becomes A + 3 (or A + B).</span></td></tr><tr><td class="mono">Zmniejsz A o 3<br>Zmniejsz A o B</td><td>A staje się A − 3 (albo A − B). Uważaj, by nie zejść poniżej 0.<br><span class="en">A becomes A − 3 (or A − B). Take care not to go below 0.</span></td></tr><tr><td class="mono">Wypisz pudełko A</td><td>Wypisuje liczbę z pudełka A.<br><span class="en">Prints the number in box A.</span></td></tr><tr><td class="mono">Wypisz napis &#x27;TAK&#x27;</td><td>Wypisuje podany tekst.<br><span class="en">Prints the given text.</span></td></tr><tr><td class="mono">Przejdź do nowej linii</td><td>Kończy wiersz wyniku. Używaj między kolejnymi odpowiedziami.<br><span class="en">Ends the output line. Use it between separate answers.</span></td></tr><tr><td class="mono">Skocz do 7</td><td>Następna wykonywana linia to 7.<br><span class="en">The next line to run is 7.</span></td></tr><tr><td class="mono">Skocz do końca</td><td>Kończy program.<br><span class="en">Ends the program.</span></td></tr><tr><td class="mono">Jeżeli A ≤ 5 skocz do następnej<br>inaczej skocz do 9</td><td>Jeśli warunek jest prawdziwy – idź do następnej linii, jeśli fałszywy – do linii 9. Porównywać można z liczbą lub z innym pudełkiem.<br><span class="en">If the condition is true go to the next line, otherwise to line 9. You can compare with a number or with another box.</span></td></tr></tbody></table>
+<p>Znaki porównania: <strong>=</strong> równe, <strong>≠</strong> różne, <strong>&lt;</strong> mniejsze, <strong>&gt;</strong> większe, <strong>≤</strong> mniejsze lub równe, <strong>≥</strong> większe lub równe. Warunek możesz też zapisać odwrotnie: „Jeżeli A = 5 skocz do 9 inaczej skocz do następnej”.</p>
+<p class="en">Comparison signs: <strong>=</strong> equal, <strong>≠</strong> not equal, <strong>&lt;</strong> less than, <strong>&gt;</strong> greater than, <strong>≤</strong> less than or equal, <strong>≥</strong> greater than or equal. You may also write the condition the other way round: “Jeżeli A = 5 skocz do 9 inaczej skocz do następnej”.</p>
+<h3>Przykład: co robi ten program? <span class="en">/ Example: what does this program do?</span></h3>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na A
+ 3. Zwiększ B o B
+ 4. Zwiększ B o 1
+ 5. Wypisz pudełko B</pre>
+<p>Dla wejścia <strong>6</strong> wykonujemy linie po kolei (tabela śledzenia):</p>
+<p class="en">For input <strong>6</strong> we run the lines in order (trace table):</p>
+<table><thead><tr><th>Linia / Line</th><th>Co się dzieje / What happens</th><th>A</th><th>B</th></tr></thead><tbody><tr><td>1</td><td>A ← 6</td><td>6</td><td>0</td></tr><tr><td>2</td><td>B ← A</td><td>6</td><td>6</td></tr><tr><td>3</td><td>B ← B + B</td><td>6</td><td>12</td></tr><tr><td>4</td><td>B ← B + 1</td><td>6</td><td>13</td></tr><tr><td>5</td><td>wypisz B / print B</td><td>6</td><td>13</td></tr></tbody></table>
+<p>Wynik: <strong>13</strong>. Program liczy 2 · n + 1.</p>
+<p class="en">Output: <strong>13</strong>. The program computes 2 · n + 1.</p>
+<h3>Dwa sposoby zapisu „jeśli … to … w przeciwnym razie” <span class="en">/ Two ways to write “if … then … otherwise”</span></h3>
+<p><strong>Sposób 1 – rozgałęzienie z końcem.</strong> Każda gałąź sama wypisuje wynik i kończy się „Skocz do końca”.</p>
+<p class="en"><strong>Way 1 – branch with an ending.</strong> Each branch prints its own result and finishes with “Skocz do końca”.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A ≥ 10 skocz do 5 inaczej skocz do następnej
+ 3. Wypisz napis &#x27;MALO&#x27;
+ 4. Skocz do końca
+ 5. Wypisz napis &#x27;DUZO&#x27;</pre>
+<p><strong>Sposób 2 – wartość domyślna.</strong> Najpierw ustaw wynik „na zapas”, potem popraw go, jeśli warunek tego wymaga. Wynik wypisz raz, na końcu.</p>
+<p class="en"><strong>Way 2 – default value.</strong> First set the result “just in case”, then correct it if the condition requires. Print once, at the end.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na 2
+ 3. Jeżeli A ≥ 10 skocz do 5 inaczej skocz do następnej
+ 4. Ustaw B na 1
+ 5. Wypisz pudełko B</pre>
+<p>Oba programy rozróżniają liczby małe (&lt; 10) i duże (≥ 10). Wybierz ten sposób, który jest dla Ciebie czytelniejszy.</p>
+<p class="en">Both programs tell small numbers (&lt; 10) from large ones (≥ 10). Choose the way that is clearer to you.</p>
+<h3>Pięć kroków, zanim napiszesz pierwsze polecenie <span class="en">/ Five steps before you write the first command</span></h3>
+<ol start="1"><li>Przeczytaj zadanie dwa razy i podkreśl, co wczytujesz i co masz wypisać.<br><span class="en">Read the task twice and underline what you read in and what you must print.</span></li><li>Sprawdź ręcznie przykłady z treści zadania.<br><span class="en">Check the examples from the task by hand.</span></li><li>Zdecyduj, które pudełko będzie na co (np. A = pierwsza liczba, B = druga, C = wynik).<br><span class="en">Decide which box is for what (e.g. A = first number, B = second, C = result).</span></li><li>Napisz program i <strong>przetestuj go na papierze</strong> tabelą śledzenia – także dla liczb brzegowych (najmniejsza, największa, równe).<br><span class="en">Write the program and <strong>test it on paper</strong> with a trace table – including edge values (smallest, largest, equal).</span></li><li>Sprawdź numery linii w skokach – po dopisaniu polecenia wszystkie numery za nim się przesuwają!<br><span class="en">Check the line numbers in jumps – after inserting a command, every number after it shifts!</span></li></ol>
+<h3>Najczęstsze błędy <span class="en">/ Most common mistakes</span></h3>
+<ul><li>Brak „Przejdź do nowej linii” między dwiema liczbami do wypisania.<br><span class="en">No “Przejdź do nowej linii” between two numbers to print.</span></li><li>Pomylone znaki &lt; i ≤ (albo &gt; i ≥) – zawsze sprawdź liczbę równą granicy.<br><span class="en">Mixed-up &lt; and ≤ (or &gt; and ≥) – always test the number equal to the border.</span></li><li>Po jednej gałęzi program „wpada” w kod drugiej gałęzi, bo zabrakło „Skocz do końca” lub „Skocz do …”.<br><span class="en">After one branch the program “falls into” the other because “Skocz do …” is missing.</span></li><li>Zmiana pudełka, którego wartość jeszcze jest potrzebna (najpierw skopiuj!).<br><span class="en">Changing a box whose value is still needed (copy it first!).</span></li><li>Odejmowanie, które daje liczbę ujemną.<br><span class="en">A subtraction that gives a negative number.</span></li></ul>
+</main>
+<footer>
+<p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

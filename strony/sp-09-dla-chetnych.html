@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dla chętnych: AQA i LMC</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Dla chętnych: od InstaLogik do assembly AQA i LMC</h1><div class="sub">For keen pupils: from InstaLogik to AQA assembly and LMC</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/sp-09-dla-chetnych.pdf" download>Pobierz PDF / Download PDF</a> <button class="alt" id="wyczysc" style="margin-left:8px">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+<p>Dodatkowa praktyka po opanowaniu materiałów konkursowych – ściągawka i przykłady.</p><p class="en">Extra practice once the contest materials are mastered – a cheat sheet and examples.</p>
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Rozumiem, że język z konkursu to uproszczony <strong>assembly</strong> – tak samo działają prawdziwe procesory.<br><span class="en">I understand that the contest language is a simplified <strong>assembly</strong> language – real processors work the same way.</span></li><li>Potrafię zamienić proste polecenie InstaLogik na polecenie assembly AQA.<br><span class="en">I can turn a simple InstaLogik command into an AQA assembly command.</span></li><li>Wiem, że <strong>rejestry</strong> to „pudełka” procesora, a <strong>etykiety</strong> zastępują numery linii.<br><span class="en">I know that <strong>registers</strong> are the processor’s “boxes” and <strong>labels</strong> replace line numbers.</span></li></ul></div>
+<div class="note"><p>To materiał dodatkowy, nie przygotowanie do konkursu: składnia jest inna niż w InstaLogik, więc programów z zeszytów nie da się w nim sprawdzać. Zewnętrzny symulator (Peter Higginson, strona „AQA Assembly Language Simulator”) działa w przeglądarce. Sposób wprowadzania i wypisywania danych w nim jest inny niż w konkursie – zajrzyj do jego pomocy; poniższe przykłady używają stałych liczb i wynik czytamy z rejestrów.</p><p class="en">This is extra material, not contest preparation: the syntax differs from InstaLogik, so workbook programs cannot be checked in it. The external simulator (Peter Higginson’s “AQA Assembly Language Simulator”) runs in the browser. Input and output work differently from the contest, so see its help page; the examples below use fixed numbers and we read the result from the registers.</p></div>
+<h2>1. Słownik: InstaLogik ↔ AQA <span class="en">/ 1. Dictionary: InstaLogik ↔ AQA</span></h2>
+<table><thead><tr><th>InstaLogik</th><th>assembly AQA</th><th>Uwaga / Note</th></tr></thead><tbody><tr><td class="mono">Ustaw A na 5</td><td class="mono">MOV R0, #5</td><td># przed liczbą<br><span class="en"># before a number</span></td></tr><tr><td class="mono">Ustaw A na B</td><td class="mono">MOV R0, R1</td><td>bez #, bo to rejestr<br><span class="en">no #, it is a register</span></td></tr><tr><td class="mono">Zwiększ A o 3</td><td class="mono">ADD R0, R0, #3</td><td>wynik, pierwszy składnik, drugi składnik<br><span class="en">result, first value, second value</span></td></tr><tr><td class="mono">Zwiększ A o B</td><td class="mono">ADD R0, R0, R1</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Zmniejsz A o 3</td><td class="mono">SUB R0, R0, #3</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Skocz do 7</td><td class="mono">B etykieta</td><td>etykieta: stoi w kodzie zamiast numeru linii<br><span class="en">a label: replaces the line number</span></td></tr><tr><td class="mono">Jeżeli A = B skocz do…</td><td class="mono">CMP R0, R1<br>BEQ etykieta</td><td>najpierw porównaj, potem skocz<br><span class="en">compare first, then branch</span></td></tr><tr><td class="mono">Jeżeli A ≠ B skocz do…</td><td class="mono">CMP R0, R1<br>BNE etykieta</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Jeżeli A &gt; B skocz do…</td><td class="mono">CMP R0, R1<br>BGT etykieta</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Jeżeli A &lt; B skocz do…</td><td class="mono">CMP R0, R1<br>BLT etykieta</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Jeżeli A ≥ B skocz do…</td><td class="mono">CMP R0, R1<br>BGT etykieta<br>BEQ etykieta</td><td>w AQA nie ma osobnego ≥ ani ≤: łączymy dwa skoki<br><span class="en">AQA has no separate ≥ or ≤: combine two branches</span></td></tr><tr><td class="mono">Skocz do końca</td><td class="mono">HALT</td><td>zatrzymuje program<br><span class="en">stops the program</span></td></tr><tr><td class="mono">pudełka A, B, C, D</td><td class="mono">rejestry R0, R1, R2, R3 …</td><td>do R12<br><span class="en">up to R12</span></td></tr><tr><td class="mono">numer linii</td><td class="mono">etykieta</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<div class="note"><p><strong>Ważna różnica:</strong> w InstaLogik w poleceniu „Jeżeli” podajemy oba miejsca skoku („…inaczej skocz do…”). W assembly AQA po niespełnionym warunku program po prostu idzie do <strong>następnej linii</strong>.</p><p class="en"><strong>Key difference:</strong> in InstaLogik the “Jeżeli” command names both jump targets (“…inaczej skocz do…”). In AQA assembly, when the condition is not met the program simply goes on to the <strong>next line</strong>.</p></div>
+<h2>2. Przykłady <span class="en">/ 2. Examples</span></h2>
+<h3>Przykład 1: podwajanie (liczba 7) <span class="en">/ Example 1: doubling (the number 7)</span></h3>
+<pre class="code"><span class="ttl">InstaLogik – wynik w pudełku A / result in box A</span>
+ 1. Ustaw A na 7
+ 2. Zwiększ A o A
+ 3. Skocz do końca</pre>
+<pre class="code"><span class="ttl">assembly AQA – wynik w R0 = 14 / result in R0 = 14</span>
+MOV R0, #7
+ADD R0, R0, R0
+HALT</pre>
+<h3>Przykład 2: większa z dwóch liczb (3 i 5) <span class="en">/ Example 2: the larger of two numbers (3 and 5)</span></h3>
+<pre class="code"><span class="ttl">InstaLogik – wynik w A / result in A</span>
+ 1. Ustaw A na 3
+ 2. Ustaw B na 5
+ 3. Jeżeli A &gt; B skocz do końca inaczej skocz do następnej
+ 4. Ustaw A na B</pre>
+<pre class="code"><span class="ttl">assembly AQA – wynik w R0 = 5 / result in R0 = 5</span>
+MOV R0, #3
+MOV R1, #5
+CMP R0, R1
+BGT end
+MOV R0, R1
+end:
+HALT</pre>
+<h3>Przykład 3: mnożenie pętlą (3 × 4) <span class="en">/ Example 3: multiplication with a loop (3 × 4)</span></h3>
+<pre class="code"><span class="ttl">assembly AQA – wynik w R0 = 12 / result in R0 = 12</span>
+MOV R0, #0
+MOV R1, #3
+MOV R2, #4
+loop:
+CMP R1, #0
+BEQ done
+ADD R0, R0, R2
+SUB R1, R1, #1
+B loop
+done:
+HALT</pre>
+<p>R1 zlicza powtórzenia, R2 to dodawana liczba, R0 zbiera wynik. Pętla kończy się, gdy R1 dojdzie do 0.</p>
+<p class="en">R1 counts the repeats, R2 is the number being added and R0 collects the result. The loop ends when R1 reaches 0.</p>
+<h3>Przykład 4: pamięć <span class="en">/ Example 4: memory</span></h3>
+<pre class="code"><span class="ttl">assembly AQA – po wykonaniu R1 = 9 / after running R1 = 9</span>
+MOV R0, #9
+STR R0, 100
+LDR R1, 100
+HALT</pre>
+<p>W InstaLogik mamy tylko cztery pudełka. Prawdziwy procesor ma też <strong>pamięć</strong>: STR zapisuje rejestr pod numerem adresu, LDR odczytuje.</p>
+<p class="en">InstaLogik has only four boxes. A real processor also has <strong>memory</strong>: STR stores a register at an address number and LDR reads it back.</p>
+<h2>3. Little Man Computer (LMC) <span class="en">/ 3. Little Man Computer (LMC)</span></h2>
+<p>LMC to prosty model komputera do nauki w szkołach (np. strony peterhigginson.co.uk/lmc i 101computing.net/lmc). Ma jeden rejestr roboczy, <strong>akumulator</strong>, oraz „skrzynki” na liczby, a wejście i wyjście działają jak w konkursie: INP wczytuje liczbę, OUT ją wypisuje.</p>
+<p class="en">LMC is a simple computer model for school teaching (e.g. peterhigginson.co.uk/lmc and 101computing.net/lmc). It has a single working register, the <strong>accumulator</strong>, and “mailboxes” for numbers, and input and output work as in the contest: INP reads a number and OUT prints it.</p>
+<table><thead><tr><th>InstaLogik</th><th>LMC</th><th>Uwaga / Note</th></tr></thead><tbody><tr><td class="mono">Wczytaj do A</td><td class="mono">INP<br>STA a</td><td>INP wczytuje do akumulatora, STA zapisuje do skrzynki a<br><span class="en">INP reads into the accumulator, STA stores it in mailbox a</span></td></tr><tr><td class="mono">Wypisz pudełko A</td><td class="mono">LDA a<br>OUT</td><td>najpierw wczytaj skrzynkę do akumulatora<br><span class="en">first load the mailbox into the accumulator</span></td></tr><tr><td class="mono">Zwiększ A o B</td><td class="mono">LDA a<br>ADD b<br>STA a</td><td>wszystkie działania idą przez akumulator<br><span class="en">all arithmetic goes through the accumulator</span></td></tr><tr><td class="mono">Zmniejsz A o B</td><td class="mono">LDA a<br>SUB b<br>STA a</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">Skocz do 7</td><td class="mono">BRA etykieta</td><td>etykieta stoi na początku linii<br><span class="en">the label sits at the start of the line</span></td></tr><tr><td class="mono">Jeżeli A = 0 skocz do…</td><td class="mono">LDA a<br>BRZ etykieta</td><td>BRZ: skok, gdy akumulator = 0<br><span class="en">BRZ: jump if the accumulator is 0</span></td></tr><tr><td class="mono">Jeżeli A ≥ B skocz do…</td><td class="mono">LDA a<br>SUB b<br>BRP etykieta</td><td>BRP: skok, gdy wynik ≥ 0<br><span class="en">BRP: jump if the result is ≥ 0</span></td></tr><tr><td class="mono">Skocz do końca</td><td class="mono">HLT</td><td><input aria-label="odpowiedź"></td></tr><tr><td class="mono">pudełka A, B…</td><td class="mono">skrzynki: a DAT, b DAT 0</td><td>DAT rezerwuje miejsce, można nadać wartość początkową<br><span class="en">DAT reserves a place and can give a start value</span></td></tr></tbody></table>
+<div class="note"><p>Inne porównania (np. A &gt; B) wymagają połączenia kilku poleceń. W LMC nie ma też osobnego „Jeżeli”: najpierw liczymy w akumulatorze, potem skaczemy. W niektórych symulatorach liczby ujemne działają inaczej niż w konkursie, więc pilnuj, by wyniki były dodatnie.</p><p class="en">Other comparisons (e.g. A &gt; B) need several commands combined. LMC also has no separate “Jeżeli”: first calculate in the accumulator, then branch. In some simulators negative numbers behave differently from the contest, so keep results positive.</p></div>
+<h3>LMC – przykład 1: podwajanie <span class="en">/ LMC – example 1: doubling</span></h3>
+<pre class="code"><span class="ttl">LMC – wpisz 7, wypisze 14 / enter 7, prints 14</span>
+INP
+STA x
+ADD x
+OUT
+HLT
+x DAT</pre>
+<h3>LMC – przykład 2: większa z dwóch liczb <span class="en">/ LMC – example 2: the larger of two numbers</span></h3>
+<pre class="code"><span class="ttl">LMC – wpisz 3 i 5, wypisze 5 / enter 3 and 5, prints 5</span>
+INP
+STA a
+INP
+STA b
+LDA a
+SUB b
+BRP first
+LDA b
+OUT
+HLT
+first LDA a
+OUT
+HLT
+a DAT
+b DAT</pre>
+<h3>LMC – przykład 3: mnożenie pętlą <span class="en">/ LMC – example 3: multiplication with a loop</span></h3>
+<pre class="code"><span class="ttl">LMC – wpisz 3 i 4, wypisze 12 / enter 3 and 4, prints 12</span>
+INP
+STA a
+INP
+STA b
+loop LDA b
+BRZ done
+SUB one
+STA b
+LDA total
+ADD a
+STA total
+BRA loop
+done LDA total
+OUT
+HLT
+a DAT
+b DAT
+total DAT 0
+one DAT 1</pre>
+<h2>4. Zadania dla chętnych <span class="en">/ 4. Challenges</span></h2>
+<ol start="1"><li>Przepisz na assembly AQA program z InstaLogik: „Ustaw A na 10, Zmniejsz A o 4”. Ile wynosi R0?<br><span class="en">Rewrite the InstaLogik program “Ustaw A na 10, Zmniejsz A o 4” in AQA assembly. What is R0?</span></li><li>Zmień przykład 2 tak, aby wynikiem była <strong>mniejsza</strong> z dwóch liczb.<br><span class="en">Change example 2 so that the result is the <strong>smaller</strong> of the two numbers.</span></li><li>Zmień przykład 3 tak, aby liczył 5 × 6. Które linie trzeba zmienić?<br><span class="en">Change example 3 to calculate 5 × 6. Which lines must change?</span></li><li>Napisz program, który dodaje liczby od 1 do 5 (wynik 15) pętlą z etykietą.<br><span class="en">Write a program that adds the numbers 1 to 5 (result 15) using a loop with a label.</span></li><li>W LMC napisz program, który wczytuje liczbę n i wypisuje sumę 1 + 2 + … + n.<br><span class="en">In LMC write a program that reads a number n and prints the sum 1 + 2 + … + n.</span></li></ol>
+<h3>Odpowiedzi (dla nauczyciela) <span class="en">/ Answers (for the teacher)</span></h3>
+<pre class="code"><span class="ttl">1 → R0 = 6</span>
+MOV R0, #10
+SUB R0, R0, #4
+HALT</pre>
+<pre class="code"><span class="ttl">2 → BLT zamiast BGT; dla 3 i 5 R0 = 3 / BLT instead of BGT; for 3 and 5, R0 = 3</span>
+MOV R0, #3
+MOV R1, #5
+CMP R0, R1
+BLT end
+MOV R0, R1
+end:
+HALT</pre>
+<p>Zadanie 3: zmień linie z liczbami MOV R1, #5 i MOV R2, #6 (wynik 30).</p>
+<p class="en">Challenge 3: change the lines MOV R1, #5 and MOV R2, #6 (result 30).</p>
+<pre class="code"><span class="ttl">4 → R0 = 15</span>
+MOV R0, #0
+MOV R1, #1
+loop:
+CMP R1, #5
+BGT done
+ADD R0, R0, R1
+ADD R1, R1, #1
+B loop
+done:
+HALT</pre>
+<pre class="code"><span class="ttl">5 (LMC) → dla n = 4 wypisze 10 / for n = 4 prints 10</span>
+INP
+STA n
+LDA zero
+STA total
+loop LDA n
+BRZ done
+LDA total
+ADD n
+STA total
+LDA n
+SUB one
+STA n
+BRA loop
+done LDA total
+OUT
+HLT
+n DAT
+total DAT 0
+zero DAT 0
+one DAT 1</pre>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your answers are saved only in this browser, on this device — nobody sees them and they are not sent anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p><p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trudne programy i pętle</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Zeszyt: trudne programy i pętle</h1><div class="sub">Workbook: hard programs and loops</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/e2-04-trudne-petle.pdf" download>Pobierz PDF / Download PDF</a> <button class="alt" id="wyczysc" style="margin-left:8px">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Potrafię napisać pętlę ze skokiem wstecz i licznikiem.<br><span class="en">I can write a loop with a jump back and a counter.</span></li><li>Potrafię policzyć dzielenie z resztą przez odejmowanie.<br><span class="en">I can compute division with remainder by subtraction.</span></li><li>Potrafię sprawdzić, czy pętla na pewno się kończy.<br><span class="en">I can check that a loop definitely ends.</span></li></ul></div>
+<div class="note"><p>Gwiazdki oznaczają trudność. Wyniki w osobnych liniach zapisuj poleceniem „Przejdź do nowej linii”. Najpierw tabela śledzenia na przykładach, potem program.</p><p class="en">Stars show difficulty. Print results on separate lines using “Przejdź do nowej linii”. Trace table on the examples first, then the program.</p></div>
+<h3>Zadanie 1: Mnożenie  ★★★ <span class="en">/ Task 1: Multiplication</span></h3>
+<p>Wczytaj dwie liczby a i b (0–1000) i wypisz a · b. Wolno używać tylko dodawania i odejmowania.</p>
+<p class="en">Read two numbers a and b (0–1000) and print a · b. You may only use addition and subtraction.</p>
+<p><strong>Wejście:</strong> dwie liczby.</p>
+<p class="en"><strong>Input:</strong> two numbers.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>3  4</td><td>12</td></tr><tr><td>2</td><td>7  1</td><td>7</td></tr></tbody></table>
+<div class="ed" data-tests='[[[3, 4], [12]], [[7, 1], [7]], [[25, 40], [1000]], [[1000, 1000], [1000000]], [[9, 0], [0]]]'><textarea rows="8" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>25  40</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>1000  1000</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T3</td><td>9  0</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h3>Zadanie 2: Suma kolejnych liczb  ★★★ <span class="en">/ Task 2: Sum of consecutive numbers</span></h3>
+<p>Wczytaj n (1–1000) i wypisz 1 + 2 + … + n.</p>
+<p class="en">Read n (1–1000) and print 1 + 2 + … + n.</p>
+<p><strong>Wejście:</strong> jedna liczba.</p>
+<p class="en"><strong>Input:</strong> one number.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>2</td><td>3</td></tr></tbody></table>
+<div class="ed" data-tests='[[[1], [1]], [[2], [3]], [[5], [15]], [[10], [55]], [[100], [5050]], [[1000], [500500]]]'><textarea rows="8" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>10</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T3</td><td>100</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h3>Zadanie 3: Tygodnie i dni  ★★★ <span class="en">/ Task 3: Weeks and days</span></h3>
+<p>Wczytaj liczbę dni (0–1000). W pierwszej linii wypisz liczbę pełnych tygodni, w drugiej – ile dni zostaje.</p>
+<p class="en">Read a number of days (0–1000). On the first line print the number of full weeks, on the second the number of days left over.</p>
+<p><strong>Wejście:</strong> jedna liczba.</p>
+<p class="en"><strong>Input:</strong> one number.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>0 | 0</td></tr><tr><td>2</td><td>6</td><td>0 | 6</td></tr></tbody></table>
+<div class="ed" data-tests='[[[0], [0, 0]], [[6], [0, 6]], [[7], [1, 0]], [[20], [2, 6]], [[49], [7, 0]], [[1000], [142, 6]]]'><textarea rows="8" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>7</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>20</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T3</td><td>49</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h3>Zadanie 4: Żaba na schodach  ★★★★ <span class="en">/ Task 4: A frog on the stairs</span></h3>
+<p>Żaba skacze po 3 stopnie naraz (ostatni skok może być krótszy). Wczytaj liczbę stopni (1–1000) i wypisz, ile skoków wykona, by dotrzeć na szczyt.</p>
+<p class="en">A frog jumps 3 steps at a time (the last jump may be shorter). Read the number of steps (1–1000) and print how many jumps it needs to reach the top.</p>
+<p><strong>Wejście:</strong> jedna liczba.</p>
+<p class="en"><strong>Input:</strong> one number.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>2</td><td>1</td></tr></tbody></table>
+<div class="ed" data-tests='[[[1], [1]], [[2], [1]], [[3], [1]], [[4], [2]], [[9], [3]], [[10], [4]], [[100], [34]]]'><textarea rows="12" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>4</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T3</td><td>9</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h3>Zadanie 5: Podwajanie  ★★★★ <span class="en">/ Task 5: Doubling</span></h3>
+<p>Co godzinę liczba bakterii się podwaja. Na początku jest 1 bakteria. Wczytaj liczbę godzin (0–10) i wypisz liczbę bakterii.</p>
+<p class="en">The number of bacteria doubles every hour. At the start there is 1 bacterium. Read the number of hours (0–10) and print the number of bacteria.</p>
+<p><strong>Wejście:</strong> jedna liczba.</p>
+<p class="en"><strong>Input:</strong> one number.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>2</td><td>1</td><td>2</td></tr></tbody></table>
+<div class="ed" data-tests='[[[0], [1]], [[1], [2]], [[5], [32]], [[10], [1024]]]'><textarea rows="12" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>10</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h3>Zadanie 6: Wyrównywanie wież  ★★★★★ <span class="en">/ Task 6: Levelling towers</span></h3>
+<p>Są dwie wieże z klocków. Dopóki różnica ich wysokości wynosi co najmniej 2, Jaś przekłada jeden klocek z wyższej na niższą. Wczytaj wysokości (0–1000) i wypisz wysokości po zakończeniu: najpierw pierwszej wieży, potem drugiej (każda w osobnej linii).</p>
+<p class="en">There are two block towers. As long as their heights differ by at least 2, Jaś moves one block from the taller to the shorter. Read the heights (0–1000) and print the heights at the end: first tower first, second tower next (each on its own line).</p>
+<p><strong>Wejście:</strong> dwie liczby.</p>
+<p class="en"><strong>Input:</strong> two numbers.</p>
+<table><thead><tr><th>Przykład</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody><tr><td>1</td><td>5  5</td><td>5 | 5</td></tr><tr><td>2</td><td>6  5</td><td>6 | 5</td></tr></tbody></table>
+<div class="ed" data-tests='[[[5, 5], [5, 5]], [[6, 5], [6, 5]], [[9, 3], [6, 6]], [[3, 9], [6, 6]], [[10, 1], [6, 5]], [[0, 7], [3, 4]], [[1000, 1], [501, 500]]]'><textarea rows="12" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><button data-act="check">Sprawdź / Check</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<table><thead><tr><th>Test</th><th>Wejście / Input</th><th>Wynik / Result</th></tr></thead><tbody><tr><td>T1</td><td>9  3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T2</td><td>3  9</td><td><input aria-label="odpowiedź"></td></tr><tr><td>T3</td><td>10  1</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your answers are saved only in this browser, on this device — nobody sees them and they are not sent anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p><p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

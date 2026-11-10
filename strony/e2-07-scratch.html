@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scratch – powtórka</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Scratch jako wstęp i narzędzia do ćwiczeń</h1><div class="sub">Scratch as an introduction, and practice tools</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/e2-07-scratch.pdf" download>Pobierz PDF / Download PDF</a> <button class="alt" id="wyczysc" style="margin-left:8px">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+<p>Krótki wstęp (ok. 20 minut) na pierwszej lekcji, zanim uczniowie przejdą do papieru, tabeli śledzenia i języka z konkursu.</p><p class="en">A short introduction (about 20 minutes) in the first lesson, before pupils move on to paper, the trace table and the contest language.</p>
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Wiem, że pudełka A–D w konkursie to <strong>zmienne</strong> – tak jak w Scratchu.<br><span class="en">I know that boxes A–D in the contest are <strong>variables</strong> – just as in Scratch.</span></li><li>Potrafię zamienić prosty skrypt ze Scratcha na program w języku z konkursu.<br><span class="en">I can turn a simple Scratch script into a program in the contest language.</span></li><li>Rozumiem, że <strong>pętla</strong> i <strong>warunek</strong> w Scratchu to w konkursie <strong>skoki</strong> i polecenie <strong>Jeżeli</strong>.<br><span class="en">I understand that a Scratch <strong>loop</strong> and <strong>condition</strong> are <strong>jumps</strong> and the <strong>Jeżeli</strong> command in the contest.</span></li></ul></div>
+<h2>1. Dlaczego Scratch na początek <span class="en">/ 1. Why start with Scratch</span></h2>
+<p>Scratch zna wielu uczniów, więc oswaja najważniejsze pojęcia bez nowej składni: <strong>zmienną</strong>, <strong>wczytanie danych</strong>, <strong>warunek</strong> i <strong>pętlę</strong>. Ma jednak ważne ograniczenie: nie ma numerowanych linii ani polecenia „Skocz do”, a właśnie one są sednem języka z konkursu. Dlatego Scratch służy tylko jako <strong>krótki wstęp na lekcji 1</strong>. Resztę przygotowań robimy tak:</p>
+<p class="en">Many pupils know Scratch, so it introduces the key ideas without new syntax: a <strong>variable</strong>, <strong>reading input</strong>, a <strong>condition</strong> and a <strong>loop</strong>. It has one important limit: it has no numbered lines and no “Skocz do” command, and these are the heart of the contest language. So Scratch is only a <strong>short introduction in lesson 1</strong>. We do the rest of the preparation like this:</p>
+<table><thead><tr><th>Narzędzie / Tool</th><th>Kiedy / When</th><th>Po co / What for</th></tr></thead><tbody><tr><td><strong>Papier i tabela śledzenia</strong><br><span class="en">Paper and trace table</span></td><td>zawsze, przy każdym zadaniu<br><span class="en">always, for every task</span></td><td>Najważniejsza umiejętność w konkursie: ręcznie sprawdzić program krok po kroku.<br><span class="en">The key contest skill: checking a program by hand, step by step.</span></td></tr><tr><td><strong>Scratch</strong></td><td>lekcja 1, ok. 20 minut<br><span class="en">lesson 1, about 20 minutes</span></td><td>Zrozumieć zmienne, warunki i pętle bez nowej składni.<br><span class="en">Understand variables, conditions and loops without new syntax.</span></td></tr><tr><td><strong>Symulator HTML</strong> (plik 08)<br><span class="en"><strong>HTML simulator</strong> (file 08)</span></td><td>ćwiczenia w klasie i w domu<br><span class="en">practice in class and at home</span></td><td>Uruchamia programy z konkursu, pokazuje tabelę śledzenia i sprawdza rozwiązania zadań z zeszytów.<br><span class="en">Runs contest programs, shows the trace table and checks the workbook tasks.</span></td></tr><tr><td><strong>Edytor na platformie konkursowej</strong><br><span class="en"><strong>Editor on the contest platform</strong></span></td><td>kilka razy przed sesją i etapem<br><span class="en">a few times before the session and the stage</span></td><td>Oswojenie z prawdziwym środowiskiem, logowaniem i zasadami.<br><span class="en">Getting used to the real environment, logging in and the rules.</span></td></tr></tbody></table>
+<div class="note"><p>W konkursie nie wolno używać narzędzi sztucznej inteligencji. Wszystkie narzędzia powyżej są zwykłymi programami do ćwiczeń – żadne z nich nie korzysta z AI.</p><p class="en">AI tools may not be used in the contest. All the tools above are ordinary practice programs – none of them uses AI.</p></div>
+<h2>2. Słownik: Scratch ↔ język z konkursu <span class="en">/ 2. Dictionary: Scratch ↔ the contest language</span></h2>
+<table><thead><tr><th>Scratch (nazwy bloków mogą się lekko różnić)</th><th>Język z konkursu / Contest language</th></tr></thead><tbody><tr><td>zmienna <strong>A</strong> (Zmienne → Utwórz zmienną)<br><span class="en">variable <strong>A</strong></span></td><td>pudełko <strong>A</strong><br><span class="en">box <strong>A</strong></span></td></tr><tr><td>zapytaj [..] i czekaj, potem ustaw [A] na (odpowiedź)<br><span class="en">ask [..] and wait, then set [A] to (answer)</span></td><td>Wczytaj do A</td></tr><tr><td>ustaw [A] na [5]  /  ustaw [A] na (B)<br><span class="en">set [A] to [5]  /  set [A] to (B)</span></td><td>Ustaw A na 5  /  Ustaw A na B</td></tr><tr><td>zmień [A] o [3]  /  zmień [A] o (B)<br><span class="en">change [A] by [3]  /  change [A] by (B)</span></td><td>Zwiększ A o 3  /  Zwiększ A o B</td></tr><tr><td>zmień [A] o [-3]<br><span class="en">change [A] by [-3]</span></td><td>Zmniejsz A o 3</td></tr><tr><td>powiedz (A)<br><span class="en">say (A)</span></td><td>Wypisz pudełko A</td></tr><tr><td>jeżeli &lt;(A) &gt; [5]&gt; to … w przeciwnym razie …<br><span class="en">if &lt;(A) &gt; [5]&gt; then … else …</span></td><td>Jeżeli A &gt; 5 skocz do następnej inaczej skocz do …</td></tr><tr><td>powtarzaj aż &lt;(B) = [0]&gt; … (pętla)<br><span class="en">repeat until &lt;(B) = [0]&gt; … (loop)</span></td><td>Jeżeli B = 0 skocz do … + <strong>Skocz do</strong> (wstecz)<br><span class="en">Jeżeli B = 0 skocz do … + <strong>Skocz do</strong> (backwards)</span></td></tr></tbody></table>
+<h2>3. Trzy skrypty „krok po kroku” <span class="en">/ 3. Three scripts, step by step</span></h2>
+<h3>Skrypt 1: Taksówki: wartość domyślna <span class="en">/ Script 1: Taxis: default value</span></h3>
+<p><strong>Scratch:</strong></p>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [Ile osób?] i czekaj
+ustaw [A] na (odpowiedź)
+ustaw [B] na [1]
+jeżeli &lt;(A) &gt; [4]&gt; to
+    ustaw [B] na [2]
+koniec
+jeżeli &lt;(A) &gt; [8]&gt; to
+    ustaw [B] na [3]
+koniec
+powiedz (B)</pre>
+<p><strong>Język z konkursu:</strong></p>
+<p class="en"><strong>Contest language:</strong></p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na 1
+ 3. Jeżeli A ≤ 4 skocz do 7 inaczej skocz do następnej
+ 4. Ustaw B na 2
+ 5. Jeżeli A ≤ 8 skocz do 7 inaczej skocz do następnej
+ 6. Ustaw B na 3
+ 7. Wypisz pudełko B</pre>
+<p>Wzorzec „najpierw wartość domyślna, potem poprawka”. W języku z konkursu każdy blok „jeżeli” to jedno polecenie Jeżeli ze skokiem.</p>
+<p class="en">The “default first, then correct it” pattern. In the contest language each “if” block becomes one Jeżeli command with a jump.</p>
+<h3>Skrypt 2: Ograniczenie od góry <span class="en">/ Script 2: A cap</span></h3>
+<p><strong>Scratch:</strong></p>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [Ile przejazdów?] i czekaj
+ustaw [A] na (odpowiedź)
+ustaw [B] na (A)
+zmień [B] o (A)
+zmień [B] o (A)
+jeżeli &lt;(B) &gt; [8]&gt; to
+    ustaw [B] na [8]
+koniec
+powiedz (B)</pre>
+<p><strong>Język z konkursu:</strong></p>
+<p class="en"><strong>Contest language:</strong></p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na A
+ 3. Zwiększ B o B
+ 4. Zwiększ B o A
+ 5. Jeżeli B ≤ 8 skocz do 7 inaczej skocz do następnej
+ 6. Ustaw B na 8
+ 7. Wypisz pudełko B</pre>
+<p>Trzykrotność liczby budujemy z dodawania, bo nie ma mnożenia. Potem „ucinamy” wynik do 8.</p>
+<p class="en">We build three times the number from addition because there is no multiplication. Then we cut the result to 8.</p>
+<h3>Skrypt 3: Mnożenie pętlą <span class="en">/ Script 3: Multiplication by a loop</span></h3>
+<p><strong>Scratch:</strong></p>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [a?] i czekaj
+ustaw [A] na (odpowiedź)
+zapytaj [b?] i czekaj
+ustaw [B] na (odpowiedź)
+ustaw [C] na [0]
+powtarzaj aż &lt;(B) = [0]&gt;
+    zmień [C] o (A)
+    zmień [B] o [-1]
+koniec
+powiedz (C)</pre>
+<p><strong>Język z konkursu:</strong></p>
+<p class="en"><strong>Contest language:</strong></p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Ustaw C na 0
+ 4. Jeżeli B = 0 skocz do 8 inaczej skocz do następnej
+ 5. Zwiększ C o A
+ 6. Zmniejsz B o 1
+ 7. Skocz do 4
+ 8. Wypisz pudełko C</pre>
+<p>Pętla „powtarzaj aż” to sprawdzenie warunku i „Skocz do” wstecz.</p>
+<p class="en">The “repeat until” loop is a condition check and a “Skocz do” jump backwards.</p>
+<h2>4. Plan 20 minut na lekcji 1 <span class="en">/ 4. A 20-minute plan for lesson 1</span></h2>
+<ol start="1"><li>(5 min) Nauczyciel pokazuje skrypt 1 w Scratchu na tablicy. Uczniowie mówią, co jest w zmiennej A po każdym bloku.<br><span class="en">(5 min) The teacher shows script 1 in Scratch on the board. Pupils say what is in variable A after each block.</span></li><li>(5 min) Uczniowie sami budują skrypt 2 (lub 1 z pierwszej części dla słabszych klas) i sprawdzają go dla trzech liczb.<br><span class="en">(5 min) Pupils build script 2 themselves and test it with three numbers.</span></li><li>(5 min) Uzupełniają słownik z punktu 2 – bez podglądania – a potem sprawdzają go w tabeli.<br><span class="en">(5 min) They complete the dictionary in section 2 without looking, then check it against the table.</span></li><li>(5 min) Ćwiczenia 1–3 poniżej: zamiana skryptu na program. Na koniec jedno zdanie: „Czego w Scratchu nie da się zrobić tak jak w konkursie?” (skoku do numeru linii).<br><span class="en">(5 min) Exercises 1–3 below: turn a script into a program. To finish, one sentence: “What can’t be done in Scratch the way it is in the contest?” (a jump to a line number).</span></li></ol>
+<h2>5. Ćwiczenia: zamień skrypt na program <span class="en">/ 5. Exercises: turn the script into a program</span></h2>
+<h4>Ćwiczenie 1 <span class="en">/ Exercise 1</span></h4>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [Liczba?] i czekaj
+ustaw [A] na (odpowiedź)
+zmień [A] o [4]
+zmień [A] o (A)
+powiedz (A)</pre>
+<div class="ed" data-tests='[]'><textarea rows="7" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><input class="inp" placeholder="dane wejściowe / input, np. 6 3" style="flex:1;min-width:140px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:inherit;font:inherit;padding:8px 10px"><button data-act="run">Uruchom / Run</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<h4>Ćwiczenie 2 <span class="en">/ Exercise 2</span></h4>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [Pierwsza?] i czekaj
+ustaw [A] na (odpowiedź)
+zapytaj [Druga?] i czekaj
+ustaw [B] na (odpowiedź)
+ustaw [C] na (A)
+zmień [C] o (B)
+zmień [C] o (C)
+powiedz (C)</pre>
+<div class="ed" data-tests='[]'><textarea rows="7" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><input class="inp" placeholder="dane wejściowe / input, np. 6 3" style="flex:1;min-width:140px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:inherit;font:inherit;padding:8px 10px"><button data-act="run">Uruchom / Run</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<h4>Ćwiczenie 3 <span class="en">/ Exercise 3</span></h4>
+<pre class="code">kiedy kliknięto zieloną flagę
+zapytaj [Liczba?] i czekaj
+ustaw [A] na (odpowiedź)
+jeżeli &lt;(A) &gt; [5]&gt; to
+    zmień [A] o [-5]
+w przeciwnym razie
+    zmień [A] o [10]
+powiedz (A)</pre>
+<div class="ed" data-tests='[]'><textarea rows="7" placeholder="Tu wpisz swój program, jedno polecenie w linii / Write your program here, one command per line"></textarea><div class="row"><input class="inp" placeholder="dane wejściowe / input, np. 6 3" style="flex:1;min-width:140px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:inherit;font:inherit;padding:8px 10px"><button data-act="run">Uruchom / Run</button><button class="alt" data-act="clear">Wyczyść / Clear</button></div><div class="msg"></div></div>
+<h4>Ćwiczenie 4 – w drugą stronę <span class="en">/ Exercise 4 – the other way round</span></h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na 1
+ 3. Jeżeli A ≤ 4 skocz do 7 inaczej skocz do następnej
+ 4. Ustaw B na 2
+ 5. Jeżeli A ≤ 8 skocz do 7 inaczej skocz do następnej
+ 6. Ustaw B na 3
+ 7. Wypisz pudełko B</pre>
+<p>Opisz słowami (albo narysuj) skrypt Scratcha, który robi to samo.</p>
+<p class="en">Describe in words (or draw) the Scratch script that does the same thing.</p>
+<div class="ed"><textarea class="free" rows="4" placeholder="Tu wpisz odpowiedź / Write your answer here"></textarea></div>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your answers are saved only in this browser, on this device — nobody sees them and they are not sent anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p><p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

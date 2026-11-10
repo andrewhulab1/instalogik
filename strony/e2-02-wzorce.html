@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wzorce programów</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Wzorce programów</h1><div class="sub">Program patterns</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/e2-02-wzorce.pdf" download>Pobierz PDF / Download PDF</a> <button class="alt" id="wyczysc" style="margin-left:8px">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+<p>Zbiór sprawdzonych „klocków”, z których składa się większość zadań etapu 2.</p><p class="en">A collection of tested “building blocks” that most Stage 2 tasks are made of.</p>
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Rozpoznaję wzorzec w nowym zadaniu i dobieram odpowiednią strukturę programu.<br><span class="en">I recognise the pattern in a new task and choose a suitable program structure.</span></li><li>Potrafię zbudować mnożenie z dodawania (podwajanie, kopia w drugim pudełku).<br><span class="en">I can build multiplication from addition (doubling, a copy in a second box).</span></li><li>Wiem, jak testować próg i liczby brzegowe.<br><span class="en">I know how to test a threshold and edge values.</span></li></ul></div>
+<h2>Wzorzec 1 – wczytaj, policz, wypisz <span class="en">/ Pattern 1 – read, calculate, print</span></h2>
+<p>Autokar ma 40 miejsc. Wczytaj liczbę zajętych miejsc i wypisz liczbę wolnych.</p>
+<p class="en">A coach has 40 seats. Read the number of taken seats and print the number of free seats.</p>
+<pre class="code"> 1. Ustaw A na 40
+ 2. Wczytaj do B
+ 3. Zmniejsz A o B
+ 4. Wypisz pudełko A</pre>
+<p>Podpowiedź: stałą liczbę wstawiamy poleceniem <strong>Ustaw</strong>, a wczytaną odejmujemy.</p>
+<p class="en">Tip: put the fixed number in with <strong>Ustaw</strong> and subtract the number you read.</p>
+<h2>Wzorzec 2 – mnożenie przez dodawanie <span class="en">/ Pattern 2 – multiplication by addition</span></h2>
+<p>Nie ma mnożenia, ale <strong>Zwiększ A o A</strong> podwaja. Wielokrotność budujemy z podwojeń i kopii:</p>
+<p class="en">There is no multiplication, but <strong>Zwiększ A o A</strong> doubles. We build multiples from doublings and copies:</p>
+<table><thead><tr><th>Chcę / I want</th><th>Zapis / Code</th></tr></thead><tbody><tr><td>2 · n</td><td class="mono">Zwiększ A o A</td></tr><tr><td>4 · n</td><td class="mono">Zwiększ A o A  (dwa razy)</td></tr><tr><td>3 · n</td><td class="mono">Ustaw B na A<br>Zwiększ B o B<br>Zwiększ B o A</td></tr><tr><td>5 · n</td><td class="mono">Ustaw B na A<br>Zwiększ B o B<br>Zwiększ B o B<br>Zwiększ B o A</td></tr><tr><td>7 · n</td><td class="mono">Ustaw B na A<br>Zwiększ B o B  (trzy razy → 8n)<br>Zmniejsz B o A</td></tr></tbody></table>
+<p>Przykład: ceny biletów – dorosły 8 zł, dziecko 5 zł. Wczytaj liczbę dorosłych, potem dzieci; wypisz koszt.</p>
+<p class="en">Example: ticket prices – adult 8 zł, child 5 zł. Read the number of adults, then children; print the cost.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Zwiększ A o A
+ 4. Zwiększ A o A
+ 5. Zwiększ A o A
+ 6. Ustaw C na B
+ 7. Zwiększ C o C
+ 8. Zwiększ C o C
+ 9. Zwiększ C o B
+10. Zwiększ A o C
+11. Wypisz pudełko A</pre>
+<h2>Wzorzec 3 – progi: wartość domyślna <span class="en">/ Pattern 3 – thresholds: default value</span></h2>
+<p>Taksówka mieści 4 osoby. Wczytaj liczbę dzieci (1–12) i wypisz, ile taksówek potrzeba. Ustawiamy wynik „na zapas” i poprawiamy go, gdy próg zostanie przekroczony.</p>
+<p class="en">A taxi holds 4 people. Read the number of children (1–12) and print how many taxis are needed. We set the result “just in case” and correct it when a threshold is passed.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na 1
+ 3. Jeżeli A ≤ 4 skocz do 7 inaczej skocz do następnej
+ 4. Ustaw B na 2
+ 5. Jeżeli A ≤ 8 skocz do 7 inaczej skocz do następnej
+ 6. Ustaw B na 3
+ 7. Wypisz pudełko B</pre>
+<p>Prześledźmy dla 6 dzieci:</p>
+<p class="en">Let us trace it for 6 children:</p>
+<table><thead><tr><th>Linia</th><th>Wykonane polecenie / Command run</th><th>A</th><th>B</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td>6</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Ustaw B na 1</td><td>6</td><td>1</td><td><input aria-label="odpowiedź"></td></tr><tr><td>3</td><td class="mono">Jeżeli A ≤ 4 skocz do 7 inaczej skocz do następnej</td><td>6</td><td>1</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Ustaw B na 2</td><td>6</td><td>2</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td class="mono">Jeżeli A ≤ 8 skocz do 7 inaczej skocz do następnej</td><td>6</td><td>2</td><td><input aria-label="odpowiedź"></td></tr><tr><td>7</td><td class="mono">Wypisz pudełko B</td><td>6</td><td>2</td><td>2</td></tr></tbody></table>
+<div class="note"><p>Granice progów: dla 4 dzieci wystarczy 1 taksówka, a dla 5 potrzebne są 2. Zawsze sprawdź liczbę równą granicy (≤ czy &lt;?).</p><p class="en">Border values: 4 children fit in 1 taxi, 5 need 2. Always test the number equal to the border (≤ or &lt;?).</p></div>
+<h3>Inna wersja: każda gałąź ustawia wynik <span class="en">/ Another version: each branch sets the result</span></h3>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A ≤ 30 skocz do 8 inaczej skocz do następnej
+ 3. Jeżeli A ≤ 60 skocz do 6 inaczej skocz do następnej
+ 4. Ustaw B na 3
+ 5. Skocz do 9
+ 6. Ustaw B na 2
+ 7. Skocz do 9
+ 8. Ustaw B na 1
+ 9. Wypisz pudełko B</pre>
+<h2>Wzorzec 4 – dwa wzory zależne od danej <span class="en">/ Pattern 4 – two formulas depending on the input</span></h2>
+<p>Parking: pierwsze 3 godziny po 4 zł za godzinę, każda następna godzina po 2 zł. Dla h ≤ 3 koszt to 4h, w przeciwnym razie 12 + 2 · (h − 3).</p>
+<p class="en">Car park: the first 3 hours cost 4 zł per hour, each further hour 2 zł. For h ≤ 3 the cost is 4h, otherwise 12 + 2 · (h − 3).</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A &gt; 3 skocz do 7 inaczej skocz do następnej
+ 3. Zwiększ A o A
+ 4. Zwiększ A o A
+ 5. Wypisz pudełko A
+ 6. Skocz do końca
+ 7. Zmniejsz A o 3
+ 8. Zwiększ A o A
+ 9. Zwiększ A o 12
+10. Wypisz pudełko A</pre>
+<table><thead><tr><th>Linia</th><th>Wykonane polecenie / Command run</th><th>A</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td>5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Jeżeli A &gt; 3 skocz do 7 inaczej skocz do następnej</td><td>5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>7</td><td class="mono">Zmniejsz A o 3</td><td>2</td><td><input aria-label="odpowiedź"></td></tr><tr><td>8</td><td class="mono">Zwiększ A o A</td><td>4</td><td><input aria-label="odpowiedź"></td></tr><tr><td>9</td><td class="mono">Zwiększ A o 12</td><td>16</td><td><input aria-label="odpowiedź"></td></tr><tr><td>10</td><td class="mono">Wypisz pudełko A</td><td>16</td><td>16</td></tr></tbody></table>
+<h2>Wzorzec 5 – ograniczenie od góry (minimum) <span class="en">/ Pattern 5 – a cap (minimum)</span></h2>
+<p>Bilet jednorazowy kosztuje 3 zł, a dzienny 8 zł. Wczytaj liczbę przejazdów r i wypisz najmniejszy koszt: min(3r, 8).</p>
+<p class="en">A single ticket costs 3 zł and a day ticket 8 zł. Read the number of rides r and print the lowest cost: min(3r, 8).</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na A
+ 3. Zwiększ B o B
+ 4. Zwiększ B o A
+ 5. Jeżeli B ≤ 8 skocz do 7 inaczej skocz do następnej
+ 6. Ustaw B na 8
+ 7. Wypisz pudełko B</pre>
+<h2>Wzorzec 6 – bieżące maksimum <span class="en">/ Pattern 6 – running maximum</span></h2>
+<p>Największa z trzech liczb: trzymamy kandydata w A i poprawiamy go, gdy kolejna liczba jest większa. To samo działa dla minimum (zmień ≤ na ≥).</p>
+<p class="en">The largest of three numbers: keep the candidate in A and replace it when the next number is larger. The same works for the minimum (swap ≤ and ≥).</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Wczytaj do C
+ 4. Jeżeli B ≤ A skocz do 6 inaczej skocz do następnej
+ 5. Ustaw A na B
+ 6. Jeżeli C ≤ A skocz do 8 inaczej skocz do następnej
+ 7. Ustaw A na C
+ 8. Wypisz pudełko A</pre>
+<table><thead><tr><th>Linia</th><th>Wykonane polecenie / Command run</th><th>A</th><th>B</th><th>C</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td>4</td><td>0</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Wczytaj do B</td><td>4</td><td>9</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>3</td><td class="mono">Wczytaj do C</td><td>4</td><td>9</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Jeżeli B ≤ A skocz do 6 inaczej skocz do następnej</td><td>4</td><td>9</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td class="mono">Ustaw A na B</td><td>9</td><td>9</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>6</td><td class="mono">Jeżeli C ≤ A skocz do 8 inaczej skocz do następnej</td><td>9</td><td>9</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>8</td><td class="mono">Wypisz pudełko A</td><td>9</td><td>9</td><td>6</td><td>9</td></tr></tbody></table>
+<h2>Wzorzec 7 – dołóż do krótszego <span class="en">/ Pattern 7 – add to the shorter one</span></h2>
+<p>Dwie kasy w sklepie: pierwszy klient idzie do kasy 1, drugi do kasy 2, trzeci do tej kasy, gdzie kolejka jest krótsza (przy remisie – do kasy 1). Wczytaj długości zakupów trzech klientów i wypisz obciążenie kas.</p>
+<p class="en">Two shop checkouts: the first customer goes to checkout 1, the second to checkout 2, the third to the one with the shorter queue (checkout 1 on a tie). Read the sizes of the three customers’ shopping and print the load of each checkout.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Wczytaj do C
+ 4. Jeżeli A ≤ B skocz do następnej inaczej skocz do 7
+ 5. Zwiększ A o C
+ 6. Skocz do 8
+ 7. Zwiększ B o C
+ 8. Wypisz pudełko A
+ 9. Przejdź do nowej linii
+10. Wypisz pudełko B</pre>
+<table><thead><tr><th>Linia</th><th>Wykonane polecenie / Command run</th><th>A</th><th>B</th><th>C</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td>5</td><td>0</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Wczytaj do B</td><td>5</td><td>5</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>3</td><td class="mono">Wczytaj do C</td><td>5</td><td>5</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Jeżeli A ≤ B skocz do następnej inaczej skocz do 7</td><td>5</td><td>5</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td class="mono">Zwiększ A o C</td><td>8</td><td>5</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>6</td><td class="mono">Skocz do 8</td><td>8</td><td>5</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>8</td><td class="mono">Wypisz pudełko A</td><td>8</td><td>5</td><td>3</td><td>8</td></tr><tr><td>9</td><td class="mono">Przejdź do nowej linii</td><td>8</td><td>5</td><td>3</td><td>8 / </td></tr><tr><td>10</td><td class="mono">Wypisz pudełko B</td><td>8</td><td>5</td><td>3</td><td>8 / 5</td></tr></tbody></table>
+<h2>Wzorzec 8 – zamiana miejscami i sortowanie <span class="en">/ Pattern 8 – swapping and sorting</span></h2>
+<p>Aby zamienić wartości A i B, potrzebny jest <strong>trzeci</strong> pojemnik: C ← A, A ← B, B ← C. Dwie liczby w porządku rosnącym:</p>
+<p class="en">To swap A and B you need a <strong>third</strong> box: C ← A, A ← B, B ← C. Two numbers in ascending order:</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Jeżeli A ≤ B skocz do 7 inaczej skocz do następnej
+ 4. Ustaw C na A
+ 5. Ustaw A na B
+ 6. Ustaw B na C
+ 7. Wypisz pudełko A
+ 8. Przejdź do nowej linii
+ 9. Wypisz pudełko B</pre>
+<p>Trzy liczby sortujemy trzema porównaniami sąsiednich par (A,B), (B,C), (A,B) – jak w „bąbelkach”:</p>
+<p class="en">Three numbers are sorted with three comparisons of neighbouring pairs (A,B), (B,C), (A,B) – like bubble sort:</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Wczytaj do C
+ 4. Jeżeli A ≤ B skocz do 8 inaczej skocz do następnej
+ 5. Ustaw D na A
+ 6. Ustaw A na B
+ 7. Ustaw B na D
+ 8. Jeżeli B ≤ C skocz do 12 inaczej skocz do następnej
+ 9. Ustaw D na B
+10. Ustaw B na C
+11. Ustaw C na D
+12. Jeżeli A ≤ B skocz do 16 inaczej skocz do następnej
+13. Ustaw D na A
+14. Ustaw A na B
+15. Ustaw B na D
+16. Wypisz pudełko A
+17. Przejdź do nowej linii
+18. Wypisz pudełko B
+19. Przejdź do nowej linii
+20. Wypisz pudełko C</pre>
+<h2>Wzorzec 9 – powtarzanie (pętla ze skokiem wstecz) <span class="en">/ Pattern 9 – repeating (a loop with a jump back)</span></h2>
+<p>Mnożenie a · b przez b-krotne dodawanie a: skok do linii 4 wraca do sprawdzenia warunku, dopóki licznik B nie spadnie do 0.</p>
+<p class="en">Multiplication a · b by adding a, b times: the jump back to line 4 returns to the check until the counter B drops to 0.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Ustaw C na 0
+ 4. Jeżeli B = 0 skocz do 8 inaczej skocz do następnej
+ 5. Zwiększ C o A
+ 6. Zmniejsz B o 1
+ 7. Skocz do 4
+ 8. Wypisz pudełko C</pre>
+<table><thead><tr><th>Linia</th><th>Wykonane polecenie / Command run</th><th>A</th><th>B</th><th>C</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td>3</td><td>0</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Wczytaj do B</td><td>3</td><td>2</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>3</td><td class="mono">Ustaw C na 0</td><td>3</td><td>2</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Jeżeli B = 0 skocz do 8 inaczej skocz do następnej</td><td>3</td><td>2</td><td>0</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td class="mono">Zwiększ C o A</td><td>3</td><td>2</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>6</td><td class="mono">Zmniejsz B o 1</td><td>3</td><td>1</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>7</td><td class="mono">Skocz do 4</td><td>3</td><td>1</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Jeżeli B = 0 skocz do 8 inaczej skocz do następnej</td><td>3</td><td>1</td><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td class="mono">Zwiększ C o A</td><td>3</td><td>1</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>6</td><td class="mono">Zmniejsz B o 1</td><td>3</td><td>0</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>7</td><td class="mono">Skocz do 4</td><td>3</td><td>0</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Jeżeli B = 0 skocz do 8 inaczej skocz do następnej</td><td>3</td><td>0</td><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>8</td><td class="mono">Wypisz pudełko C</td><td>3</td><td>0</td><td>6</td><td>6</td></tr></tbody></table>
+<h2>Lista kontrolna przed wysłaniem programu <span class="en">/ Checklist before submitting a program</span></h2>
+<ul><li>Czy program czyta dane <strong>w kolejności</strong> z treści zadania?<br><span class="en">Does the program read the data <strong>in the order</strong> given in the task?</span></li><li>Czy każda gałąź kończy się „Skocz do końca” albo skokiem do wspólnego wypisania?<br><span class="en">Does every branch end with “Skocz do końca” or a jump to a common print line?</span></li><li>Czy numery skoków zgadzają się z numerami linii po ostatniej zmianie?<br><span class="en">Do the jump numbers match the line numbers after the last change?</span></li><li>Czy sprawdziłem: najmniejszą i największą daną, liczby równe, liczby przy progu?<br><span class="en">Did I check: the smallest and largest input, equal numbers, numbers at a threshold?</span></li><li>Czy żadne odejmowanie nie daje liczby ujemnej?<br><span class="en">Does no subtraction give a negative number?</span></li></ul>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your answers are saved only in this browser, on this device — nobody sees them and they are not sent anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p><p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

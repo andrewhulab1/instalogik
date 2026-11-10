@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeszyt ćwiczeń 1</title>
+<link rel="stylesheet" href="../assets/strona.css">
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Zeszyt ćwiczeń 1: Co robi program?</h1><div class="sub">Workbook 1: What does the program do?</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><a class="dl" href="../pliki/sp-03-zeszyt-1.pdf" download>Pobierz PDF / Download PDF</a> <button class="alt" id="wyczysc" style="margin-left:8px">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Potrafię prześledzić program i podać, co wypisze.<br><span class="en">I can trace a program and say what it prints.</span></li><li>Potrafię uzupełnić brakujące polecenie lub liczbę.<br><span class="en">I can fill in a missing command or number.</span></li><li>Potrafię znaleźć dane wejściowe, gdy znam wynik (myślenie wstecz).<br><span class="en">I can find the input when I know the output (working backwards).</span></li><li>Potrafię rozwiązać zadanie tekstowe na liczbach metodą pasków lub „sprawdź i popraw”.<br><span class="en">I can solve a number word problem with bars or trial-and-improve.</span></li></ul></div>
+<h2>Część A – śledzenie programów <span class="en">/ Part A – tracing programs</span></h2>
+<p>Wykonaj program dla podanych danych i wpisz, co zostanie wypisane. Dla pierwszego programu uzupełnij tabelę śledzenia.</p>
+<p class="en">Run each program for the given input and write what is printed. For the first program complete the trace table.</p>
+<h4>Program 1 (z tabelą śledzenia / with trace table)</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Zwiększ A o 4
+ 3. Zwiększ A o A
+ 4. Wypisz pudełko A</pre>
+<p>Wejście: <strong>3</strong></p>
+<p class="en">Input: <strong>3</strong></p>
+<table><thead><tr><th>Linia</th><th>Polecenie</th><th>A</th></tr></thead><tbody><tr><td>1</td><td class="mono">Wczytaj do A</td><td><input aria-label="odpowiedź"></td></tr><tr><td>2</td><td class="mono">Zwiększ A o 4</td><td><input aria-label="odpowiedź"></td></tr><tr><td>3</td><td class="mono">Zwiększ A o A</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td class="mono">Wypisz pudełko A</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<p>Wypisane: ______</p>
+<p class="en">Printed: ______</p>
+<p>Teraz podobnie dla wejść <strong>5</strong> i <strong>10</strong>: ______ , ______</p>
+<p class="en">Now the same for inputs <strong>5</strong> and <strong>10</strong>: ______ , ______</p>
+<h4>Program 2</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Zmniejsz A o B
+ 4. Wypisz pudełko A</pre>
+<table><thead><tr><th>Wejście / Input</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>9  4</td><td><input aria-label="odpowiedź"></td></tr><tr><td>20  15</td><td><input aria-label="odpowiedź"></td></tr><tr><td>7  7</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h4>Program 3</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Ustaw C na A
+ 4. Zwiększ C o B
+ 5. Zwiększ C o C
+ 6. Wypisz pudełko C</pre>
+<table><thead><tr><th>Wejście / Input</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>2  3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5  5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>10  1</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h4>Program 4</h4>
+<pre class="code"> 1. Ustaw A na 10
+ 2. Wczytaj do B
+ 3. Zmniejsz A o B
+ 4. Zwiększ A o A
+ 5. Wypisz pudełko A</pre>
+<table><thead><tr><th>Wejście / Input</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>1</td><td><input aria-label="odpowiedź"></td></tr><tr><td>4</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h4>Program 5</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Skocz do 5
+ 3. Zwiększ A o 100
+ 4. Zwiększ A o 100
+ 5. Zwiększ A o 1
+ 6. Wypisz pudełko A</pre>
+<table><thead><tr><th>Wejście / Input</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>7</td><td><input aria-label="odpowiedź"></td></tr><tr><td>20</td><td><input aria-label="odpowiedź"></td></tr><tr><td>0</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h4>Program 6</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A &gt; 5 skocz do 5 inaczej skocz do następnej
+ 3. Zwiększ A o 10
+ 4. Skocz do 6
+ 5. Zmniejsz A o 5
+ 6. Wypisz pudełko A</pre>
+<table><thead><tr><th>Wejście / Input</th><th>Wypisane / Printed</th></tr></thead><tbody><tr><td>3</td><td><input aria-label="odpowiedź"></td></tr><tr><td>5</td><td><input aria-label="odpowiedź"></td></tr><tr><td>6</td><td><input aria-label="odpowiedź"></td></tr><tr><td>12</td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h2>Część B – brakujące elementy <span class="en">/ Part B – missing pieces</span></h2>
+<h4>Zadanie B1</h4>
+<pre class="code"> 1. Ustaw A na 7
+ 2. Zwiększ A o ?
+ 3. Wypisz pudełko A</pre>
+<p>Jaką liczbę wpiszesz zamiast ? , aby program wypisał 12?   ?  =  ______</p>
+<p class="en">Which number replaces ? so that the program prints 12?</p>
+<h4>Zadanie B2</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Zwiększ A o A
+ 3. Zmniejsz A o ?
+ 4. Wypisz pudełko A</pre>
+<p>Dla wejścia 9 program ma wypisać 14. Jaką liczbę wpiszesz zamiast ?   ?  =  ______</p>
+<p class="en">For input 9 the program must print 14. Which number replaces ?</p>
+<h4>Zadanie B3</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Skocz do ?
+ 3. Zwiększ A o 10
+ 4. Zwiększ A o 20
+ 5. Zwiększ A o 30
+ 6. Wypisz pudełko A</pre>
+<p>Dla wejścia 1 program ma wypisać 31. Do której linii należy skoczyć (zamiast ?)   ?  =  ______</p>
+<p class="en">For input 1 the program must print 31. Which line must the jump go to (instead of ?)</p>
+<h4>Zadanie B4 – prawda czy fałsz? <span class="en">/ Task B4 – true or false?</span></h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na A
+ 3. Zwiększ A o B
+ 4. Zmniejsz A o 1
+ 5. Wypisz pudełko A</pre>
+<table><thead><tr><th>Nr</th><th>Stwierdzenie / Statement</th><th>P / F</th></tr></thead><tbody><tr><td>B4.1</td><td>Dla wejścia 5 program wypisze 9.<br><span class="en">For input 5 the program prints 9.</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>B4.2</td><td>Dla wejścia 1 program wypisze 2.<br><span class="en">For input 1 the program prints 2.</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>B4.3</td><td>Dla wejścia 20 program wypisze 39.<br><span class="en">For input 20 the program prints 39.</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>B4.4</td><td>Wynik jest zawsze liczbą nieparzystą (dla każdego wejścia ≥ 1).<br><span class="en">The result is always an odd number (for every input ≥ 1).</span></td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+<h2>Część C – myślenie wstecz <span class="en">/ Part C – working backwards</span></h2>
+<h4>Zadanie C1</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Zwiększ A o 4
+ 3. Zwiększ A o A
+ 4. Wypisz pudełko A</pre>
+<p>Program wypisał 26. Jaką liczbę wczytano? ______</p>
+<p class="en">The program printed 26. Which number was read in? ______</p>
+<h4>Zadanie C2</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Zmniejsz A o B
+ 4. Wypisz pudełko A</pre>
+<p>Pierwsza wczytana liczba to 15, a program wypisał 6. Jaka była druga liczba? ______</p>
+<p class="en">The first number read was 15 and the program printed 6. What was the second number? ______</p>
+<h4>Zadanie C3</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Ustaw C na A
+ 4. Zwiększ C o B
+ 5. Zwiększ C o C
+ 6. Wypisz pudełko C</pre>
+<p>Pierwsza wczytana liczba to 3, a program wypisał 16. Jaka była druga liczba? ______</p>
+<p class="en">The first number read was 3 and the program printed 16. What was the second number? ______</p>
+<h4>Zadanie C4</h4>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A &gt; 5 skocz do 5 inaczej skocz do następnej
+ 3. Zwiększ A o 10
+ 4. Skocz do 6
+ 5. Zmniejsz A o 5
+ 6. Wypisz pudełko A</pre>
+<p>To jest program 6. Ile jest różnych liczb od 0 do 100, dla których program wypisze 12? ______</p>
+<p class="en">This is program 6. How many different numbers from 0 to 100 make the program print 12? ______</p>
+<h2>Część D – liczby i historyjki <span class="en">/ Part D – numbers and stories</span></h2>
+<p>Podpowiedź: narysuj paski (jeden pasek = jedna część) albo zrób tabelę „sprawdź i popraw”.</p>
+<p class="en">Hint: draw bars (one bar = one part) or make a “check and improve” table.</p>
+<table><thead><tr><th>Nr</th><th>Zadanie / Task</th><th>Odp. / Ans.</th></tr></thead><tbody><tr><td>D1</td><td>Jaś ma 3 razy więcej naklejek niż Małgosia. Razem mają 28 naklejek. Ile naklejek ma Małgosia?<br><span class="en">Jaś has 3 times as many stickers as Małgosia. Together they have 28 stickers. How many does Małgosia have?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D2</td><td>W dwóch koszykach razem jest 31 jabłek. W pierwszym jest o 5 jabłek więcej niż w drugim. Ile jabłek jest w drugim koszyku?<br><span class="en">Two baskets hold 31 apples together. The first has 5 more apples than the second. How many apples are in the second basket?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D3</td><td>Pierwsza wieża jest o 2 klocki wyższa od drugiej, a trzecia wieża jest dwa razy wyższa od drugiej. Razem jest 26 klocków. Ile klocków ma druga wieża?<br><span class="en">The first tower is 2 blocks taller than the second and the third tower is twice as tall as the second. There are 26 blocks in all. How many blocks does the second tower have?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D4</td><td>Kajak niosą 2 osoby, a do tego potrzebny jest 1 przewodnik. Ile osób potrzeba do przeniesienia 6 kajaków? Ile kajaków można przenieść, jeśli jest 21 osób?<br><span class="en">A kayak is carried by 2 people and 1 guide is also needed. How many people are needed to carry 6 kayaks? How many kayaks can be carried with 21 people?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D5</td><td>Małgosia wchodzi po schodach po 2 stopnie naraz, zaczynając od stopnia 0. Na którym stopniu stanie po 7 skokach? Jaś skacze po 3 stopnie – po ilu skokach pierwszy raz stanie na stopniu 20 lub wyżej?<br><span class="en">Małgosia climbs stairs 2 steps at a time, starting at step 0. Which step is she on after 7 jumps? Jaś jumps 3 steps at a time – after how many jumps is he first on step 20 or higher?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D6</td><td>Jaś ma o 6 złotych więcej niż Małgosia. Razem mają 40 złotych. Ile ma Jaś?<br><span class="en">Jaś has 6 zloty more than Małgosia. Together they have 40 zloty. How much does Jaś have?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D7</td><td>Myślę o liczbie, podwajam ją i dodaję 7. Wychodzi 31. O jakiej liczbie myślę?<br><span class="en">I think of a number, double it and add 7. I get 31. What number am I thinking of?</span></td><td><input aria-label="odpowiedź"></td></tr><tr><td>D8</td><td>Suma trzech kolejnych liczb całkowitych wynosi 42. Jaka jest najmniejsza z nich?<br><span class="en">The sum of three consecutive whole numbers is 42. What is the smallest of them?</span></td><td><input aria-label="odpowiedź"></td></tr></tbody></table>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your answers are saved only in this browser, on this device — nobody sees them and they are not sent anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p><p>Stronę opracował Andrzej Dobosz dla British School of Wilanów. <span class="en">Created by Andrzej Dobosz for the British School of Wilanów.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script src="../assets/engine.js"></script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>
