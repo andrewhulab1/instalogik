@@ -10,14 +10,14 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 header{background:#1e3277;border-bottom:4px solid var(--gold);color:#fff}
-.bi{max-width:980px;margin:0 auto;padding:14px 16px;display:flex;gap:14px;align-items:center}
+.bi{max-width:900px;margin:0 auto;padding:14px 16px;display:flex;gap:14px;align-items:center}
 .bi img{width:56px;height:56px;border-radius:8px;flex:none}
 h1{margin:0;font-size:1.45rem;line-height:1.2}
 .sub{color:#d6ddf6;font-style:italic;margin-top:2px}
-nav{max-width:980px;margin:0 auto;padding:12px 16px 0;display:flex;flex-wrap:wrap;gap:8px}
+nav{max-width:900px;margin:0 auto;padding:12px 16px 0;display:flex;flex-wrap:wrap;gap:8px}
 nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:999px;font:inherit;cursor:pointer}
 nav button[aria-selected=true]{background:var(--btn);border-color:var(--btn);color:var(--onbtn);font-weight:600}
-main{max-width:980px;margin:0 auto;padding:12px 16px 28px}
+main{max-width:900px;margin:0 auto;padding:12px 16px 28px}
 section{display:none}section.on{display:block}
 .intro{background:var(--soft);border-left:4px solid var(--gold);border-radius:8px;padding:10px 14px;margin:0 0 14px}
 .intro p{margin:2px 0}
@@ -37,7 +37,7 @@ a.btn2{background:transparent;color:var(--navy);border:1.5px solid var(--navy);m
 a.btn2:hover{background:var(--soft)}
 .go{display:flex;flex-wrap:wrap;gap:8px 0;align-items:center}
 .sim{display:flex;flex-direction:column;gap:10px}
-footer{max-width:980px;margin:0 auto;padding:0 16px 24px;color:var(--mut);font-size:.82rem}
+footer{max-width:900px;margin:0 auto;padding:0 16px 24px;color:var(--mut);font-size:.82rem}
 </style>
 </head>
 <body>
@@ -71,6 +71,9 @@ const LINKS = {
   e2_09: 'strony/e2-09-dla-chetnych.html',  // Dla chętnych (AQA, LMC)
   par_sp: 'strony/sp-06-dla-rodzicow.html', // Przewodnik dla rodziców – sesja próbna
   par_e2: 'strony/e2-06-dla-rodzicow.html', // Przewodnik dla rodziców – etap 2
+  logika: 'strony/co-to-jest-logika.html',
+  komputer: 'strony/jak-dziala-komputer.html',
+  niezbednik: 'strony/niezbednik.html',
   python: 'strony/python.html',
   simulator: 'symulator.html' // adres strony „Symulator” w Twojej witrynie Google Sites
 };
@@ -80,6 +83,9 @@ const SECTIONS = [
   introPL:'Ćwiczenia i arkusz próbny przed sesją próbną. Otwórz plik lub pobierz go i wydrukuj.',
   introEN:'Exercises and a mock paper before the practice session. Open a file, or download it and print it.',
   items:[
+   ['logika','Zacznij tutaj: Co to jest logika?','Start here: What is logic?','Skąd słowo „logika”, myślenie komputacyjne, John Snow i cholera, prawda i fałsz.','Where “logic” comes from, computational thinking, John Snow and cholera, true and false.'],
+   ['komputer','Jak działa komputer? Czym jest assembly?','How does a computer work? What is assembly?','Historia, procesor krok po kroku i animacja.','History, the processor step by step, and an animation.'],
+   ['niezbednik','Niezbędnik: 8 misji przed konkursem','Toolkit: 8 missions before the competition','Pudełka, pętle, tabela śledzenia, dzielenie z resztą. Zbierz 8 odznak!','Boxes, loops, trace tables, division with remainders. Collect 8 badges!'],
    ['sp_01','Ściągawka języka assembly','Language cheat sheet','Wszystkie polecenia na jednej kartce.','All the commands on one sheet.'],
    ['sp_02','Uczciwa gra – ćwiczenia','Fair play – exercises','Rozgrzewka z zasadami konkursu.','A warm-up with the contest rules.'],
    ['sp_03','Zeszyt ćwiczeń 1: Co robi program?','Workbook 1: What does the program do?','Śledzenie programów z tabelą.','Tracing programs with a trace table.'],
@@ -93,6 +99,9 @@ const SECTIONS = [
   introPL:'Wzorce programów, zeszyty i arkusz próbny na etap 2.',
   introEN:'Program patterns, workbooks and a mock paper for Stage 2.',
   items:[
+   ['logika','Zacznij tutaj: Co to jest logika?','Start here: What is logic?','Skąd słowo „logika”, myślenie komputacyjne, John Snow i cholera, prawda i fałsz.','Where “logic” comes from, computational thinking, John Snow and cholera, true and false.'],
+   ['komputer','Jak działa komputer? Czym jest assembly?','How does a computer work? What is assembly?','Historia, procesor krok po kroku i animacja.','History, the processor step by step, and an animation.'],
+   ['niezbednik','Niezbędnik: 8 misji przed konkursem','Toolkit: 8 missions before the competition','Pudełka, pętle, tabela śledzenia, dzielenie z resztą. Zbierz 8 odznak!','Boxes, loops, trace tables, division with remainders. Collect 8 badges!'],
    ['e2_01','Ściągawka rozszerzona','Extended cheat sheet','Polecenia i pułapki.','Commands and traps.'],
    ['e2_02','Wzorce programów','Program patterns','Gotowe schematy: progi, maksimum, pętle.','Ready patterns: thresholds, maximum, loops.'],
    ['e2_03','Zeszyt programów, poziom 1–2','Program workbook, levels 1–2','Dziesięć zadań na rozgrzewkę.','Ten warm-up tasks.'],

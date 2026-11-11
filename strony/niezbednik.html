@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Niezbędnik przed konkursem</title>
+<link rel="stylesheet" href="../assets/strona.css">
+<style>
+.badges{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+.bdg{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;border:2px dashed var(--line);filter:grayscale(1);opacity:.45;text-decoration:none;transition:all .3s}
+.bdg.got{filter:none;opacity:1;border:2px solid var(--gold);background:var(--note);transform:scale(1.08)}
+.prog{font-weight:700;color:var(--navy);margin-left:8px;font-size:.95rem}
+.mis{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:4px 16px 14px;margin:18px 0;scroll-margin-top:70px}
+.mis h2{border-top:0;margin-top:10px;display:flex;gap:10px;align-items:center}
+.mis h2 .ic{font-size:1.8rem}
+.vis{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:12px 0;padding:12px;border-radius:12px;background:var(--soft)}
+.bx{width:74px;text-align:center}
+.bx .lid{font-weight:800;color:var(--navy)}
+.bx .in{height:58px;border:3px solid var(--navy);border-top:0;border-radius:0 0 10px 10px;background:var(--card);display:grid;place-items:center;font:800 1.6rem ui-monospace,Consolas,monospace;color:var(--navy);position:relative;overflow:hidden}
+.bx .in.pop{animation:pop .5s}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.18);background:var(--note)}100%{transform:scale(1)}}
+.old{position:absolute;inset:0;display:grid;place-items:center;animation:out .7s forwards;color:var(--err)}
+@keyframes out{to{transform:translateY(-40px);opacity:0}}
+.ar{font-size:1.5rem;color:var(--gold);font-weight:800}
+.belt{display:flex;gap:6px;padding:6px 10px;border-radius:8px;background:var(--card);border:2px solid var(--line);min-width:120px;min-height:44px;align-items:center;justify-content:center;font:700 1.2rem ui-monospace,Consolas,monospace}
+.belt span{padding:2px 8px;border-radius:6px;background:var(--note)}
+.belt span.used{opacity:.3;text-decoration:line-through;background:transparent}
+.machine{border:3px solid var(--navy);border-radius:12px;padding:8px 14px;background:var(--card);font-weight:800;color:var(--navy);text-align:center}
+.q{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0;padding:8px 10px;border-left:4px solid var(--gold);background:var(--soft);border-radius:6px}
+.q .t{flex:1 1 260px}
+.q input{width:5.5em;font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
+.q .r{font-weight:700;min-width:1.5em}
+.ok{color:var(--ok)}.no{color:var(--err)}
+.blocks{display:grid;gap:4px}
+.blocks .row{display:flex;gap:4px;align-items:center}
+.blocks .row b{width:4.5em;font-size:.85rem;color:var(--mut);text-align:right;margin-right:4px}
+.blocks i{width:22px;height:22px;border-radius:5px;background:var(--blue);display:inline-block}
+.groups{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.grp{border:2px solid var(--navy);border-radius:10px;padding:4px 6px;font-size:1.2rem;background:var(--card)}
+.grp.rest{border-style:dashed;border-color:var(--err)}
+.tt td input{text-align:center}
+.bars{display:flex;gap:10px;align-items:flex-end;height:120px}
+.bar1{width:42px;background:var(--blue);border-radius:6px 6px 0 0;display:flex;align-items:flex-start;justify-content:center;color:#fff;font-weight:800;padding-top:3px;transition:all .3s}
+.bar1.max{background:var(--gold);color:#12161d}
+.zap{margin:10px 0;padding:8px 12px;border-radius:10px;border:2px dashed var(--gold);background:var(--card)}
+.zap b:first-child{color:var(--gold)}
+.done{text-align:center;font-size:1.2rem;font-weight:800;color:var(--ok);padding:16px;border:3px solid var(--gold);border-radius:14px;background:var(--note);display:none}
+.done.show{display:block;animation:pop .8s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Niezbędnik przed konkursem</h1><div class="sub">Toolkit before the competition</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><button class="alt" id="wyczysc">Zacznij od nowa / Start again</button></span>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul>
+<li>Rozumiem, jak działają pudełka, wejście i wyjście.<br><span class="en">I understand how boxes, input and output work.</span></li>
+<li>Potrafię prześledzić program w tabeli i policzyć, ile razy wykona się pętla.<br><span class="en">I can trace a program in a table and count how many times a loop runs.</span></li>
+<li>Znam sztuczki matematyczne z konkursu: mnożenie przez dodawanie, dzielenie z resztą, największa liczba i myślenie wstecz.<br><span class="en">I know the maths tricks used in the competition: multiplying by adding, division with remainder, the biggest number and working backwards.</span></li>
+</ul></div>
+
+<p>Osiem misji to osiem rzeczy, które pojawiają się w zadaniach InstaLogik. Za każdą poprawnie wykonaną misję dostajesz <b>odznakę</b>. Zbierz wszystkie osiem!</p>
+<p class="en">Eight missions are eight things that appear in InstaLogik tasks. For each mission you complete you get a <b>badge</b>. Collect all eight!</p>
+
+<div class="badges" id="badges"></div>
+
+<!-- 1 -->
+<section class="mis" id="m1"><h2><span class="ic">📦</span>1. Pudełko pamięta jedną liczbę <span class="en">/ A box holds one number</span></h2>
+<p>Pudełka A, B, C, D to <b>zmienne</b>. W każdym jest dokładnie <b>jedna</b> liczba (na początku 0). Gdy wkładasz nową liczbę, stara <b>znika</b>.</p>
+<p class="en">Boxes A, B, C, D are <b>variables</b>. Each holds exactly <b>one</b> number (0 at the start). When you put in a new number, the old one <b>disappears</b>.</p>
+<div class="vis">
+ <div class="bx"><div class="lid">A</div><div class="in" id="m1a">0</div></div>
+ <div class="bx"><div class="lid">B</div><div class="in" id="m1b">0</div></div>
+ <div style="display:flex;flex-direction:column;gap:6px">
+  <button class="alt" data-m1="Ustaw A na 5">Ustaw A na 5</button>
+  <button class="alt" data-m1="Ustaw A na 8">Ustaw A na 8</button>
+  <button class="alt" data-m1="Zwiększ A o 2">Zwiększ A o 2</button>
+  <button class="alt" data-m1="Ustaw B na A">Ustaw B na A</button>
+ </div>
+</div>
+<p class="note" style="display:block">„Ustaw B na A” <b>kopiuje</b> liczbę. A się nie zmienia! <span class="en">“Ustaw B na A” copies the number. A does not change!</span></p>
+<div class="zap"><b>💡 Zapamiętaj!</b> Pudełko jest jak <b>miejsce w autobusie</b>: siedzi na nim tylko jedna osoba. Gdy wsiada nowa, poprzednia musi wysiąść.<br><span class="en"><b>Remember!</b> A box is like <b>a seat on a bus</b>: only one person can sit there. When a new one gets on, the old one has to get off.</span></div>
+<div data-quiz="m1"></div>
+</section>
+
+<!-- 2 -->
+<section class="mis" id="m2"><h2><span class="ic">📥</span>2. Wejście i wyjście <span class="en">/ Input and output</span></h2>
+<p><b>Wejście</b> to liczby, które program dostaje. „Wczytaj do A” bierze <b>następną</b> liczbę z kolejki, po kolei od lewej. <b>Wyjście</b> to to, co program wypisze.</p>
+<p class="en"><b>Input</b> is the numbers the program gets. “Wczytaj do A” takes the <b>next</b> number in the queue, from left to right. <b>Output</b> is what the program prints.</p>
+<div class="vis">
+ <div><small>Wejście / Input</small><div class="belt" id="m2belt"></div></div>
+ <div class="ar">→</div>
+ <div class="machine">PROGRAM<br><small id="m2cmd" style="font-weight:400">—</small></div>
+ <div class="ar">→</div>
+ <div class="bx"><div class="lid">A</div><div class="in" id="m2a">0</div></div>
+ <div class="bx"><div class="lid">B</div><div class="in" id="m2b">0</div></div>
+ <div><small>Wyjście / Output</small><div class="belt" id="m2out"></div></div>
+</div>
+<p style="text-align:center"><button id="m2step">Następne polecenie / Next command</button> <button class="alt" id="m2reset">Od nowa / Reset</button></p>
+<pre class="code" id="m2code"></pre>
+<div class="zap"><b>💡 Zapamiętaj!</b> Wejście to <b>kolejka w sklepie</b>: kto pierwszy przyszedł, ten pierwszy jest obsłużony. Nie da się nikogo przeskoczyć.<br><span class="en"><b>Remember!</b> Input is <b>a queue in a shop</b>: first come, first served. Nobody can jump the queue.</span></div>
+<div data-quiz="m2"></div>
+</section>
+
+<!-- 3 -->
+<section class="mis" id="m3"><h2><span class="ic">📝</span>3. Tabela śledzenia <span class="en">/ The trace table</span></h2>
+<p>Na konkursie musisz „być komputerem”: wykonać program ołówkiem. Najlepiej w tabeli: po każdej linii zapisz, co jest w pudełkach. Uzupełnij tabelę dla wejścia <b>4</b>.</p>
+<p class="en">In the competition you must “be the computer”: run the program with a pencil. A table is best: after each line, write what is in the boxes. Fill in the table for input <b>4</b>.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na A
+ 3. Zwiększ B o 3
+ 4. Zwiększ A o B
+ 5. Wypisz pudełko A</pre>
+<table class="tt"><thead><tr><th>Linia / Line</th><th>A</th><th>B</th></tr></thead><tbody id="m3t"></tbody></table>
+<p><button id="m3chk">Sprawdź tabelę / Check the table</button> <span class="r" id="m3r"></span></p>
+<div class="zap"><b>💡 Zapamiętaj!</b> Bądź <b>detektywem</b>: detektyw zapisuje każdy ślad. Ty zapisujesz każdą zmianę w pudełkach, linia po linii.<br><span class="en"><b>Remember!</b> Be <b>a detective</b>: a detective writes down every clue. You write down every change in the boxes, line by line.</span></div>
+<div data-quiz="m3"></div>
+</section>
+
+<!-- 4 -->
+<section class="mis" id="m4"><h2><span class="ic">🔁</span>4. Pętla i licznik <span class="en">/ Loops and counters</span></h2>
+<p><b>Pętla</b> to powtarzanie: „Skocz do 2” wraca w górę programu. <b>Licznik</b> to pudełko, które liczy powtórzenia: za każdym razem „Zwiększ C o 1”. Pętla musi się kiedyś skończyć, dlatego potrzebny jest warunek.</p>
+<p class="en">A <b>loop</b> means repeating: “Skocz do 2” goes back up the program. A <b>counter</b> is a box that counts the repeats: “Zwiększ C o 1” each time. A loop must end some time, so it needs a condition.</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A = 0 skocz do 6 inaczej skocz do następnej
+ 3. Zmniejsz A o 1
+ 4. Zwiększ C o 1
+ 5. Skocz do 2
+ 6. Wypisz pudełko C</pre>
+<div class="vis"><div id="m4laps" style="font-size:1.6rem;letter-spacing:4px;min-height:2rem"></div></div>
+<p style="text-align:center"><label>Wejście A / Input A: <input type="number" id="m4in" value="3" min="0" max="12" style="width:5em"></label> <button id="m4run">Pokaż pętlę / Show the loop</button></p>
+<p class="fbk" id="m4txt" style="text-align:center"></p>
+<div class="zap"><b>💡 Zapamiętaj!</b> Pętla to <b>okrążenia na bieżni</b>. Licznik to sędzia, który liczy okrążenia. Warunek to meta: bez niej biegałbyś w nieskończoność!<br><span class="en"><b>Remember!</b> A loop is <b>laps on a running track</b>. The counter is the judge counting the laps. The condition is the finish line: without it you would run for ever!</span></div>
+<div data-quiz="m4"></div>
+</section>
+
+<!-- 5 -->
+<section class="mis" id="m5"><h2><span class="ic">✖️</span>5. Mnożenie przez dodawanie <span class="en">/ Multiplying by adding</span></h2>
+<p>W języku InstaLogik nie ma mnożenia! Ale 3 × 4 to po prostu 4 + 4 + 4. Program dodaje tę samą liczbę kilka razy w pętli.</p>
+<p class="en">The InstaLogik language has no multiplication! But 3 × 4 is just 4 + 4 + 4. The program adds the same number several times in a loop.</p>
+<div class="vis"><div class="blocks" id="m5b"></div></div>
+<p style="text-align:center"><label>Ile razy / How many times: <input type="number" id="m5x" value="3" min="1" max="6" style="width:4em"></label> × <label><input type="number" id="m5y" value="4" min="1" max="9" style="width:4em"></label></p>
+<p>Podwojenie to dodanie liczby do samej siebie: „Zwiększ A o A” daje 2 × A.</p>
+<p class="en">Doubling means adding a number to itself: “Zwiększ A o A” gives 2 × A.</p>
+<div class="zap"><b>💡 Zapamiętaj!</b> <b>3 × 4 = 3 torby po 4 jabłka.</b> Dorzucasz do kosza jedną torbę za drugą.<br><span class="en"><b>Remember!</b> <b>3 × 4 = 3 bags of 4 apples.</b> You tip one bag after another into the basket.</span></div>
+<div data-quiz="m5"></div>
+</section>
+
+<!-- 6 -->
+<section class="mis" id="m6"><h2><span class="ic">🍬</span>6. Dzielenie z resztą <span class="en">/ Division with a remainder</span></h2>
+<p>Dzielenia też nie ma! Dzielimy, <b>odejmując</b> po kawałku i licząc, ile razy się udało. To, co zostanie, to <b>reszta</b>. Przykład: 17 dni to 2 tygodnie i 3 dni.</p>
+<p class="en">There is no division either! We divide by <b>subtracting</b> a piece at a time and counting how many times it works. What is left is the <b>remainder</b>. Example: 17 days is 2 weeks and 3 days.</p>
+<div class="vis" style="flex-direction:column">
+ <div><label>Cukierki / Sweets: <input type="number" id="m6n" value="17" min="1" max="40" style="width:4.5em"></label> <label>po / in groups of: <input type="number" id="m6k" value="5" min="1" max="10" style="width:4em"></label></div>
+ <div class="groups" id="m6g"></div>
+ <div class="fbk" id="m6txt"></div>
+</div>
+<div class="zap"><b>💡 Zapamiętaj!</b> Dzielenie to <b>rozdawanie cukierków</b>: każdy dostaje po równo, a to, co zostanie w ręce, to reszta.<br><span class="en"><b>Remember!</b> Division is <b>sharing out sweets</b>: everyone gets the same, and what is left in your hand is the remainder.</span></div>
+<div data-quiz="m6"></div>
+</section>
+
+<!-- 7 -->
+<section class="mis" id="m7"><h2><span class="ic">🏆</span>7. Największa liczba <span class="en">/ The biggest number</span></h2>
+<p>Jak znaleźć największą z kilku liczb? Zapamiętaj pierwszą jako „rekord”. Każdą następną porównaj z rekordem: jeżeli jest większa, staje się nowym rekordem.</p>
+<p class="en">How do you find the biggest of several numbers? Remember the first as the “record”. Compare each next one with the record: if it is bigger, it becomes the new record.</p>
+<div class="vis" style="flex-direction:column"><div class="bars" id="m7bars"></div><div class="fbk" id="m7txt"></div>
+<button id="m7step">Następna liczba / Next number</button></div>
+<div class="zap"><b>💡 Zapamiętaj!</b> Rekord to <b>król wzgórza</b>: stoi na szczycie, dopóki nie przyjdzie ktoś silniejszy.<br><span class="en"><b>Remember!</b> The record is <b>king of the hill</b>: it stays on top until someone stronger comes along.</span></div>
+<div data-quiz="m7"></div>
+</section>
+
+<!-- 8 -->
+<section class="mis" id="m8"><h2><span class="ic">⏪</span>8. Myślenie wstecz <span class="en">/ Working backwards</span></h2>
+<p>Czasem znasz <b>wynik</b>, a szukasz <b>wejścia</b>. Idź od końca i rób działania odwrotne: zamiast dodawać, odejmuj; zamiast podwajać, dziel na pół.</p>
+<p class="en">Sometimes you know the <b>output</b> and need the <b>input</b>. Start from the end and do the opposite: instead of adding, subtract; instead of doubling, halve.</p>
+<div class="vis">
+ <div class="machine">? </div><div class="ar">→ ×2 →</div><div class="machine">?</div><div class="ar">→ +1 →</div><div class="machine" style="background:var(--note)">13</div>
+</div>
+<p style="text-align:center"><b>Wstecz / Backwards:</b> 13 <span class="ar">→ −1 →</span> 12 <span class="ar">→ ÷2 →</span> <b>6</b></p>
+<div class="zap"><b>💡 Zapamiętaj!</b> Myślenie wstecz to <b>przewijanie filmu do tyłu</b>. Albo skarpetki i buty: rano zakładasz najpierw skarpetki, potem buty, a wieczorem zdejmujesz w odwrotnej kolejności.<br><span class="en"><b>Remember!</b> Working backwards is <b>rewinding a film</b>. Or socks and shoes: in the morning you put on socks, then shoes, and in the evening you take them off in the opposite order.</span></div>
+<div data-quiz="m8"></div>
+</section>
+
+<div class="done" id="alldone">🎉 Wszystkie 8 odznak! Jesteś gotowy na InstaLogik. / All 8 badges! You are ready for InstaLogik. 🎉</div>
+
+<p style="margin-top:20px"><a href="sp-01-sciagawka.html">Dalej: Ściągawka języka / Next: Language cheat sheet &rarr;</a></p>
+</main>
+<footer>
+<p>Twoje odznaki zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. <span class="en">Your badges are saved only in this browser, on this device — nobody sees them and they are not sent anywhere.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p>
+<p>Stronę opracował Andrzej Dobosz dla British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
+<p>© 2026 Andrzej Dobosz, British Primary School of Wilanow. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0 — share with attribution, no changes, non-commercial use only.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var KEY='instalogik-niezbednik';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function save(o){try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+var S=load();
+var ICONS=['📦','📥','📝','🔁','✖️','🍬','🏆','⏪'];
+function badges(){
+ var b=$('badges'),n=0;b.innerHTML='';
+ ICONS.forEach(function(ic,i){var id='m'+(i+1),got=S[id]&&S[id].done;if(got)n++;
+  var a=document.createElement('a');a.href='#'+id;a.className='bdg'+(got?' got':'');a.textContent=ic;a.title='Misja '+(i+1);b.appendChild(a)});
+ var p=document.createElement('span');p.className='prog';p.textContent=n+' / 8';b.appendChild(p);
+ $('alldone').classList.toggle('show',n===8);
+}
+/* pytania / questions: [pl, en, answer] */
+var Q={
+ m1:[['A = 3. Wykonujemy: „Ustaw A na 7”, potem „Zwiększ A o 2”. Ile jest w A?','A = 3. We run “Ustaw A na 7”, then “Zwiększ A o 2”. What is in A?',9],
+     ['A = 6, B = 0. Wykonujemy „Ustaw B na A”. Ile jest teraz w A?','A = 6, B = 0. We run “Ustaw B na A”. What is in A now?',6]],
+ m2:[['Wejście: 4 7 2. Program: Wczytaj do A, Wczytaj do B, Wypisz pudełko B. Co wypisze?','Input: 4 7 2. Program: Wczytaj do A, Wczytaj do B, Wypisz pudełko B. What does it print?',7],
+     ['Wejście: 5 9. Program: Wczytaj do A, Wczytaj do A, Wypisz pudełko A. Co wypisze?','Input: 5 9. Program: Wczytaj do A, Wczytaj do A, Wypisz pudełko A. What does it print?',9]],
+ m3:[['Co wypisze program z tabeli dla wejścia 10?','What does the table program print for input 10?',23]],
+ m4:[['Program z pętlą dostaje A = 5. Co wypisze?','The loop program gets A = 5. What does it print?',5],
+     ['Ile razy wykona się linia 3, gdy A = 4?','How many times does line 3 run when A = 4?',4]],
+ m5:[['Ile razy trzeba dodać 6, żeby policzyć 4 × 6?','How many times do you add 6 to work out 4 × 6?',4],
+     ['A = 7. Wykonujemy „Zwiększ A o A”. Ile jest w A?','A = 7. We run “Zwiększ A o A”. What is in A?',14]],
+ m6:[['23 dni to ile pełnych tygodni?','23 days is how many full weeks?',3],
+     ['A ile dni zostaje (reszta)?','And how many days are left over (remainder)?',2]],
+ m7:[['Liczby: 4, 11, 7, 11, 2. Ile razy zmieni się rekord (po pierwszej liczbie)?','Numbers: 4, 11, 7, 11, 2. How many times does the record change (after the first number)?',1]],
+ m8:[['Program: Zwiększ A o 3, potem Zwiększ A o A. Wynik to 20. Jakie było wejście?','Program: add 3 to A, then add A to A. The output is 20. What was the input?',7]]
+};
+document.querySelectorAll('[data-quiz]').forEach(function(box){
+ var id=box.dataset.quiz;S[id]=S[id]||{};
+ Q[id].forEach(function(q,i){
+  var d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="t">'+q[0]+'<br><span class="en">'+q[1]+'</span></div><input type="number" inputmode="numeric" aria-label="odpowiedź"><button>Sprawdź / Check</button><span class="r"></span>';
+  var inp=d.querySelector('input'),r=d.querySelector('.r');
+  if(S[id]['q'+i]){inp.value=q[2];r.textContent='✓';r.className='r ok'}
+  function chk(){var ok=Number(inp.value)===q[2]&&inp.value!=='';r.textContent=ok?'✓':'✗ Spróbuj jeszcze raz / Try again';r.className='r '+(ok?'ok':'no');
+   S[id]['q'+i]=ok;S[id].done=Q[id].every(function(_,j){return S[id]['q'+j]})&&(id!=='m3'||S.m3.table);save(S);badges()}
+  d.querySelector('button').onclick=chk;inp.onkeydown=function(e){if(e.key==='Enter')chk()};
+  box.appendChild(d);
+ });
+});
+/* misja 1 */
+var A1={A:0,B:0};
+function setBox(el,v){var old=el.textContent;if(String(v)===old)return;el.innerHTML='<span class="old">'+old+'</span>'+v;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}
+document.querySelectorAll('[data-m1]').forEach(function(b){b.onclick=function(){
+ var c=b.dataset.m1;if(c==='Ustaw A na 5')A1.A=5;if(c==='Ustaw A na 8')A1.A=8;if(c==='Zwiększ A o 2')A1.A+=2;if(c==='Ustaw B na A')A1.B=A1.A;
+ setBox($('m1a'),A1.A);setBox($('m1b'),A1.B)}});
+/* misja 2 */
+var P2=['Wczytaj do A','Wczytaj do B','Wypisz pudełko B','Wypisz pudełko A'],IN2=[4,7,2],st2;
+$('m2code').textContent=P2.map(function(l,i){return ' '+(i+1)+'. '+l}).join('\n')+'\n Wejście / Input: 4 7 2';
+function r2(){st2={i:0,k:0,A:0,B:0,out:[]};$('m2a').textContent=0;$('m2b').textContent=0;$('m2cmd').textContent='—';draw2()}
+function draw2(){$('m2belt').innerHTML=IN2.map(function(v,i){return '<span class="'+(i<st2.k?'used':'')+'">'+v+'</span>'}).join('');$('m2out').textContent=st2.out.join(' ')||'—'}
+$('m2step').onclick=function(){if(st2.i>=P2.length){$('m2cmd').textContent='koniec / end';return}
+ var c=P2[st2.i++],m;$('m2cmd').textContent=c;
+ if((m=c.match(/Wczytaj do ([AB])/))){st2[m[1]]=IN2[st2.k++];setBox($('m2'+m[1].toLowerCase()),st2[m[1]])}
+ if((m=c.match(/Wypisz pudełko ([AB])/)))st2.out.push(st2[m[1]]);draw2()};
+$('m2reset').onclick=r2;r2();
+/* misja 3 */
+var T3=[[1,4,0],[2,4,4],[3,4,7],[4,11,7]];S.m3=S.m3||{};
+$('m3t').innerHTML=T3.map(function(r,i){return '<tr><td>'+r[0]+'</td><td><input data-r="'+i+'" data-c="1" inputmode="numeric"></td><td><input data-r="'+i+'" data-c="2" inputmode="numeric"></td></tr>'}).join('')+'<tr><td>5</td><td colspan="2">wypisz A / print A → <b id="m3o">?</b></td></tr>';
+if(S.m3.table){$('m3t').querySelectorAll('input').forEach(function(x){x.value=T3[x.dataset.r][x.dataset.c]});$('m3o').textContent='11'}
+$('m3chk').onclick=function(){var ok=true;$('m3t').querySelectorAll('input').forEach(function(x){var g=Number(x.value)===T3[x.dataset.r][x.dataset.c]&&x.value!=='';x.style.borderColor=g?'var(--ok)':'var(--err)';if(!g)ok=false});
+ $('m3r').textContent=ok?'✓ Brawo! Program wypisze 11. / Well done! It prints 11.':'✗ Czerwone pola sprawdź jeszcze raz. / Check the red boxes again.';$('m3r').className='r '+(ok?'ok':'no');
+ if(ok)$('m3o').textContent='11';S.m3.table=ok;S.m3.done=ok&&!!S.m3.q0;save(S);badges()};
+/* misja 4 */
+$('m4run').onclick=function(){var n=Math.max(0,Math.min(12,Number($('m4in').value)||0)),k=0,el=$('m4laps');el.textContent='';
+ (function go(){if(k<n){k++;el.textContent+='🔄';$('m4txt').innerHTML='Okrążenie '+k+': A = '+(n-k)+', C = '+k+'<br><span class="en">Lap '+k+': A = '+(n-k)+', C = '+k+'</span>';setTimeout(go,500)}
+  else $('m4txt').innerHTML='A = 0, więc koniec pętli. Wypisz C → <b>'+n+'</b><br><span class="en">A = 0, so the loop ends. Print C → '+n+'</span>'})()};
+/* misja 5 */
+function d5(){var x=Math.max(1,Math.min(6,Number($('m5x').value)||1)),y=Math.max(1,Math.min(9,Number($('m5y').value)||1)),h='';
+ for(var i=1;i<=x;i++){h+='<div class="row"><b>+ '+y+'</b>'+'<i></i>'.repeat(y)+'</div>'}
+ $('m5b').innerHTML=h+'<div style="text-align:center;font-weight:800;margin-top:6px">'+x+' × '+y+' = '+Array(x).fill(y).join(' + ')+' = '+(x*y)+'</div>'}
+$('m5x').oninput=d5;$('m5y').oninput=d5;d5();
+/* misja 6 */
+function d6(){var n=Math.max(1,Math.min(40,Number($('m6n').value)||1)),k=Math.max(1,Math.min(10,Number($('m6k').value)||1)),q=Math.floor(n/k),r=n%k,h='';
+ for(var i=0;i<q;i++)h+='<div class="grp">'+'🍬'.repeat(k)+'</div>';if(r)h+='<div class="grp rest">'+'🍬'.repeat(r)+'</div>';
+ $('m6g').innerHTML=h;$('m6txt').innerHTML=n+' : '+k+' = '+q+' reszta '+r+' <span class="en">('+q+' remainder '+r+')</span>'}
+$('m6n').oninput=d6;$('m6k').oninput=d6;d6();
+/* misja 7 */
+var N7=[4,9,6,12,3],i7=0;
+function d7(){var rec=null,h='';for(var i=0;i<N7.length;i++){var vis=i<i7;if(vis&&(rec===null||N7[i]>N7[rec]))rec=i;
+  h+='<div class="bar1'+(vis&&false?'':'')+'" id="b7'+i+'" style="height:'+(vis?N7[i]*8+20:6)+'px;opacity:'+(vis?1:.25)+'">'+(vis?N7[i]:'')+'</div>'}
+ $('m7bars').innerHTML=h;if(rec!==null)$('b7'+rec).classList.add('max');
+ $('m7txt').innerHTML=i7===0?'Kliknij, żeby zobaczyć pierwszą liczbę. <span class="en">Click to see the first number.</span>':'Rekord / Record: <b>'+N7[rec]+'</b>'+(i7===N7.length?' — to największa liczba! <span class="en">— the biggest number!</span>':'')}
+$('m7step').onclick=function(){i7=i7>=N7.length?0:i7+1;d7()};d7();
+/* reset */
+$('wyczysc').onclick=function(){S={};save(S);location.reload()};
+badges();
+})();
+</script>
+</body>
+</html>

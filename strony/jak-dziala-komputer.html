@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jak działa komputer? Czym jest assembly</title>
+<link rel="stylesheet" href="../assets/strona.css">
+<style>
+.lead{font-size:1.05rem}
+/* poziomy języków */
+.stairs{display:grid;gap:8px;margin:14px 0}
+.stair{display:grid;grid-template-columns:1fr;gap:2px;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:8px;background:var(--card);padding:8px 12px}
+.stair b{color:var(--navy)}
+.stair.s1{margin-left:0;border-left-color:#4a62a8}
+.stair.s2{margin-left:14px;border-left-color:var(--gold)}
+.stair.s3{margin-left:28px;border-left-color:#157347}
+.stair.s4{margin-left:42px;border-left-color:#b02a37}
+.stair code{font:14px ui-monospace,Consolas,monospace;background:var(--code);padding:2px 6px;border-radius:5px;word-break:break-all}
+/* oś czasu */
+.tl{position:relative;margin:18px 0 6px;padding-left:26px}
+.tl:before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:3px;background:var(--gold);border-radius:2px}
+.ev{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:0 0 12px}
+.ev:before{content:"";position:absolute;left:-26px;top:14px;width:15px;height:15px;border-radius:50%;background:var(--navy);border:3px solid var(--gold)}
+.ev .yr{font-weight:800;color:var(--navy);font-size:1.05rem}
+.ev p{margin:2px 0}
+.info{display:flex;flex-direction:column;gap:6px;margin:16px 0;padding:14px;border-radius:14px;background:var(--soft)}
+.ist{flex:1 1 0;min-width:0;max-width:220px;background:var(--card);border:2px solid var(--navy);border-radius:12px;padding:8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.ist .ic{font-size:1.9rem;line-height:1}
+.ist b{color:var(--navy);font-size:.95rem}
+.ist code{font:12px ui-monospace,Consolas,monospace;background:var(--code);border-radius:5px;padding:2px 5px;word-break:break-all}
+.ist small{font-size:.78rem;color:var(--mut)}
+.ist.tool{border-color:var(--gold);border-style:dashed}
+.iar.mob{display:none}
+.iar{align-self:center;font-size:1.6rem;color:var(--gold);font-weight:800}
+.irow{display:flex;align-items:stretch;justify-content:center;gap:6px}
+.irow.rev{flex-direction:row-reverse}
+.irow.rev .iar{transform:scaleX(-1)}
+.brk{text-align:right;padding-right:calc(16.6% - 10px);font-size:1.6rem;color:var(--gold);font-weight:800;line-height:1}
+.infot{width:100%;text-align:center;font-weight:800;color:var(--navy);margin:0 0 4px}
+@media(max-width:600px){.irow,.irow.rev{flex-direction:column;align-items:center}.brk{text-align:center;padding:0}.info{align-items:center}.ist{max-width:300px;width:100%}.iar,.irow.rev .iar{transform:rotate(90deg)}}
+/* animacja */
+.cpu{border:2px solid var(--navy);border-radius:14px;background:var(--card);padding:12px;margin:14px 0}
+.grid{display:grid;gap:12px}
+@media(min-width:760px){.grid{grid-template-columns:1.25fr 1fr}}
+.panel{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.panel h5{margin:0 0 6px;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+#prog{list-style:none;margin:0;padding:0;font:14px/1.5 ui-monospace,Consolas,monospace}
+#prog li{margin:2px 0;padding:3px 8px;border-radius:6px;border:2px solid transparent;transition:background .25s,border-color .25s}
+#prog li.cur{background:var(--note);border-color:var(--gold)}
+#prog li .n{display:inline-block;width:1.7em;color:var(--mut)}
+.stages{display:flex;gap:6px;margin:4px 0 8px}
+.stg{flex:1;text-align:center;padding:6px 4px;border-radius:8px;border:2px solid var(--line);font-weight:700;font-size:.88rem;color:var(--mut);transition:all .25s}
+.stg small{display:block;font-weight:400;font-size:.72rem}
+.stg.on{border-color:var(--gold);background:var(--note);color:var(--ink);transform:scale(1.05)}
+.ir{font:15px ui-monospace,Consolas,monospace;border:2px dashed var(--navy);border-radius:8px;padding:8px;min-height:2.4em;text-align:center;background:var(--card)}
+.ir.fly{animation:fly .6s ease-out}
+@keyframes fly{from{transform:translateX(-60px);opacity:0}to{transform:none;opacity:1}}
+.regs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.reg{text-align:center;border:2px solid var(--navy);border-radius:10px;background:var(--card);padding:4px 0;transition:background .3s,border-color .3s}
+.reg b{display:block;font-size:.8rem;color:var(--mut)}
+.reg span{display:block;font:700 1.5rem ui-monospace,Consolas,monospace;color:var(--navy)}
+.reg.chg{background:var(--gold);border-color:var(--gold)}
+.reg.chg span,.reg.chg b{color:#12161d}
+.io{display:grid;gap:8px;margin-top:8px}
+@media(min-width:520px){.io{grid-template-columns:1fr 1fr}}
+.ioval{font:15px ui-monospace,Consolas,monospace;min-height:2em;word-break:break-all}
+.cap{margin:10px 0 0;padding:8px 12px;border-radius:8px;background:var(--soft);min-height:4.4em}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.ctl label{font-size:.9rem}
+select,input[type=number],input[type=text]{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
+input[type=text]{width:7em}
+.pc{font:14px ui-monospace,Consolas,monospace;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Jak działa komputer? Czym jest assembly</h1><div class="sub">How does a computer work? What is assembly?</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <a href="co-to-jest-logika.html">&larr; Wstecz: Co to jest logika? / Back: What is logic?</a>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Rozumiem, czym jest język assembly i skąd się wziął.<br><span class="en">I understand what assembly language is and where it came from.</span></li><li>Potrafię opowiedzieć, co robi procesor: pobiera, dekoduje i wykonuje polecenie.<br><span class="en">I can explain what the processor does: fetch, decode and execute an instruction.</span></li></ul></div>
+
+<div class="info" role="img" aria-label="Infografika: pomysł, assembly, assembler, kod maszynowy, procesor, wynik">
+ <p class="infot">Assembly w jednym obrazku / Assembly in one picture</p>
+<div class="irow">
+ <div class="ist"><span class="ic">💡</span><b>1. Pomysł</b><small>Idea</small><small>„Dodaj 3 do liczby” / “Add 3 to a number”</small></div>
+ <div class="iar">→</div>
+ <div class="ist"><span class="ic">✍️</span><b>2. Assembly</b><small>Człowiek pisze krótkie polecenia / A person writes short commands</small><code>add eax, 3</code></div>
+ <div class="iar">→</div>
+ <div class="ist tool"><span class="ic">🔧</span><b>3. Assembler</b><small>Program „składa” kod maszynowy / A program assembles machine code</small></div>
+ </div>
+<div class="brk">↓</div>
+<div class="irow rev">
+ <div class="ist"><span class="ic">🔢</span><b>4. Kod maszynowy</b><small>Machine code: 0 i 1</small><code>10000011 11000000 00000011</code></div>
+ <div class="iar">→</div>
+ <div class="ist"><span class="ic">⚙️</span><b>5. Procesor</b><small>CPU: pobierz → dekoduj → wykonaj<br>fetch → decode → execute</small></div>
+ <div class="iar">→</div>
+ <div class="ist"><span class="ic">✅</span><b>6. Wynik</b><small>Result: liczba w rejestrze / a number in a register</small></div>
+</div>
+</div>
+<h2>1. Czym jest assembly? <span class="en">/ What is assembly?</span></h2>
+<p class="lead">Komputer rozumie tylko <b>kod maszynowy</b>: długie ciągi zer i jedynek. Pisanie w nim jest bardzo trudne, więc ludzie wymyślili <b>assembly</b>: każdemu poleceniu procesora nadano krótką nazwę, którą da się przeczytać, np. <span class="mono">ADD</span> (dodaj). Specjalny program, <b>assembler</b>, zamienia ten tekst na zera i jedynki.</p>
+<p class="en">A computer only understands <b>machine code</b>: long strings of 0s and 1s. Writing it by hand is very hard, so people invented <b>assembly</b>: every processor command gets a short, readable name, such as <span class="mono">ADD</span>. A special program, the <b>assembler</b>, turns that text into 0s and 1s.</p>
+
+<div class="note"><p><b>Skąd nazwa?</b> Po angielsku <i>to assemble</i> znaczy „złożyć, zmontować”. Program <i>assembler</i> składa gotowy kod maszynowy z naszych czytelnych poleceń, tak jak montuje się model z klocków. Dlatego język nazywa się „assembly”.</p>
+<p class="en"><b>Why the name?</b> <i>To assemble</i> means to put pieces together. The assembler program puts the machine code together from our readable commands, like building a model from bricks.</p></div>
+
+<h3>To samo polecenie na czterech poziomach <span class="en">/ The same idea on four levels</span></h3>
+<p>Chcemy zwiększyć liczbę o 3. Zobacz, jak to wygląda coraz bliżej maszyny:</p>
+<p class="en">We want to add 3 to a number. See how it looks closer and closer to the machine:</p>
+<div class="stairs">
+ <div class="stair s1"><b>Python</b> <span>wysoki poziom / high level</span><code>a = a + 3</code></div>
+ <div class="stair s2"><b>InstaLogik</b> <span>nasz uproszczony assembly / our simplified assembly</span><code>Zwiększ A o 3</code></div>
+ <div class="stair s3"><b>Prawdziwy assembly / Real assembly (x86)</b><code>add eax, 3</code></div>
+ <div class="stair s4"><b>Kod maszynowy / Machine code</b> <span>(zapis szesnastkowy / in hexadecimal)</span><code>83 C0 03</code> <code>10000011 11000000 00000011</code></div>
+</div>
+<p>Im niżej, tym bliżej procesora, ale tym trudniej człowiekowi czytać. Język InstaLogik, którego uczysz się na konkursie, działa jak prawdziwy assembly, tylko ma mniej poleceń i cztery „pudełka” <b>A, B, C, D</b> (w prawdziwym procesorze nazywają się <b>rejestry</b>).</p>
+<p class="en">The lower you go, the closer to the processor, but the harder for a person to read. The InstaLogik language works like real assembly, with fewer commands and four “boxes” <b>A, B, C, D</b> (in a real processor they are called <b>registers</b>).</p>
+
+<h2>2. Kilka faktów z historii <span class="en">/ Some history</span></h2>
+<div class="tl">
+ <div class="ev"><div class="yr">1940s</div>
+  <p>Pierwsze komputery programowano zerami i jedynkami albo przełącznikami i kablami. Jedna pomyłka w jednym bicie psuła cały program.</p>
+  <p class="en">The first computers were programmed with 0s and 1s, or with switches and cables. One wrong bit could spoil the whole program.</p></div>
+ <div class="ev"><div class="yr">1947</div>
+  <p>Brytyjka <b>Kathleen Booth</b> opracowała jeden z pierwszych języków typu assembly, pracując nad komputerem ARC w Birkbeck College w Londynie.</p>
+  <p class="en">British scientist <b>Kathleen Booth</b> devised one of the first assembly languages while working on the ARC computer at Birkbeck College, London.</p></div>
+ <div class="ev"><div class="yr">1949</div>
+  <p>Komputer <b>EDSAC</b> na Uniwersytecie w Cambridge dostał program do tłumaczenia czytelnych poleceń na kod maszynowy, czyli wczesny assembler. Napisał go zespół z <b>Davidem Wheelerem</b>.</p>
+  <p class="en">The <b>EDSAC</b> computer at Cambridge University got a program that translated readable commands into machine code: an early assembler. It was written by a team including <b>David Wheeler</b>.</p></div>
+ <div class="ev"><div class="yr">1952</div>
+  <p><b>Grace Hopper</b> stworzyła jeden z pierwszych kompilatorów. To początek języków wysokiego poziomu, z których dziś pochodzi np. Python.</p>
+  <p class="en"><b>Grace Hopper</b> created one of the first compilers. This was the start of high-level languages, the family that Python belongs to today.</p></div>
+ <div class="ev"><div class="yr">1969</div>
+  <p>Komputer pokładowy rakiety <b>Apollo</b>, która zawiozła ludzi na Księżyc, był programowany w assembly. Miał bardzo mało pamięci, więc każdy bajt się liczył.</p>
+  <p class="en">The <b>Apollo</b> Guidance Computer, which helped land people on the Moon, was programmed in assembly. It had very little memory, so every byte counted.</p></div>
+ <div class="ev"><div class="yr">1999</div>
+  <p>Gra <b>RollerCoaster Tycoon</b> została napisana prawie w całości w assembly przez jedną osobę, Chrisa Sawyera. Dzięki temu działała szybko nawet na słabych komputerach.</p>
+  <p class="en">The game <b>RollerCoaster Tycoon</b> was written almost entirely in assembly by one person, Chris Sawyer. That made it run fast even on weak computers.</p></div>
+ <div class="ev"><div class="yr">Dziś / Today</div>
+  <p>Assembly wciąż jest używany tam, gdzie liczy się szybkość i małe urządzenia: w sterownikach, wbudowanych układach i bezpieczeństwie komputerów. Nowoczesny procesor wykonuje miliardy poleceń na sekundę.</p>
+  <p class="en">Assembly is still used where speed and tiny devices matter: drivers, embedded chips and computer security. A modern processor runs billions of instructions per second.</p></div>
+</div>
+
+<h2>3. Co robi procesor? <span class="en">/ What does the processor do?</span></h2>
+<p>Procesor powtarza w kółko trzy kroki dla każdej linii programu:</p>
+<p class="en">The processor repeats three steps for every line of the program:</p>
+<ol>
+ <li><b>Pobierz</b> (<i>fetch</i>): weź następną linię z pamięci.</li>
+ <li><b>Dekoduj</b> (<i>decode</i>): zrozum, co ona oznacza.</li>
+ <li><b>Wykonaj</b> (<i>execute</i>): zrób to i zapamiętaj wynik w pudełku.</li>
+</ol>
+<p class="en">1. Fetch: take the next line from memory. 2. Decode: work out what it means. 3. Execute: do it and store the result in a box.</p>
+
+<h3>Zobacz to na żywo <span class="en">/ See it live</span></h3>
+<p>Wybierz program i klikaj <b>Krok</b>, albo wciśnij <b>Start</b>. Złota ramka pokazuje, która linia jest teraz wykonywana. Pudełka, które się zmieniły, świecą na złoto.</p>
+<p class="en">Choose a program and click <b>Step</b>, or press <b>Start</b>. The gold frame shows the line being run. Boxes that change light up gold.</p>
+
+<div class="cpu" id="cpu">
+ <div class="ctl">
+  <label>Program: <select id="sel"></select></label>
+  <label>Wejście / Input: <input type="text" id="inp" inputmode="numeric" autocomplete="off"></label>
+  <button id="reset" class="alt">Od nowa / Reset</button>
+ </div>
+ <div class="grid" style="margin-top:12px">
+  <div class="panel"><h5>Pamięć: program / Memory: program</h5><ol id="prog" style="list-style:none"></ol></div>
+  <div>
+   <div class="panel"><h5>Procesor / Processor (CPU)</h5>
+    <div class="stages">
+     <div class="stg" id="s1">1 Pobierz<small>Fetch</small></div>
+     <div class="stg" id="s2">2 Dekoduj<small>Decode</small></div>
+     <div class="stg" id="s3">3 Wykonaj<small>Execute</small></div>
+    </div>
+    <div class="ir" id="ir">&nbsp;</div>
+    <div class="pc" id="pc" style="margin-top:6px"></div>
+   </div>
+   <div class="panel" style="margin-top:10px"><h5>Rejestry (pudełka) / Registers (boxes)</h5>
+    <div class="regs" id="regs"></div></div>
+  </div>
+ </div>
+ <div class="io">
+  <div class="panel"><h5>Wejście / Input</h5><div class="ioval" id="inview"></div></div>
+  <div class="panel"><h5>Wyjście / Output</h5><div class="ioval" id="outview"></div></div>
+ </div>
+ <div class="cap" id="cap" aria-live="polite"></div>
+ <div class="ctl">
+  <button id="step">Krok / Step</button>
+  <button id="play">Start</button>
+  <label>Szybkość / Speed: <input type="range" id="spd" min="1" max="5" value="3"></label>
+ </div>
+</div>
+
+<div class="note"><p>Zauważ: komputer nie „myśli”. Wykonuje po kolei proste kroki, ale robi to tak szybko, że wygląda to jak magia. Dokładnie tak samo będziesz wykonywać programy ołówkiem w tabeli śledzenia na konkursie.</p>
+<p class="en">Notice: the computer does not “think”. It follows simple steps one by one, but so fast that it looks like magic. You will run programs by hand in a trace table in the same way in the competition.</p></div>
+
+<h2>4. Sprawdź się <span class="en">/ Check yourself</span></h2>
+<details><summary>Co zamienia assembly na zera i jedynki? / What turns assembly into 0s and 1s?</summary><p>Assembler.</p></details>
+<details><summary>Jak nazywają się „pudełka” w prawdziwym procesorze? / What are the “boxes” called in a real processor?</summary><p>Rejestry / Registers.</p></details>
+<details><summary>Wymień trzy kroki procesora. / Name the three processor steps.</summary><p>Pobierz, dekoduj, wykonaj / Fetch, decode, execute.</p></details>
+<details><summary>Dlaczego ludzie wymyślili assembly? / Why did people invent assembly?</summary><p>Żeby nie pisać zer i jedynek ręcznie: nazwy poleceń łatwiej czytać i mniej się w nich pomylić. / So they would not have to write 0s and 1s by hand: command names are easier to read and make fewer mistakes.</p></details>
+
+<p style="margin-top:20px"><a href="niezbednik.html">Dalej: Niezbędnik – 8 misji przed konkursem / Next: Toolkit – 8 missions before the competition &rarr;</a></p>
+</main>
+<footer>
+<p>Ta strona niczego nie zapisuje i nie wysyła — wszystko dzieje się w Twojej przeglądarce. Fakty historyczne podano w uproszczeniu, na poziomie szkoły podstawowej. <span class="en">This page saves and sends nothing — everything happens in your browser. Historical facts are simplified for primary level.</span></p>
+<p>Stronę opracował Andrzej Dobosz dla British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
+<p>© 2026 Andrzej Dobosz, British Primary School of Wilanow. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0 — share with attribution, no changes, non-commercial use only.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+
+<script>
+(function(){
+var PROGS=[
+ {pl:'Podwój i dodaj 1 (2n+1)',en:'Double and add 1',inp:'6',code:[
+  'Wczytaj do A','Ustaw B na A','Zwiększ B o B','Zwiększ B o 1','Wypisz pudełko B']},
+ {pl:'Dodaj dwie liczby',en:'Add two numbers',inp:'4 5',code:[
+  'Wczytaj do A','Wczytaj do B','Zwiększ A o B','Wypisz pudełko A']},
+ {pl:'Odliczanie (pętla)',en:'Countdown (loop)',inp:'3',code:[
+  'Wczytaj do A','Jeżeli A = 0 skocz do 6 inaczej skocz do następnej','Wypisz pudełko A','Zmniejsz A o 1','Skocz do 2','Skocz do końca']}
+];
+var $=function(i){return document.getElementById(i)};
+var sel=$('sel'),inp=$('inp'),prog=$('prog'),ir=$('ir'),pcEl=$('pc'),cap=$('cap'),outv=$('outview'),inv=$('inview');
+var regsEl=$('regs'),st,timer=null,busy=false;
+PROGS.forEach(function(p,i){var o=document.createElement('option');o.value=i;o.textContent=p.pl+' / '+p.en;sel.appendChild(o)});
+['A','B','C','D'].forEach(function(n){var d=document.createElement('div');d.className='reg';d.id='r'+n;d.innerHTML='<b>'+n+'</b><span>0</span>';regsEl.appendChild(d)});
+
+function load(){
+  stop();
+  var p=PROGS[sel.value]; if(document.activeElement!==inp||true){}
+  st={pc:0,A:0,B:0,C:0,D:0,inp:[],out:[],phase:0,done:false,idx:0};
+  st.inp=(inp.value||'').split(/[\s,;]+/).filter(Boolean).map(Number).filter(function(x){return isFinite(x)});
+  prog.innerHTML='';
+  p.code.forEach(function(l,i){var li=document.createElement('li');li.innerHTML='<span class="n">'+(i+1)+'.</span>'+esc(l);li.id='L'+i;prog.appendChild(li)});
+  ir.innerHTML='&nbsp;';render();
+  say('Gotowe do startu. Kliknij Krok.','Ready. Click Step.');
+  stg(0);pcEl.textContent='licznik rozkazów / program counter: 1';
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function say(pl,en){cap.innerHTML='<div>'+pl+'</div><div class="en">'+en+'</div>'}
+function stg(n){for(var i=1;i<=3;i++)$('s'+i).classList.toggle('on',i===n)}
+function render(){
+  ['A','B','C','D'].forEach(function(n){$('r'+n).lastChild.textContent=st[n]});
+  outv.textContent=st.out.join(' ')||'—';
+  inv.innerHTML=st.inp.map(function(v,i){return i<st.idx?'<s style="opacity:.4">'+v+'</s>':'<b>'+v+'</b>'}).join(' ')||'—';
+  Array.prototype.forEach.call(prog.children,function(li,i){li.classList.toggle('cur',!st.done&&i===st.pc)});
+  pcEl.textContent='licznik rozkazów / program counter: '+(st.done?'koniec / end':(st.pc+1));
+}
+function val(t){t=t.trim();return /^[ABCD]$/.test(t)?st[t]:Number(t)}
+function cmp(a,op,b){return op==='='?a===b:op==='≠'||op==='!='?a!==b:op==='<'?a<b:op==='>'?a>b:op==='≤'||op==='<='?a<=b:a>=b}
+function flash(n){var e=$('r'+n);e.classList.add('chg');setTimeout(function(){e.classList.remove('chg')},900)}
+/* wykonanie jednej instrukcji; zwraca opis */
+function exec(line){
+  var m,L=st.pc;
+  if((m=line.match(/^Wczytaj do ([ABCD])$/))){
+    if(st.idx>=st.inp.length){st.done=true;return ['Brak liczb na wejściu, program kończy się.','No numbers left in the input, the program stops.']}
+    st[m[1]]=st.inp[st.idx++];flash(m[1]);st.pc++;
+    return ['Liczba z wejścia ('+st[m[1]]+') trafia do pudełka '+m[1]+'.','The next input number ('+st[m[1]]+') goes into box '+m[1]+'.']}
+  if((m=line.match(/^Ustaw ([ABCD]) na (\S+)$/))){
+    st[m[1]]=val(m[2]);flash(m[1]);st.pc++;
+    return ['Pudełko '+m[1]+' dostaje wartość '+st[m[1]]+'.','Box '+m[1]+' gets the value '+st[m[1]]+'.']}
+  if((m=line.match(/^Zwiększ ([ABCD]) o (\S+)$/))){
+    var x=val(m[2]);st[m[1]]+=x;flash(m[1]);st.pc++;
+    return ['Do pudełka '+m[1]+' dodajemy '+x+'. Teraz jest tam '+st[m[1]]+'.','We add '+x+' to box '+m[1]+'. It now holds '+st[m[1]]+'.']}
+  if((m=line.match(/^Zmniejsz ([ABCD]) o (\S+)$/))){
+    var y=val(m[2]);st[m[1]]=Math.max(0,st[m[1]]-y);flash(m[1]);st.pc++;
+    return ['Z pudełka '+m[1]+' odejmujemy '+y+'. Teraz jest tam '+st[m[1]]+'.','We subtract '+y+' from box '+m[1]+'. It now holds '+st[m[1]]+'.']}
+  if((m=line.match(/^Wypisz pudełko ([ABCD])$/))){
+    st.out.push(st[m[1]]);st.pc++;
+    return ['Na wyjście trafia liczba '+st[m[1]]+'.','The number '+st[m[1]]+' is sent to the output.']}
+  if((m=line.match(/^Skocz do (\d+)$/))){
+    st.pc=Number(m[1])-1;
+    return ['Skok: następna będzie linia '+m[1]+'.','Jump: the next line will be '+m[1]+'.']}
+  if(/^Skocz do końca$/.test(line)){st.done=true;return ['Koniec programu.','End of the program.']}
+  if((m=line.match(/^Jeżeli ([ABCD]) (=|≠|<|>|≤|≥) (\S+) skocz do (\d+|następnej) inaczej skocz do (\d+|następnej)$/))){
+    var t=cmp(st[m[1]],m[2],val(m[3]));var tgt=t?m[4]:m[5];
+    st.pc=tgt==='następnej'?st.pc+1:Number(tgt)-1;
+    return ['Sprawdzamy: czy '+m[1]+' '+m[2]+' '+val(m[3])+'? ('+m[1]+' = '+st[m[1]]+') Odpowiedź: '+(t?'TAK':'NIE')+'. Idziemy do '+(tgt==='następnej'?'następnej linii':'linii '+tgt)+'.',
+            'Check: is '+m[1]+' '+m[2]+' '+val(m[3])+'? ('+m[1]+' = '+st[m[1]]+') Answer: '+(t?'YES':'NO')+'. We go to '+(tgt==='następnej'?'the next line':'line '+tgt)+'.']}
+  st.done=true;return ['Nie rozumiem tego polecenia.','I do not understand this command.']
+}
+function after(){if(!st.done&&st.pc>=PROGS[sel.value].code.length)st.done=true}
+function delay(){return [1400,1000,700,450,250][$('spd').value-1]/3}
+/* jeden krok = 3 fazy z animacją */
+function step(cb){
+  if(st.done){say('Program zakończony. Kliknij „Od nowa”.','The program has finished. Click Reset.');stop();return}
+  if(busy)return;busy=true;
+  var code=PROGS[sel.value].code,line=code[st.pc];
+  stg(1);ir.classList.remove('fly');void ir.offsetWidth;ir.textContent=line;ir.classList.add('fly');
+  Array.prototype.forEach.call(prog.children,function(li,i){li.classList.toggle('cur',i===st.pc)});
+  say('<b>1. Pobierz.</b> Procesor bierze linię '+(st.pc+1)+' z pamięci.','<b>1. Fetch.</b> The processor takes line '+(st.pc+1)+' from memory.');
+  setTimeout(function(){
+    stg(2);say('<b>2. Dekoduj.</b> Procesor rozpoznaje, jakie to polecenie.','<b>2. Decode.</b> The processor works out which command it is.');
+    setTimeout(function(){
+      stg(3);var d=exec(line);after();
+      say('<b>3. Wykonaj.</b> '+d[0],'<b>3. Execute.</b> '+d[1]);render();
+      setTimeout(function(){busy=false;if(cb)cb()},delay()*1.2);
+    },delay());
+  },delay());
+}
+function stop(){if(timer){clearTimeout(timer);timer=null}$('play').textContent='Start'}
+function loop(){ if(!timer)return; step(function(){ if(timer&&!st.done)timer=setTimeout(loop,delay()*0.6); else stop() }) }
+$('step').onclick=function(){stop();step()};
+$('play').onclick=function(){ if(timer){stop();return} if(st.done)load(); $('play').textContent='Pauza / Pause'; timer=setTimeout(loop,0) };
+$('reset').onclick=function(){busy=false;load()};
+sel.onchange=function(){inp.value=PROGS[sel.value].inp;busy=false;load()};
+inp.onchange=function(){busy=false;load()};
+inp.value=PROGS[0].inp;load();
+})();
+</script>
+</body>
+</html>

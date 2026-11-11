@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Co to jest logika?</title>
+<link rel="stylesheet" href="../assets/strona.css">
+<style>
+.lead{font-size:1.05rem}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:12px 14px;margin:12px 0}
+/* prawda / fałsz */
+.tf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:8px 0}
+.tf:last-child{border-bottom:0}
+.tf .q{flex:1 1 260px}
+.tf .q .en{display:block;font-size:.92rem}
+.tf .b{display:flex;gap:6px;align-items:center}
+.tf button{padding:6px 12px}
+.tf .r{min-width:1.6em;font-weight:800;font-size:1.2rem}
+.good{color:var(--ok)}.bad{color:var(--err)}
+/* schemat blokowy */
+.flow{display:grid;justify-items:center;gap:0;margin:12px 0}
+.fb{border:2px solid var(--navy);border-radius:10px;padding:8px 14px;background:var(--card);text-align:center;min-width:0;max-width:100%;transition:all .3s}
+.fb.dec{border-radius:40px;border-color:var(--gold)}
+.fb.lit{background:var(--gold);border-color:var(--gold);color:#12161d}
+.fb.lit .en{color:#12161d}
+.arr{width:3px;height:22px;background:var(--line);transition:background .3s}
+.arr.lit{background:var(--gold)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:100%;max-width:520px;text-align:center}
+.split .lbl{font-weight:800;margin:4px 0;color:var(--mut)}
+.split .lbl.lit{color:var(--gold)}
+.split .col{display:grid;justify-items:center}
+/* kolejność */
+.pool,.done{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:8px;border:2px dashed var(--line);border-radius:10px;margin:8px 0}
+.done{border-color:var(--gold);flex-direction:column}
+.chip{font:inherit;padding:6px 12px;border-radius:20px;border:1px solid var(--navy);background:var(--soft);color:var(--ink);cursor:pointer;font-weight:500}
+.done .chip{border-radius:8px;cursor:default;text-align:left}
+.chip.mono{font-family:ui-monospace,Consolas,monospace;font-size:.92rem}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fbk{margin-top:6px;font-weight:600;min-height:1.5em}
+.greek{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin:12px 0;padding:14px;border-radius:14px;background:var(--soft);text-align:center}
+.greek .w{font:800 2.2rem Georgia,serif;color:var(--navy)}
+.greek .m{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.greek .m span{background:var(--card);border:2px solid var(--gold);border-radius:20px;padding:4px 12px;font-weight:600}
+.tree{display:grid;gap:10px;margin:12px 0}
+@media(min-width:760px){.tree{grid-template-columns:1fr 1fr 1fr}}
+.tree .card{margin:0;border-top:4px solid var(--gold)}
+.tree h4{margin:0 0 4px}
+.pillars{display:grid;gap:10px;margin:12px 0;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.pil{background:var(--card);border:2px solid var(--navy);border-radius:12px;padding:10px;text-align:center}
+.pil .ic{font-size:2rem}
+.pil b{display:block;color:var(--navy)}
+.pil p{font-size:.9rem;margin:4px 0}
+.story{display:grid;gap:10px;margin:12px 0;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.sc{position:relative;background:var(--card);border:2px solid var(--navy);border-radius:12px;padding:10px 12px}
+.sc .n{position:absolute;top:-10px;left:-10px;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#12161d;font-weight:800;display:grid;place-items:center}
+.sc .ic{font-size:2rem;text-align:center}
+.sc>b{display:block;text-align:center;color:var(--navy)}
+.fig{margin:14px 0;text-align:center}
+.fig img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+.fig figcaption{font-size:.85rem;color:var(--mut);margin-top:4px}
+.figrow{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));align-items:start}
+.portrait{float:right;width:130px;margin:0 0 8px 14px}
+@media(max-width:480px){.portrait{width:100px}}
+.sc p{font-size:.92rem}
+.map .ex rect{fill:#fff;stroke:#157347;stroke-width:3;opacity:0;transition:opacity .4s}
+.map .ex text{font:700 12px system-ui,sans-serif;fill:#157347;opacity:0;transition:opacity .4s}
+.map.exc .ex rect,.map.exc .ex text{opacity:1}
+.map{width:100%;max-width:560px;display:block;margin:10px auto;border:1px solid var(--line);border-radius:12px;background:#f3eee2}
+.map .st{stroke:#c9bfa8;stroke-width:10;fill:none;stroke-linecap:round}
+.map .d{fill:#b02a37;opacity:.8}
+.map .p{fill:#1e3277;stroke:#fff;stroke-width:2}
+.map .pl{font:600 13px system-ui,sans-serif;fill:#1e3277}
+.map .ring{fill:none;stroke:#e49a05;stroke-width:3;stroke-dasharray:6 4;opacity:0;transition:opacity .4s}
+.map.show .ring{opacity:1}
+.map .pg{opacity:0;transition:opacity .4s}
+.map.pumps .pg{opacity:1}
+/* oś czasu */
+.tl{position:relative;margin:18px 0 6px;padding-left:26px}
+.tl:before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:3px;background:var(--gold);border-radius:2px}
+.ev{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:0 0 12px}
+.ev:before{content:"";position:absolute;left:-26px;top:14px;width:15px;height:15px;border-radius:50%;background:var(--navy);border:3px solid var(--gold)}
+.ev .yr{font-weight:800;color:var(--navy);font-size:1.05rem}
+.ev p{margin:2px 0}
+.signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}
+.sign{border:1px solid var(--line);border-radius:10px;background:var(--card);text-align:center;padding:8px}
+.sign b{display:block;font:800 1.6rem ui-monospace,Consolas,monospace;color:var(--navy)}
+.sign span{font-size:.85rem}
+input[type=number]{font:inherit;width:6em;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
+details{margin:10px 0;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--card)}
+summary{cursor:pointer;font-weight:600;color:var(--navy)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Co to jest logika?</h1><div class="sub">What is logic?</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <a href="jak-dziala-komputer.html">Dalej: Jak działa komputer? / Next: How does a computer work? &rarr;</a>
+</div>
+<main>
+
+<div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul><li>Wiem, skąd pochodzi słowo „logika” i dlaczego jest ważna w matematyce i filozofii.<br><span class="en">I know where the word “logic” comes from and why it matters in maths and philosophy.</span></li><li>Potrafię wymienić cztery części myślenia komputacyjnego.<br><span class="en">I can name the four parts of computational thinking.</span></li><li>Wiem, co to jest zdanie prawdziwe i fałszywe.<br><span class="en">I know what a true and a false statement is.</span></li><li>Potrafię użyć „jeżeli… to… inaczej…”.<br><span class="en">I can use “if… then… otherwise…”.</span></li><li>Rozumiem, że kolejność kroków ma znaczenie.<br><span class="en">I understand that the order of steps matters.</span></li></ul></div>
+
+<h2>1. Logika to myślenie krok po kroku <span class="en">/ Logic is thinking step by step</span></h2>
+<p class="lead"><b>Logika</b> to sposób myślenia, w którym z tego, co wiemy, wyciągamy pewne wnioski. Pomaga sprawdzić, czy coś jest <b>prawdą</b>, czy <b>fałszem</b>, i zdecydować, co zrobić dalej.</p>
+<p class="en">Logic is a way of thinking where we use what we know to reach sure conclusions. It helps us check whether something is <b>true</b> or <b>false</b>, and decide what to do next.</p>
+<div class="note"><p>Komputer jest bardzo „logiczny”: robi <b>dokładnie</b> to, co mu każesz, krok po kroku. Nie zgaduje i nie domyśla się. Dlatego na konkursie InstaLogik liczy się logiczne myślenie, a nie szybkie pisanie.</p>
+<p class="en">A computer is very “logical”: it does <b>exactly</b> what you tell it, step by step. It never guesses. That is why InstaLogik is about logical thinking, not fast typing.</p></div>
+
+<div class="card" style="border-left:6px solid var(--gold)"><h4 style="margin-top:0">🧠 Twój mózg też używa logiki <span class="en">/ Your brain uses logic too</span></h4>
+<p>Za planowanie i podejmowanie decyzji odpowiada głównie przednia część mózgu, tuż za czołem. Naukowcy nazywają ją <b>korą przedczołową</b> (<i>prefrontal cortex</i>). Używasz jej codziennie:</p>
+<p class="en">Planning and making decisions happen mostly in the front part of your brain, just behind your forehead. Scientists call it the <b>prefrontal cortex</b>. You use it every day:</p>
+<ul>
+ <li><b>Jeżeli</b> pada deszcz, <b>to</b> biorę kurtkę. <span class="en">If it is raining, then I take a coat.</span></li>
+ <li>Najpierw pakuję zeszyty, <b>potem</b> zamykam plecak. <span class="en">First I pack my books, then I close my bag.</span></li>
+ <li><b>Jeżeli</b> autobus się spóźnia, <b>to</b> idę pieszo, <b>inaczej</b> czekam. <span class="en">If the bus is late, then I walk, otherwise I wait.</span></li>
+</ul>
+<p>Ta część mózgu rozwija się aż do dorosłości, a ćwiczenie logicznego myślenia, na przykład w konkursie InstaLogik, pomaga ją trenować.</p>
+<p class="en">This part of the brain keeps developing until adulthood, and practising logical thinking, for example in InstaLogik, helps to train it.</p></div>
+
+<h2>2. Skąd się wzięło słowo „logika”? <span class="en">/ Where does the word “logic” come from?</span></h2>
+<div class="greek" role="img" aria-label="Greckie słowo logos: słowo, myśl, rozum">
+ <div class="w">λόγος <span style="font-size:1.2rem;font-weight:600">(logos)</span></div>
+ <div class="m"><span>słowo / word</span><span>myśl / thought</span><span>rozum / reason</span></div>
+</div>
+<p>Słowo <b>logika</b> pochodzi od greckiego słowa <b>logos</b>, które znaczy „słowo”, „myśl” i „rozum”. Logika to więc sztuka dobrego, rozumnego myślenia.</p>
+<p class="en">The word <b>logic</b> comes from the Greek word <b>logos</b>, which means “word”, “thought” and “reason”. So logic is the art of thinking well and sensibly.</p>
+<p>Logika narodziła się ponad 2300 lat temu w starożytnej Grecji. Filozof <b>Arystoteles</b> jako pierwszy spisał jej zasady. Uważał, że logika to <b>narzędzie</b>, którego potrzebuje każda nauka.</p>
+<p class="en">Logic was born over 2,300 years ago in ancient Greece. The philosopher <b>Aristotle</b> was the first to write down its rules. He saw logic as a <b>tool</b> that every kind of knowledge needs.</p>
+<div class="tree">
+ <div class="card"><h4>🏛️ Filozofia <span class="en">/ Philosophy</span></h4>
+  <p>Filozofowie zadają wielkie pytania: co jest prawdą? jak odróżnić dobry argument od złego? Logika pomaga im sprawdzić, czy wniosek naprawdę wynika z tego, co wiemy.</p>
+  <p class="en">Philosophers ask big questions: what is true? how can we tell a good argument from a bad one? Logic helps them check that a conclusion really follows from what we know.</p></div>
+ <div class="card"><h4>📐 Matematyka <span class="en">/ Mathematics</span></h4>
+  <p>W matematyce nic nie przyjmujemy „na oko”. Każdy wynik trzeba <b>udowodnić</b> krok po kroku, a każdy krok musi być logiczny. Już starożytny Grek <b>Euklides</b> budował geometrię w ten sposób. W XIX wieku matematycy, m.in. George Boole, pokazali, że samą logikę można zapisać jak matematykę.</p>
+  <p class="en">In maths we never accept anything “by guessing”. Every result must be <b>proved</b> step by step, and every step must be logical. The ancient Greek <b>Euclid</b> built geometry this way. In the 19th century mathematicians, including George Boole, showed that logic itself can be written like maths.</p></div>
+ <div class="card"><h4>💻 Informatyka <span class="en">/ Computing</span></h4>
+  <p>Każdy komputer jest zbudowany z milionów maleńkich przełączników, które działają według logiki: prawda = 1, fałsz = 0. Każdy program to logiczne polecenia: „jeżeli… to… inaczej…”.</p>
+  <p class="en">Every computer is built from millions of tiny switches that work by logic: true = 1, false = 0. Every program is made of logical instructions: “if… then… otherwise…”.</p></div>
+</div>
+<div class="note"><p>Logika łączy filozofię, matematykę i informatykę. Gdy piszesz program w InstaLogik, robisz to samo co Arystoteles i Euklides: wyciągasz pewne wnioski krok po kroku.</p>
+<p class="en">Logic links philosophy, maths and computing. When you write a program in InstaLogik, you do what Aristotle and Euclid did: reach sure conclusions step by step.</p></div>
+
+<h2>3. Myślenie komputacyjne <span class="en">/ Computational thinking</span></h2>
+<p><b>Myślenie komputacyjne</b> to sposób rozwiązywania problemów tak, jak robią to informatycy. Nie potrzeba do niego komputera! Składa się z czterech kroków:</p>
+<p class="en"><b>Computational thinking</b> is a way of solving problems like computer scientists do. You do not need a computer for it! It has four parts:</p>
+<div class="pillars">
+ <div class="pil"><div class="ic">🧩</div><b>Rozkład na części</b><span class="en">Decomposition</span><p>Dziel duży problem na małe, łatwiejsze kawałki.</p><p class="en">Break a big problem into small, easier pieces.</p></div>
+ <div class="pil"><div class="ic">🔍</div><b>Szukanie wzorców</b><span class="en">Pattern recognition</span><p>Zauważ, co się powtarza albo co jest podobne.</p><p class="en">Notice what repeats or what is similar.</p></div>
+ <div class="pil"><div class="ic">🎯</div><b>Abstrakcja</b><span class="en">Abstraction</span><p>Skup się na tym, co ważne, a pomiń szczegóły.</p><p class="en">Focus on what matters and ignore the details.</p></div>
+ <div class="pil"><div class="ic">📋</div><b>Algorytm</b><span class="en">Algorithm</span><p>Zapisz rozwiązanie jako kroki w ustalonej kolejności.</p><p class="en">Write the solution as steps in a fixed order.</p></div>
+</div>
+
+<h3>Prawdziwa historia: dr John Snow i cholera <span class="en">/ A true story: Dr John Snow and cholera</span></h3>
+<figure class="fig portrait"><img src="../assets/snow-portret.jpg" alt="Dr John Snow, fotografia z ok. 1856 r." width="220" height="323" loading="lazy"><figcaption>Dr John Snow (1813–1858)</figcaption></figure>
+<p><i>(To nie ten Jon Snow z „Gry o tron”! Ten był prawdziwym lekarzem.) <span class="en">(Not Jon Snow from “Game of Thrones”! This one was a real doctor.)</span></i></p>
+
+<div class="story">
+ <div class="sc"><div class="n">1</div><div class="ic">🏚️</div><b>Londyn, 1854</b>
+  <p>Dzielnica Soho. Domy stoją ciasno, nie ma kranów ani łazienek. Kilka rodzin dzieli jedną toaletę, a nieczystości trafiają do dołów w ziemi. Wodę przynosi się w wiadrach z pompy na rogu ulicy.</p>
+  <p class="en">The Soho district. Houses are packed together, with no taps or bathrooms. Several families share one toilet, and waste goes into pits in the ground (cesspits). People fetch water in buckets from a pump on the street corner.</p></div>
+ <div class="sc"><div class="n">2</div><div class="ic">😷</div><b>Epidemia / The outbreak</b>
+  <p>Wybucha cholera. W kilka dni umierają setki ludzi. Wszyscy myślą, że winne jest „złe powietrze” i smród.</p>
+  <p class="en">Cholera breaks out. Hundreds of people die within days. Everyone thinks “bad air” and the smell are to blame.</p></div>
+ <div class="sc"><div class="n">3</div><div class="ic">🕵️</div><b>Zbieranie danych / Collecting data</b>
+  <p>Dr Snow ma inną hipotezę: woda. Razem z miejscowym duchownym, <b>Henrym Whiteheadem</b>, chodzi od domu do domu i zapisuje, kto zachorował i skąd brał wodę.</p>
+  <p class="en">Dr Snow has a different idea (a hypothesis): the water. With a local clergyman, <b>Henry Whitehead</b>, he goes from house to house, writing down who fell ill and where they got their water.</p></div>
+ <div class="sc"><div class="n">4</div><div class="ic">🗺️</div><b>Mapa / The map</b>
+  <p>Każde zachorowanie zaznacza kreską na mapie. Widać wyraźny wzorzec: wokół jednej pompy na <b>Broad Street</b>.</p>
+  <p class="en">He marks each case with a line on a map. A clear pattern appears: around one pump on <b>Broad Street</b>.</p></div>
+ <div class="sc"><div class="n">5</div><div class="ic">🚰</div><b>Rozwiązanie / The solution</b>
+  <p>Snow przekonuje władze parafii, by zdjęły rączkę pompy. Nikt nie może już z niej pić, a nowych zachorowań jest coraz mniej.</p>
+  <p class="en">Snow persuades the parish authorities to remove the pump handle. Nobody can drink from it any more, and new cases become fewer and fewer.</p></div>
+</div>
+
+<figure class="fig" style="clear:both"><img src="../assets/snow-mapa.jpg" alt="Fragment prawdziwej mapy Johna Snowa: czarne kreski przy domach to zgony, pompa na Broad Street w środku skupiska" width="1200" height="654" loading="lazy">
+<figcaption>Prawdziwa mapa Johna Snowa (fragment). Każda czarna kreska to jedna osoba, która zmarła. Znajdź napis „PUMP” przy BROAD STREET! / John Snow’s real map (detail). Each black line is one person who died. Find the word “PUMP” on BROAD STREET!</figcaption></figure>
+<p><b>Zagraj w detektywa! / Play detective!</b> Klikaj przyciski po kolei. <span class="en">Click the buttons in order.</span></p>
+<svg class="map" id="snowmap" viewBox="0 0 560 360" role="img" aria-label="Uproszczona mapa Soho: kropki to zachorowania, skupione wokół pompy na Broad Street; browar i przytułek prawie bez zachorowań">
+ <path class="st" d="M20 120 H540 M20 250 H540 M150 20 V340 M300 20 V340 M440 20 V340"/>
+ <g class="ex"><rect x="330" y="200" width="62" height="40" rx="5"/><text x="361" y="224" text-anchor="middle">Browar</text>
+  <rect x="190" y="38" width="80" height="44" rx="5"/><text x="230" y="64" text-anchor="middle">Przytułek</text></g>
+ <circle class="ring" cx="300" cy="182" r="92"/>
+ <g id="dots"></g>
+ <g class="pg">
+  <circle class="p" cx="300" cy="182" r="9"/><text class="pl" x="312" y="176">Broad Street</text>
+  <circle class="p" cx="70" cy="60" r="9"/><circle class="p" cx="500" cy="60" r="9"/><circle class="p" cx="80" cy="310" r="9"/><circle class="p" cx="500" cy="310" r="9"/>
+ </g>
+</svg>
+<p style="text-align:center"><button id="bpumps">1. Pokaż pompy / Show the pumps</button> <button id="bring" class="alt">2. Znajdź wzorzec / Find the pattern</button> <button id="bex" class="alt">3. Znajdź wyjątki / Find the exceptions</button></p>
+<p class="fbk" id="snowtxt" style="text-align:center"></p>
+
+<details><summary>🤔 Zagadka: dlaczego w browarze i w przytułku prawie nikt nie zachorował, choć były blisko pompy? / Puzzle: why did almost nobody fall ill in the brewery and the workhouse, although they were near the pump?</summary>
+<p>Miały <b>własne studnie</b>, więc nie piły wody z pompy na Broad Street. Robotnicy w browarze pili też piwo warzone na miejscu. Te wyjątki tylko <b>potwierdziły</b> hipotezę Snowa: chorowali ci, którzy pili wodę z tej jednej pompy.</p>
+<p class="en">They had <b>their own wells</b>, so they did not drink water from the Broad Street pump. The brewery workers also drank beer brewed on site. These exceptions <b>supported</b> Snow’s hypothesis: the people who fell ill were the ones who drank water from that one pump.</p></details>
+
+<div class="figrow">
+<figure class="fig"><img src="../assets/snow-rysunek.jpg" alt="Rysunek „Death’s Dispensary” z 1866 r.: śmierć jako szkielet przy pompie, z której ludzie biorą wodę" width="600" height="747" loading="lazy">
+<figcaption>„Death’s Dispensary” (Apteka Śmierci), rysunek z 1866 r. / cartoon from 1866</figcaption></figure>
+<div class="card"><h4 style="margin-top:0">🤔 Co oznacza ten rysunek? / What does this cartoon mean?</h4>
+<p>Przyjrzyj się: kto stoi przy pompie? Co robią ludzie? Dlaczego artysta narysował śmierć właśnie przy pompie z wodą?</p>
+<p class="en">Look closely: who is standing by the pump? What are the people doing? Why did the artist draw Death right next to a water pump?</p>
+<details><summary>Pokaż odpowiedź / Show the answer</summary><p>Artysta ostrzega, że brudna woda z ulicznych pomp może zabijać, a najbardziej narażeni są biedni ludzie, którzy nie mają innej wody. Kilkanaście lat po odkryciu Snowa ludzie zaczęli to rozumieć.</p><p class="en">The artist warns that dirty water from street pumps can kill, and poor people with no other water are most at risk. Some years after Snow’s discovery, people began to understand this.</p></details></div>
+</div>
+
+<p><b>Jak myślał John Snow? / How did John Snow think?</b></p>
+<ul>
+ <li><b>🧩 Rozkład:</b> zamiast pytać „skąd cała choroba?”, sprawdzał każdy dom osobno: kto zachorował i skąd brał wodę.<br><span class="en">Decomposition: instead of asking “where does the whole disease come from?”, he checked each house: who fell ill and where they got water.</span></li>
+ <li><b>🔍 Wzorzec:</b> zachorowania skupiały się wokół jednej pompy, a miejsca z własną studnią były zdrowe.<br><span class="en">Pattern: the cases clustered around one pump, and places with their own well stayed healthy.</span></li>
+ <li><b>🎯 Abstrakcja:</b> pominął to, co nieważne (smród, plotki, kolory domów) i skupił się na jednym: <b>skąd ludzie brali wodę</b>.<br><span class="en">Abstraction: he ignored what did not matter (the smell, rumours, the colour of houses) and focused on one thing: <b>where people got their water</b>.</span></li>
+ <li><b>📋 Rozwiązanie:</b> jeżeli ludzie piją wodę z tej pompy, to chorują, więc trzeba zabrać rączkę pompy.<br><span class="en">Solution: if people drink water from this pump, then they fall ill, so remove the pump handle.</span></li>
+</ul>
+
+<div class="note"><p><b>Ciekawostki / Fun facts</b></p>
+<p>Później okazało się, że tuż obok studni pod pompą był dół z nieczystościami, który przeciekał do wody. Fuj! 💩 / Later it turned out that a cesspit right next to the well under the pump was leaking into the water. Yuck!</p>
+<p>Ludzie długo nie wierzyli Snowowi. Minęło wiele lat, zanim uznano, że miał rację. Dziś nazywa się go ojcem <b>epidemiologii</b>, czyli nauki o tym, jak rozprzestrzeniają się choroby. / People did not believe Snow for a long time. It took many years before they accepted he was right. Today he is called the father of <b>epidemiology</b>, the study of how diseases spread.</p>
+<p>W Londynie przy dawnej Broad Street (dziś Broadwick Street) stoi kopia tej pompy, celowo <b>bez rączki</b>. / In London, on the old Broad Street (now Broadwick Street), a copy of the pump stands, on purpose <b>without a handle</b>.</p>
+<p>Interaktywna mapa jest uproszczona. Fotografia, mapa i rysunek pochodzą z XIX wieku i są w domenie publicznej. / The interactive map is simplified. The photograph, map and cartoon are from the 19th century and are in the public domain.</p></div>
+
+<h2>4. Prawda czy fałsz? <span class="en">/ True or false?</span></h2>
+<p>Zdanie logiczne jest albo <b>prawdziwe</b>, albo <b>fałszywe</b>. Kliknij swoją odpowiedź.</p>
+<p class="en">A logical statement is either <b>true</b> or <b>false</b>. Click your answer.</p>
+<div class="card" id="tfbox"></div>
+<p id="tfscore" class="fbk"></p>
+
+<h2>5. Znaki porównania <span class="en">/ Comparison signs</span></h2>
+<p>W programach InstaLogik porównujesz liczby. Wynik porównania to zawsze TAK (prawda) albo NIE (fałsz).</p>
+<p class="en">In InstaLogik programs you compare numbers. The answer is always YES (true) or NO (false).</p>
+<div class="signs">
+ <div class="sign"><b>=</b><span>równe<br><i>equal to</i></span></div>
+ <div class="sign"><b>≠</b><span>różne<br><i>not equal to</i></span></div>
+ <div class="sign"><b>&lt;</b><span>mniejsze<br><i>less than</i></span></div>
+ <div class="sign"><b>&gt;</b><span>większe<br><i>greater than</i></span></div>
+ <div class="sign"><b>≤</b><span>mniejsze lub równe<br><i>less than or equal to</i></span></div>
+ <div class="sign"><b>≥</b><span>większe lub równe<br><i>greater than or equal to</i></span></div>
+</div>
+<div class="note"><p><b>Pułapka!</b> Czy 5 ≤ 5? <b>TAK</b>, bo 5 jest równe 5. Czy 5 &lt; 5? <b>NIE</b>. Na konkursie ta różnica często decyduje o punktach.</p>
+<p class="en"><b>Trap!</b> Is 5 ≤ 5? <b>YES</b>, because 5 equals 5. Is 5 &lt; 5? <b>NO</b>. In the competition this difference often decides the points.</p></div>
+
+<h2>6. Jeżeli… to… inaczej… <span class="en">/ If… then… otherwise…</span></h2>
+<p>Codziennie podejmujesz decyzje: <i>jeżeli</i> pada deszcz, <i>to</i> biorę parasol, <i>inaczej</i> idę bez niego. Komputer robi tak samo. Wpisz liczbę i zobacz, którą drogą pójdzie program.</p>
+<p class="en">You make decisions every day: <i>if</i> it rains, <i>then</i> I take an umbrella, <i>otherwise</i> I go without. A computer does the same. Type a number and see which way the program goes.</p>
+<div class="card">
+ <p><label>Liczba A / Number A: <input type="number" id="fnum" value="7"></label></p>
+ <div class="flow">
+  <div class="fb" id="f0">Wczytaj A <span class="en">/ Read A</span></div>
+  <div class="arr" id="a0"></div>
+  <div class="fb dec" id="f1">Czy A ≥ 10? <span class="en">/ Is A ≥ 10?</span></div>
+  <div class="split">
+   <div class="col"><div class="lbl" id="ly">TAK / YES</div><div class="arr" id="a1"></div><div class="fb" id="f2">Wypisz „DUŻA” <span class="en">/ print BIG</span></div></div>
+   <div class="col"><div class="lbl" id="ln">NIE / NO</div><div class="arr" id="a2"></div><div class="fb" id="f3">Wypisz „MAŁA” <span class="en">/ print SMALL</span></div></div>
+  </div>
+ </div>
+ <p class="fbk" id="fout"></p>
+</div>
+<p>Tak samo wygląda to w języku InstaLogik:</p>
+<p class="en">This is how it looks in the InstaLogik language:</p>
+<pre class="code"> 1. Wczytaj do A
+ 2. Jeżeli A ≥ 10 skocz do następnej inaczej skocz do 5
+ 3. Wypisz napis 'DUŻA'
+ 4. Skocz do końca
+ 5. Wypisz napis 'MAŁA'</pre>
+
+<h2>7. Kolejność ma znaczenie <span class="en">/ Order matters</span></h2>
+<p>Ciąg kroków, który zawsze prowadzi do celu, to <b>algorytm</b>. Klikaj kroki we właściwej kolejności.</p>
+<p class="en">A list of steps that always reaches the goal is an <b>algorithm</b>. Click the steps in the right order.</p>
+<div class="card" id="ord1"></div>
+<div class="card" id="ord2"></div>
+
+<h2>8. Trochę historii <span class="en">/ A little history</span></h2>
+<div class="tl">
+ <div class="ev"><div class="yr">ok. 350 p.n.e. / c. 350 BC</div>
+  <p>Grecki filozof <b>Arystoteles</b> opisał zasady poprawnego wnioskowania. Uważa się go za ojca logiki.</p>
+  <p class="en">The Greek philosopher <b>Aristotle</b> described rules for correct reasoning. He is called the father of logic.</p></div>
+ <div class="ev"><div class="yr">IX wiek / 9th century</div>
+  <p>Perski uczony <b>al-Chwarizmi</b> pisał o rozwiązywaniu zadań krok po kroku. Od jego imienia pochodzi słowo <b>algorytm</b>.</p>
+  <p class="en">The Persian scholar <b>al-Khwarizmi</b> wrote about solving problems step by step. The word <b>algorithm</b> comes from his name.</p></div>
+ <div class="ev"><div class="yr">1843</div>
+  <p><b>Ada Lovelace</b> opublikowała algorytm dla maszyny analitycznej Charlesa Babbage’a. Nazywa się ją pierwszą programistką.</p>
+  <p class="en"><b>Ada Lovelace</b> published an algorithm for Charles Babbage’s Analytical Engine. She is often called the first programmer.</p></div>
+ <div class="ev"><div class="yr">1854</div>
+  <p>Angielski matematyk <b>George Boole</b> pokazał, że logikę można liczyć jak matematykę, używając tylko dwóch wartości: prawda i fałsz.</p>
+  <p class="en">English mathematician <b>George Boole</b> showed that logic can be calculated like maths, using only two values: true and false.</p></div>
+ <div class="ev"><div class="yr">1937</div>
+  <p><b>Claude Shannon</b> zauważył, że logikę Boole’a można zbudować z przełączników elektrycznych: włączony = 1 (prawda), wyłączony = 0 (fałsz). Na tym pomyśle działa każdy komputer.</p>
+  <p class="en"><b>Claude Shannon</b> showed that Boole’s logic can be built from electrical switches: on = 1 (true), off = 0 (false). Every computer works on this idea.</p></div>
+</div>
+
+<h2>9. Sprawdź się <span class="en">/ Check yourself</span></h2>
+<details><summary>Jakie dwie wartości ma każde zdanie logiczne? / What two values can a logical statement have?</summary><p>Prawda albo fałsz (TAK albo NIE, 1 albo 0). / True or false (YES or NO, 1 or 0).</p></details>
+<details><summary>A = 8. Czy warunek „A ≤ 8” jest spełniony? / A = 8. Is “A ≤ 8” true?</summary><p>TAK, bo 8 jest równe 8. / YES, because 8 equals 8.</p></details>
+<details><summary>Co znaczy greckie słowo „logos”? / What does the Greek word “logos” mean?</summary><p>Słowo, myśl, rozum. / Word, thought, reason.</p></details>
+<details><summary>Jakiego wzorca szukał John Snow? / What pattern did John Snow look for?</summary><p>Zachorowania skupiały się wokół jednej pompy z wodą na Broad Street. / The cases clustered around one water pump on Broad Street.</p></details>
+<details><summary>Co to jest algorytm? / What is an algorithm?</summary><p>Ciąg kroków w ustalonej kolejności, który prowadzi do celu. / A list of steps in a fixed order that reaches a goal.</p></details>
+
+<p style="margin-top:20px"><a href="jak-dziala-komputer.html">Dalej: Jak działa komputer i czym jest assembly? / Next: How does a computer work and what is assembly? &rarr;</a></p>
+</main>
+<footer>
+<p>Ta strona niczego nie zapisuje i nie wysyła — wszystko dzieje się w Twojej przeglądarce. Fakty historyczne podano w uproszczeniu, na poziomie szkoły podstawowej. <span class="en">This page saves and sends nothing — everything happens in your browser. Historical facts are simplified for primary level.</span></p>
+<p>Stronę opracował Andrzej Dobosz dla British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
+<p>© 2026 Andrzej Dobosz, British Primary School of Wilanow. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0 — share with attribution, no changes, non-commercial use only.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+/* 1. prawda / fałsz */
+var TF=[
+ ['7 &gt; 5','7 is greater than 5',true],
+ ['3 = 4','3 equals 4',false],
+ ['Każdy kwadrat ma 4 boki.','Every square has 4 sides.',true],
+ ['10 ≤ 10','10 is less than or equal to 10',true],
+ ['6 &lt; 6','6 is less than 6',false],
+ ['Wtorek jest po środzie.','Tuesday comes after Wednesday.',false],
+ ['2 + 2 ≠ 5','2 + 2 is not equal to 5',true],
+ ['Jeżeli A = 3, to A + A = 6.','If A = 3, then A + A = 6.',true]
+];
+var box=$('tfbox'),score=0,answered=0;
+TF.forEach(function(t,i){
+ var d=document.createElement('div');d.className='tf';
+ d.innerHTML='<div class="q">'+t[0]+'<span class="en">'+t[1]+'</span></div><div class="b"><button class="alt" data-v="1">Prawda / True</button><button class="alt" data-v="0">Fałsz / False</button><span class="r"></span></div>';
+ d.querySelectorAll('button').forEach(function(btn){btn.onclick=function(){
+  if(d.dataset.done)return;d.dataset.done=1;answered++;
+  var ok=(btn.dataset.v==='1')===t[2];if(ok)score++;
+  var r=d.querySelector('.r');r.textContent=ok?'✓':'✗';r.className='r '+(ok?'good':'bad');
+  if(!ok)r.title=t[2]?'To jest prawda / It is true':'To jest fałsz / It is false';
+  if(!ok)r.textContent='✗ '+(t[2]?'prawda / true':'fałsz / false');
+  if(answered===TF.length)$('tfscore').textContent='Wynik / Score: '+score+' / '+TF.length;
+ }});
+ box.appendChild(d);
+});
+/* 2. schemat blokowy */
+function flow(){
+ var v=Number($('fnum').value),y=v>=10;
+ ['f0','f1','a0'].forEach(function(id){$(id).classList.add('lit')});
+ $('a1').classList.toggle('lit',y);$('f2').classList.toggle('lit',y);$('ly').classList.toggle('lit',y);
+ $('a2').classList.toggle('lit',!y);$('f3').classList.toggle('lit',!y);$('ln').classList.toggle('lit',!y);
+ $('fout').innerHTML='A = '+v+'. Czy '+v+' ≥ 10? <b>'+(y?'TAK':'NIE')+'</b> → wynik: <b>'+(y?'DUŻA':'MAŁA')+'</b><br><span class="en">Is '+v+' ≥ 10? '+(y?'YES':'NO')+' → output: '+(y?'BIG':'SMALL')+'</span>';
+}
+$('fnum').oninput=flow;flow();
+/* mapa Snowa */
+(function(){var g=$('dots'),seed=7;function r(){seed=(seed*9301+49297)%233280;return seed/233280}
+var ns='http://www.w3.org/2000/svg';
+function bad(x,y){return (x>322&&x<400&&y>192&&y<248)||(x>182&&x<278&&y>30&&y<90)}
+for(var i=0,n=0;n<70&&i<400;i++){var a=r()*6.283,d=Math.pow(r(),.7)*95,x=300+Math.cos(a)*d*1.3,y=182+Math.sin(a)*d;if(bad(x,y))continue;n++;var c=document.createElementNS(ns,'circle');c.setAttribute('class','d');c.setAttribute('cx',x.toFixed(1));c.setAttribute('cy',y.toFixed(1));c.setAttribute('r',4);g.appendChild(c)}
+for(var j=0,k=0;k<7&&j<100;j++){var x2=30+r()*500,y2=30+r()*300;if(bad(x2,y2))continue;k++;var c2=document.createElementNS(ns,'circle');c2.setAttribute('class','d');c2.setAttribute('cx',x2.toFixed(1));c2.setAttribute('cy',y2.toFixed(1));c2.setAttribute('r',4);g.appendChild(c2)}
+var m=$('snowmap');
+$('bpumps').onclick=function(){m.classList.add('pumps');$('snowtxt').innerHTML='Każda czerwona kropka to zachorowanie. Granatowe kółka to pompy z wodą.<br><span class="en">Each red dot is a case of illness. The navy circles are water pumps.</span>'};
+$('bex').onclick=function(){m.classList.add('pumps','show','exc');$('snowtxt').innerHTML='Wyjątki: browar i przytułek są blisko pompy, a prawie nikt tam nie zachorował. Dlaczego? Rozwiąż zagadkę poniżej!<br><span class="en">Exceptions: the brewery and the workhouse are near the pump, yet almost nobody there fell ill. Why? Solve the puzzle below!</span>'};
+$('bring').onclick=function(){m.classList.add('pumps','show');$('snowtxt').innerHTML='Wzorzec: prawie wszystkie zachorowania są blisko pompy na Broad Street!<br><span class="en">Pattern: almost all cases are close to the Broad Street pump!</span>'};
+})();
+/* 3. kolejność */
+function order(el,title,titleEn,steps,mono){
+ function build(){
+  el.innerHTML='<p><b>'+title+'</b><br><span class="en">'+titleEn+'</span></p><div class="pool"></div><div class="done"></div><div class="fbk"></div><button class="alt">Od nowa / Again</button>';
+  var pool=el.querySelector('.pool'),done=el.querySelector('.done'),fb=el.querySelector('.fbk'),next=0;
+  var idx=steps.map(function(_,i){return i});
+  do{idx.sort(function(){return Math.random()-.5})}while(idx.every(function(v,i){return v===i}));
+  idx.forEach(function(i){
+   var c=document.createElement('button');c.className='chip'+(mono?' mono':'');c.innerHTML=steps[i];
+   c.onclick=function(){
+    if(i===next){next++;c.onclick=null;done.appendChild(c);c.innerHTML=next+'. '+steps[i];
+      fb.textContent=next===steps.length?'Brawo! Dobra kolejność. / Well done! Right order.':'';fb.className='fbk good'}
+    else{c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');fb.textContent='Jeszcze nie ten krok. Pomyśl, co musi być wcześniej. / Not this step yet. Think what must come first.';fb.className='fbk bad'}
+   };pool.appendChild(c);
+  });
+  el.querySelector('button.alt').onclick=build;
+ }
+ build();
+}
+order($('ord1'),'Zrób kanapkę','Make a sandwich',
+ ['Weź dwie kromki chleba / Take two slices of bread','Posmaruj chleb masłem / Spread butter on the bread','Połóż ser / Put on the cheese','Przykryj drugą kromką / Cover with the second slice','Zjedz! / Eat it!']);
+order($('ord2'),'Program: wczytaj dwie liczby i wypisz ich sumę','Program: read two numbers and print their sum',
+ ['Wczytaj do A','Wczytaj do B','Zwiększ A o B','Wypisz pudełko A'],true);
+})();
+</script>
+</body>
+</html>

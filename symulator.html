@@ -12,8 +12,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-ap
 header{background:#1e3277;border-bottom:4px solid #e49a05;margin:0;padding:12px 0}.bi{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));display:flex;gap:14px;align-items:center}.bi img{width:52px;height:52px;border-radius:8px;flex:none}
 h1{margin:0;font-size:1.5rem;color:#fff}
 .sub{color:#d6ddf6;font-style:italic;margin:2px 0 0}
-main{max-width:1180px;margin:0 auto;padding:8px 16px 32px;display:grid;gap:14px}
-@media(min-width:900px){main{grid-template-columns:1fr 1fr}.wide{grid-column:1/-1}}
+main{max-width:1180px;margin:0 auto;padding:8px 16px 32px;display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}.card{min-width:0}
+@media(min-width:900px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.wide{grid-column:1/-1}}
 .card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:12px 14px}
 .card h2{margin:0 0 8px;font-size:1rem;color:var(--navy)}
 .card h2 small{color:var(--blue);font-weight:400;font-style:italic}
@@ -63,6 +63,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 24px;color:var(--mut);font-
 <div><h1>Symulator języka „assembly” – InstaLogik</h1>
 <div class="sub">Simulator for the InstaLogik “assembly” language</div></div></div>
 </header>
+<div style="max-width:1180px;margin:0 auto;padding:12px 16px 0"><a href="index.html" style="text-decoration:none;font-weight:600;color:var(--navy)">&larr; Wszystkie materiały / All materials</a></div>
 <main>
 <section class="card wide" id="taskcard">
 <h2>Zadania z zeszytów <small>Tasks from the workbooks – write your program below, then check it</small></h2>
