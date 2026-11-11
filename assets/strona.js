@@ -6,26 +6,35 @@ function fmtOut(a){return a.join(' | ');}
 
 function setMsg(el,kind,text){el.className='msg show '+kind;el.textContent=text;}
 
+
+/* zamienia liste bledow parsera na zrozumiale wyjasnienie */
+function opiszBledy(errs){
+  return errs.slice(0,3).map(e=>{
+    const d = (typeof diagnozaLinii==='function') ? diagnozaLinii(e.raw||'') : null;
+    const naglowek = 'Linia '+e.line+'  «'+(e.raw||'')+'»';
+    return d ? naglowek+'\n'+d.pl+'\n'+d.en : naglowek+'\nNie rozumiem tego polecenia. / Unknown command.';
+  }).join('\n\n') + (errs.length>3 ? '\n\n…oraz '+(errs.length-3)+' dalszych linii. / …and '+(errs.length-3)+' more lines.' : '');
+}
+
 function checkProgram(ed){
   const ta=ed.querySelector('textarea'), msg=ed.querySelector('.msg');
   const tests=JSON.parse(ed.dataset.tests||'[]');
   const txt=(ta.value||'').trim();
   if(!txt){setMsg(msg,'err','Najpierw wpisz program. / Type a program first.');return;}
   const p=parseProgram(txt);
-  if(p.errors.length){
-    setMsg(msg,'err','Nie rozumiem linii '+p.errors.map(e=>e.line).join(', ')+
-      '. Sprawdź pisownię polecenia. / I do not understand line(s) '+p.errors.map(e=>e.line).join(', ')+'.');
-    return;
-  }
+  if(p.errors.length){setMsg(msg,'err',opiszBledy(p.errors));return;}
   if(!tests.length){setMsg(msg,'ok','Program jest poprawnie zapisany. / The program is written correctly.');return;}
-  let bad=null;
+  let bad=null, wyk=null, ostrz=null;
   for(const t of tests){
-    let got;
-    try{got=outputLines(runAll(p.lines,t[0]));}catch(e){got=['(błąd / error)'];}
-    const want=t[1].map(String);
+    let st;
+    try{st=runAll(p.lines,t[0].slice());}catch(e){wyk={inp:t[0],msg:'Coś poszło nie tak przy uruchamianiu. / Something went wrong while running.'};break;}
+    if(st.error){wyk={inp:t[0],msg:st.error};break;}
+    if(st.warn&&!ostrz)ostrz=st.warn;
+    const got=outputLines(st), want=t[1].map(String);
     if(got.length!==want.length||got.some((v,i)=>v!==want[i])){bad={inp:t[0],want:want,got:got};break;}
   }
-  if(!bad){setMsg(msg,'ok','Dobrze! Program działa na wszystkich '+tests.length+' testach. / Correct on all '+tests.length+' tests.');}
+  if(wyk){setMsg(msg,'err','Program zatrzymał się dla wejścia '+fmtIn(wyk.inp)+'.\n'+wyk.msg);return;}
+  if(!bad){setMsg(msg,'ok','Dobrze! Program działa na wszystkich '+tests.length+' testach. / Correct on all '+tests.length+' tests.'+(ostrz?'\n\nUwaga: '+ostrz:''));}
   else{setMsg(msg,'err','Jeszcze nie. Dla wejścia '+fmtIn(bad.inp)+' Twój program daje '+fmtOut(bad.got)+
     ', a powinien '+fmtOut(bad.want)+'. / Not yet: for input '+fmtIn(bad.inp)+' you print '+fmtOut(bad.got)+' instead of '+fmtOut(bad.want)+'.');}
 }
@@ -34,9 +43,10 @@ function runProgram(ed){
   const ta=ed.querySelector('textarea'), msg=ed.querySelector('.msg');
   const inp=(ed.querySelector('.inp')?ed.querySelector('.inp').value:'').match(/-?\d+/g)||[];
   const p=parseProgram((ta.value||'').trim());
-  if(p.errors.length){setMsg(msg,'err','Nie rozumiem linii '+p.errors.map(e=>e.line).join(', ')+'.');return;}
-  let st;try{st=runAll(p.lines,inp.map(Number));}catch(e){setMsg(msg,'err','Program się zapętlił albo zabrakło danych.');return;}
-  setMsg(msg,'ok','Wynik / Output: '+(outputLines(st).join(' | ')||'(nic / nothing)'));
+  if(p.errors.length){setMsg(msg,'err',opiszBledy(p.errors));return;}
+  let st;try{st=runAll(p.lines,inp.map(Number));}catch(e){setMsg(msg,'err','Coś poszło nie tak przy uruchamianiu programu. / Something went wrong while running the program.');return;}
+  if(st.error){setMsg(msg,'err',st.error);return;}
+  setMsg(msg,'ok','Wynik / Output: '+(outputLines(st).join(' | ')||'(nic / nothing)')+(st.warn?'\n\nUwaga: '+st.warn:''));
 }
 
 document.addEventListener('click',e=>{

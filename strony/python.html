@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dla chętnych: Python</title>
+<link rel="stylesheet" href="../assets/strona.css">
+<style>
+.para{display:grid;gap:10px;margin:10px 0}
+@media(min-width:760px){.para{grid-template-columns:1fr 1fr}}
+.para h5{margin:0 0 4px;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+.pyst{margin:10px 0;padding:8px 12px;border-radius:8px;background:var(--soft);font-size:.9rem}
+.pyst.err{background:rgba(176,42,55,.12);color:var(--err)}
+details{margin:10px 0;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--card)}
+summary{cursor:pointer;font-weight:600;color:var(--navy)}
+.zad{border-top:2px solid var(--gold);padding-top:10px;margin-top:26px}
+</style>
+</head>
+<body>
+<header><div class="bi"><img src="../assets/logo.png" alt=""><div>
+<h1>Dla chętnych: Python</h1><div class="sub">For keen pupils: Python</div></div></div></header>
+<div class="bar">
+  <a href="../index.html">&larr; Wszystkie materiały / All materials</a>
+  <span><button class="alt" id="wyczysc">Wyczyść moje odpowiedzi</button></span>
+</div>
+<main>
+<p>Umiesz już pisać programy w języku InstaLogik. Python działa tak samo — tylko zamiast pudełek A, B, C, D masz nazwy, które wymyślasz sam, i nie musisz skakać do numerów linii. To ta sama logika w wygodniejszym ubraniu.</p>
+<p class="en">You can already write programs in the InstaLogik language. Python works the same way — instead of boxes A, B, C, D you invent your own names, and you do not jump to line numbers. The same logic, more comfortable clothes.</p>
+
+<div class="note"><p>Python uruchamia się tutaj w Twojej przeglądarce. Przy pierwszym kliknięciu „Sprawdź” strona pobiera go z internetu, co trwa kilka sekund — potem jest już szybko. Twój kod nigdzie nie jest wysyłany.</p>
+<p class="en">Python runs here in your own browser. The first time you click Check the page downloads it, which takes a few seconds — after that it is fast. Your code is never sent anywhere.</p></div>
+
+<h2>1. Pudełka to zmienne <span class="en">/ Boxes are variables</span></h2>
+<div class="para">
+<div><h5>InstaLogik</h5><pre class="code"> 1. Ustaw A na 5
+ 2. Zwiększ A o 3
+ 3. Wypisz pudełko A</pre></div>
+<div><h5>Python</h5><pre class="code">a = 5
+a = a + 3
+print(a)</pre></div>
+</div>
+<p>Nazwa może być dowolna: <span class="mono">a</span>, <span class="mono">wiek</span>, <span class="mono">liczba_kasztanow</span>. Nie musisz jej wcześniej zapowiadać — wystarczy przypisać wartość.</p>
+<p class="en">The name can be anything. You do not declare it first — assigning a value is enough.</p>
+
+<h2>2. Wczytywanie liczb <span class="en">/ Reading numbers</span></h2>
+<div class="para">
+<div><h5>InstaLogik</h5><pre class="code"> 1. Wczytaj do A
+ 2. Wypisz pudełko A</pre></div>
+<div><h5>Python</h5><pre class="code">a = int(input())
+print(a)</pre></div>
+</div>
+<p><span class="mono">input()</span> czyta jedną linię, a <span class="mono">int(...)</span> zamienia ją na liczbę. Bez <span class="mono">int</span> Python potraktowałby to jako tekst i <span class="mono">2 + 2</span> dałoby <span class="mono">22</span>.</p>
+<p class="en"><span class="mono">input()</span> reads one line, <span class="mono">int(...)</span> turns it into a number. Without <span class="mono">int</span> Python would treat it as text.</p>
+<div class="note"><p>Na tej stronie każda liczba wejściowa jest w osobnej linii, więc trzy liczby czytasz trzema poleceniami <span class="mono">input()</span>.</p>
+<p class="en">On this page each input number is on its own line, so three numbers need three <span class="mono">input()</span> calls.</p></div>
+
+<h2>3. Warunki <span class="en">/ Conditions</span></h2>
+<div class="para">
+<div><h5>InstaLogik</h5><pre class="code"> 1. Wczytaj do A
+ 2. Wczytaj do B
+ 3. Jeżeli A &gt; B skocz do
+    następnej inaczej skocz do 6
+ 4. Wypisz pudełko A
+ 5. Skocz do końca
+ 6. Wypisz pudełko B</pre></div>
+<div><h5>Python</h5><pre class="code">a = int(input())
+b = int(input())
+if a &gt; b:
+    print(a)
+else:
+    print(b)</pre></div>
+</div>
+<p>Zwróć uwagę na dwie rzeczy: dwukropek na końcu linii z <span class="mono">if</span> oraz wcięcie o cztery spacje. W Pythonie wcięcie zastępuje skoki — to ono mówi, co należy do warunku.</p>
+<p class="en">Note the colon and the four-space indent. In Python the indent replaces jumps — it says what belongs to the condition.</p>
+
+<h2>4. Pętle <span class="en">/ Loops</span></h2>
+<div class="para">
+<div><h5>InstaLogik</h5><pre class="code"> 1. Wczytaj do A
+ 2. Ustaw B na 0
+ 3. Jeżeli A &gt; 0 skocz do
+    następnej inaczej skocz do 7
+ 4. Zwiększ B o A
+ 5. Zmniejsz A o 1
+ 6. Skocz do 3
+ 7. Wypisz pudełko B</pre></div>
+<div><h5>Python</h5><pre class="code">n = int(input())
+suma = 0
+for i in range(1, n + 1):
+    suma = suma + i
+print(suma)</pre></div>
+</div>
+<p>Tu Python naprawdę wygrywa. <span class="mono">range(1, n + 1)</span> daje kolejne liczby od 1 do n, a pętla <span class="mono">for</span> wykonuje wcięty fragment dla każdej z nich. Żadnych skoków i numerów linii.</p>
+<p class="en">Here Python really wins. <span class="mono">range(1, n + 1)</span> gives the numbers from 1 to n, and the <span class="mono">for</span> loop runs the indented part for each one.</p>
+
+<h2>5. Wypisywanie <span class="en">/ Printing</span></h2>
+<p><span class="mono">print(a)</span> wypisuje wartość i od razu przechodzi do nowej linii — czyli robi to, co w InstaLogiku wymagało dwóch poleceń: „Wypisz pudełko A” i „Przejdź do nowej linii”.</p>
+<p class="en"><span class="mono">print(a)</span> prints the value and moves to a new line, doing what needed two commands in InstaLogik.</p>
+
+<h2>Zadania <span class="en">/ Tasks</span></h2>
+<p>Pięć zadań, które znasz już z zeszytów. Napisz je po swojemu w Pythonie i kliknij „Sprawdź”. Program zostanie uruchomiony na wszystkich przykładach.</p>
+<p class="en">Five tasks you know from the workbooks. Write them your own way in Python and click Check.</p>
+<div id="zadania"></div>
+</main>
+<footer>
+<p>Twoje odpowiedzi zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. <span class="en">Your answers are saved only in this browser, on this device.</span></p>
+<p>© 2026 Andrzej Dobosz, British Primary School of Wilanów. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0.</span></p>
+<p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
+</footer>
+<script>
+"use strict";
+const ZAD = [
+ {t:'Podwojenie', te:'Doubling',
+  o:'Wczytaj jedną liczbę i wypisz dwa razy większą.', oe:'Read one number and print twice that number.',
+  tests:[[[1],['2']],[[7],['14']],[[20],['40']],[[500],['1000']]],
+  r:'n = int(input())\nprint(n * 2)'},
+ {t:'Suma trzech liczb', te:'Sum of three numbers',
+  o:'Wczytaj trzy liczby, każdą z osobnej linii, i wypisz ich sumę.', oe:'Read three numbers, each on its own line, and print their sum.',
+  tests:[[[1,2,3],['6']],[[10,0,5],['15']],[[100,200,300],['600']],[[0,0,0],['0']]],
+  r:'a = int(input())\nb = int(input())\nc = int(input())\nprint(a + b + c)'},
+ {t:'Większa z dwóch', te:'The larger of two',
+  o:'Wczytaj dwie liczby i wypisz większą. Jeśli są równe, wypisz tę liczbę.', oe:'Read two numbers and print the larger one.',
+  tests:[[[3,8],['8']],[[8,3],['8']],[[5,5],['5']],[[0,100],['100']]],
+  r:'a = int(input())\nb = int(input())\nif a > b:\n    print(a)\nelse:\n    print(b)'},
+ {t:'Suma od 1 do n', te:'Sum from 1 to n',
+  o:'Wczytaj liczbę n i wypisz sumę wszystkich liczb od 1 do n.', oe:'Read n and print the sum of all numbers from 1 to n.',
+  tests:[[[1],['1']],[[5],['15']],[[10],['55']],[[100],['5050']]],
+  r:'n = int(input())\nsuma = 0\nfor i in range(1, n + 1):\n    suma = suma + i\nprint(suma)'},
+ {t:'Ile liczb parzystych', te:'How many even numbers',
+  o:'Wczytaj liczbę n i wypisz, ile liczb parzystych jest od 1 do n.', oe:'Read n and print how many even numbers there are from 1 to n.',
+  tests:[[[1],['0']],[[2],['1']],[[9],['4']],[[100],['50']]],
+  r:'n = int(input())\nile = 0\nfor i in range(1, n + 1):\n    if i % 2 == 0:\n        ile = ile + 1\nprint(ile)'}
+];
+
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const host = document.getElementById('zadania');
+ZAD.forEach((z,i)=>{
+  const przyklady = z.tests.slice(0,2).map((t,j)=>
+    '<tr><td>'+(j+1)+'</td><td class="mono">'+t[0].join('<br>')+'</td><td class="mono">'+t[1].join('<br>')+'</td></tr>').join('');
+  const d=document.createElement('div'); d.className='zad'; d.dataset.i=i;
+  d.innerHTML =
+    '<h3>Zadanie '+(i+1)+': '+esc(z.t)+' <span class="en">/ Task '+(i+1)+': '+esc(z.te)+'</span></h3>'+
+    '<p>'+esc(z.o)+'</p><p class="en">'+esc(z.oe)+'</p>'+
+    '<table><thead><tr><th>Przykład / Example</th><th>Wejście / Input</th><th>Wyjście / Output</th></tr></thead><tbody>'+przyklady+'</tbody></table>'+
+    '<textarea rows="7" spellcheck="false" placeholder="Tu napisz program w Pythonie / Write your Python program here"></textarea>'+
+    '<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">'+
+      '<button data-py="check">Sprawdź / Check</button>'+
+      '<button class="alt" data-py="clear">Wyczyść / Clear</button></div>'+
+    '<div class="pyst" style="display:none"></div>'+
+    '<details><summary>Pokaż rozwiązanie / Show a solution</summary>'+
+      '<pre class="code">'+esc(z.r)+'</pre>'+
+      '<p class="en">To jedno z możliwych rozwiązań — Twoje może wyglądać inaczej i też być poprawne. / One possible solution — yours may look different and still be correct.</p>'+
+    '</details>';
+  host.appendChild(d);
+});
+
+let pyodide=null, ladowanie=null;
+const PYODIDE_URL='https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+function wczytajPythona(info){
+  if(pyodide) return Promise.resolve(pyodide);
+  if(ladowanie) return ladowanie;
+  info('Pobieram Pythona, to potrwa kilka sekund… / Downloading Python, this takes a few seconds…');
+  ladowanie = new Promise((ok,zle)=>{
+    const s=document.createElement('script'); s.src=PYODIDE_URL+'pyodide.js';
+    s.onload=()=>loadPyodide({indexURL:PYODIDE_URL}).then(p=>{pyodide=p;ok(p);}).catch(zle);
+    s.onerror=()=>zle(new Error('skrypt'));
+    document.head.appendChild(s);
+  });
+  return ladowanie;
+}
+
+function uruchom(kod, dane){
+  pyodide.runPython(
+    'import sys, io\n'+
+    'sys.stdin = io.StringIO(' + JSON.stringify(dane.join('\n')+'\n') + ')\n'+
+    '_out = io.StringIO()\n_err = None\nsys.stdout = _out\n'
+  );
+  let blad=null;
+  try{ pyodide.runPython(kod); }
+  catch(e){ blad=String(e.message||e); }
+  const wy = pyodide.runPython('sys.stdout = sys.__stdout__\n_out.getvalue()');
+  return {wy: String(wy).split('\n').filter((l,i,a)=>!(i===a.length-1&&l==='')), blad};
+}
+
+function czytelnyBlad(s){
+  const ost = s.trim().split('\n').filter(Boolean).pop() || s;
+  if(/EOFError/.test(s)) return 'Program prosił o więcej liczb, niż jest w przykładzie. Policz, ile razy wywołujesz input(). / Your program asked for more numbers than the example provides.';
+  if(/IndentationError|expected an indented block/.test(s)) return 'Błąd wcięcia. Po linii zakończonej dwukropkiem następna musi być wcięta o cztery spacje. / Indentation error: the line after a colon must be indented.';
+  if(/SyntaxError/.test(s)) return 'Błąd składni: ' + ost + '\nNajczęstsze przyczyny to brak dwukropka po if albo for, albo brak nawiasu. / Syntax error — often a missing colon or bracket.';
+  if(/NameError/.test(s)) return ost + '\nUżywasz nazwy, której wcześniej nie ustawiłeś — sprawdź pisownię. / You used a name you have not set — check the spelling.';
+  if(/ValueError.*invalid literal/.test(s)) return 'int() dostał coś, co nie jest liczbą. Sprawdź, czy czytasz dane po jednej liczbie w linii. / int() received something that is not a number.';
+  if(/TypeError/.test(s)) return ost + '\nPrawdopodobnie mieszasz tekst z liczbą — pamiętaj o int(input()). / You are probably mixing text and numbers — remember int(input()).';
+  return ost;
+}
+
+document.addEventListener('click', async e=>{
+  const b=e.target.closest('button[data-py]'); if(!b) return;
+  const zad=b.closest('.zad'), i=+zad.dataset.i, z=ZAD[i];
+  const ta=zad.querySelector('textarea'), st=zad.querySelector('.pyst');
+  const info=(txt,kl)=>{st.style.display='block';st.className='pyst'+(kl?' '+kl:'');st.textContent=txt;};
+  if(b.dataset.py==='clear'){ta.value='';st.style.display='none';return;}
+  const kod=(ta.value||'').replace(/\t/g,'    ');
+  if(!kod.trim()){info('Najpierw napisz program. / Write a program first.','err');return;}
+  try{ await wczytajPythona(info); }
+  catch(err){ info('Nie udało się pobrać Pythona. Sprawdź połączenie z internetem — szkolna sieć może blokować pobieranie. / Could not download Python; the school network may be blocking it.','err'); return; }
+  info('Sprawdzam… / Checking…');
+  for(const t of z.tests){
+    const {wy,blad}=uruchom(kod, t[0]);
+    if(blad){ info('Python zatrzymał się dla wejścia '+t[0].join(', ')+':\n'+czytelnyBlad(blad),'err'); return; }
+    const chc=t[1];
+    if(wy.length!==chc.length || wy.some((v,k)=>v.trim()!==chc[k])){
+      info('Jeszcze nie. Dla wejścia '+t[0].join(', ')+' Twój program wypisuje '+(wy.join(' | ')||'(nic)')+
+           ', a powinien '+chc.join(' | ')+'. / Not yet: for input '+t[0].join(', ')+' you print '+(wy.join(' | ')||'(nothing)')+
+           ' instead of '+chc.join(' | ')+'.','err'); return;
+    }
+  }
+  info('Dobrze! Program działa na wszystkich '+z.tests.length+' przykładach. / Correct on all '+z.tests.length+' examples.');
+});
+</script>
+<script src="../assets/strona.js"></script>
+</body>
+</html>

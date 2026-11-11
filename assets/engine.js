@@ -68,3 +68,62 @@ function runAll(prog,inputs){
   return st;
 }
 function outputLines(st){const o=st.out.slice(); if(o.length&&o[o.length-1]==='') o.pop(); return o;}
+
+/* ---------- diagnostyka bledow: co dokladnie jest nie tak w linii ---------- */
+const POLECENIA = ['Wczytaj do A','Ustaw A na 5','Zwiększ A o 3','Zmniejsz A o 3',
+  'Wypisz pudełko A','Wypisz napis \'TAK\'','Przejdź do nowej linii','Skocz do 7',
+  'Skocz do końca','Jeżeli A ≤ 5 skocz do następnej inaczej skocz do 9'];
+
+function diagnozaLinii(raw){
+  const s = raw.replace(/^\s*\d+\s*[.)]\s+/,'').trim().replace(/\s+/g,' ');
+  const L = s.toLowerCase();
+  const zle = (p,e)=>({pl:p,en:e});
+
+  if(/^wczytaj/.test(L)){
+    if(!/^wczytaj do /.test(L)) return zle('po „Wczytaj” musi być „do” i nazwa pudełka, np. Wczytaj do A.',
+      'after “Wczytaj” you need “do” and a box name, e.g. Wczytaj do A.');
+    const b=s.slice(11).trim();
+    if(!/^[A-Da-d]$/.test(b)) return zle('„'+b+'” to nie jest pudełko. Pudełka to tylko A, B, C i D.',
+      '“'+b+'” is not a box. The boxes are only A, B, C and D.');
+  }
+  if(/^ustaw/.test(L)){
+    if(/=/.test(s)) return zle('w tym języku nie używamy znaku „=”. Napisz: Ustaw A na 5.',
+      'this language does not use “=”. Write: Ustaw A na 5.');
+    if(!/ na /.test(L)) return zle('brakuje słowa „na”. Napisz: Ustaw A na 5.','the word “na” is missing. Write: Ustaw A na 5.');
+  }
+  if(/^(zwiększ|zwieksz|zmniejsz)/.test(L) && !/ o /.test(L))
+    return zle('brakuje słowa „o” i liczby. Napisz: Zwiększ A o 3.','the word “o” and a number are missing. Write: Zwiększ A o 3.');
+  if(/^wypisz/.test(L)){
+    if(/^wypisz napis/.test(L) && !/['"‘’]/.test(s))
+      return zle('napis trzeba ująć w apostrofy. Napisz: Wypisz napis \'TAK\'.','text must be in quotes. Write: Wypisz napis \'TAK\'.');
+    if(!/^wypisz (pude[łl]ko|napis)/.test(L))
+      return zle('po „Wypisz” musi być „pudełko” albo „napis”. Napisz: Wypisz pudełko A.',
+        'after “Wypisz” you need “pudełko” or “napis”. Write: Wypisz pudełko A.');
+    const b=s.replace(/^wypisz pude[łl]ko /i,'').trim();
+    if(/^wypisz pude/i.test(s) && !/^[A-Da-d]$/.test(b))
+      return zle('„'+b+'” to nie jest pudełko. Pudełka to tylko A, B, C i D.','“'+b+'” is not a box. The boxes are only A, B, C and D.');
+  }
+  if(/^skocz/.test(L) && !/^skocz do (ko[ńn]ca|\d+)$/.test(L))
+    return zle('po „Skocz do” musi być numer linii albo słowo „końca”. Napisz: Skocz do 7.',
+      'after “Skocz do” you need a line number or the word “końca”. Write: Skocz do 7.');
+  if(/^je[żz]eli/.test(L)){
+    if(!/inaczej skocz do/.test(L))
+      return zle('warunek musi mieć obie drogi. Dopisz na końcu: inaczej skocz do 9.',
+        'a condition needs both branches. Add at the end: inaczej skocz do 9.');
+    if(!/[=≠<>≤≥]/.test(s))
+      return zle('brakuje znaku porównania: =, ≠, <, >, ≤ albo ≥.','a comparison sign is missing: =, ≠, <, >, ≤ or ≥.');
+  }
+  if(/^przejd/.test(L) && !/^przejd[źz] do nowej linii$/.test(L))
+    return zle('to polecenie brzmi dokładnie: Przejdź do nowej linii.','the command is exactly: Przejdź do nowej linii.');
+
+  const pierwsze = L.split(' ')[0];
+  const znane = ['wczytaj','ustaw','zwiększ','zwieksz','zmniejsz','wypisz','przejdź','przejdz','skocz','jeżeli','jezeli'];
+  const odl = (a,b)=>{const d=[];for(let i=0;i<=a.length;i++){d[i]=[i];for(let j=1;j<=b.length;j++)d[i][j]=i===0?j:
+    Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));}return d[a.length][b.length];};
+  let best=null,bd=99; znane.forEach(k=>{const d=odl(pierwsze,k); if(d<bd){bd=d;best=k;}});
+  if(best && bd<=2 && bd>0)
+    return zle('nie znam słowa „'+pierwsze+'”. Czy chodziło o „'+best.charAt(0).toUpperCase()+best.slice(1)+'”?',
+      'I do not know the word “'+pierwsze+'”. Did you mean “'+best.charAt(0).toUpperCase()+best.slice(1)+'”?');
+  return zle('to nie jest żadne z poleceń języka. Dozwolone są: '+POLECENIA.slice(0,7).join('; ')+'.',
+    'this is not one of the language commands. The allowed ones are: '+POLECENIA.slice(0,7).join('; ')+'.');
+}
