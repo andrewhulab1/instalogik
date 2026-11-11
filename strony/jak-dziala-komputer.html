@@ -89,7 +89,7 @@ input[type=text]{width:7em}
 <div class="irow">
  <div class="ist"><span class="ic">💡</span><b>1. Pomysł</b><small>Idea</small><small>„Dodaj 3 do liczby” / “Add 3 to a number”</small></div>
  <div class="iar">→</div>
- <div class="ist"><span class="ic">✍️</span><b>2. Assembly</b><small>Człowiek pisze krótkie polecenia / A person writes short commands</small><code>add eax, 3</code></div>
+ <div class="ist"><span class="ic">✍️</span><b>2. Assembly</b><small>Człowiek pisze krótkie polecenia / A person writes short instructions</small><code>add eax, 3</code></div>
  <div class="iar">→</div>
  <div class="ist tool"><span class="ic">🔧</span><b>3. Assembler</b><small>Program „składa” kod maszynowy / A program assembles machine code</small></div>
  </div>
@@ -104,10 +104,10 @@ input[type=text]{width:7em}
 </div>
 <h2>1. Czym jest assembly? <span class="en">/ What is assembly?</span></h2>
 <p class="lead">Komputer rozumie tylko <b>kod maszynowy</b>: długie ciągi zer i jedynek. Pisanie w nim jest bardzo trudne, więc ludzie wymyślili <b>assembly</b>: każdemu poleceniu procesora nadano krótką nazwę, którą da się przeczytać, np. <span class="mono">ADD</span> (dodaj). Specjalny program, <b>assembler</b>, zamienia ten tekst na zera i jedynki.</p>
-<p class="en">A computer only understands <b>machine code</b>: long strings of 0s and 1s. Writing it by hand is very hard, so people invented <b>assembly</b>: every processor command gets a short, readable name, such as <span class="mono">ADD</span>. A special program, the <b>assembler</b>, turns that text into 0s and 1s.</p>
+<p class="en">A computer only understands <b>machine code</b>: long strings of 0s and 1s. Writing it by hand is very hard, so people invented <b>assembly</b>: every processor instruction gets a short, readable name, such as <span class="mono">ADD</span>. A special program, the <b>assembler</b>, turns that text into 0s and 1s.</p>
 
 <div class="note"><p><b>Skąd nazwa?</b> Po angielsku <i>to assemble</i> znaczy „złożyć, zmontować”. Program <i>assembler</i> składa gotowy kod maszynowy z naszych czytelnych poleceń, tak jak montuje się model z klocków. Dlatego język nazywa się „assembly”.</p>
-<p class="en"><b>Why the name?</b> <i>To assemble</i> means to put pieces together. The assembler program puts the machine code together from our readable commands, like building a model from bricks.</p></div>
+<p class="en"><b>Why the name?</b> <i>To assemble</i> means to put pieces together. The assembler program puts the machine code together from our readable instructions, like building a model from bricks.</p></div>
 
 <h3>To samo polecenie na czterech poziomach <span class="en">/ The same idea on four levels</span></h3>
 <p>Chcemy zwiększyć liczbę o 3. Zobacz, jak to wygląda coraz bliżej maszyny:</p>
@@ -119,7 +119,7 @@ input[type=text]{width:7em}
  <div class="stair s4"><b>Kod maszynowy / Machine code</b> <span>(zapis szesnastkowy / in hexadecimal)</span><code>83 C0 03</code> <code>10000011 11000000 00000011</code></div>
 </div>
 <p>Im niżej, tym bliżej procesora, ale tym trudniej człowiekowi czytać. Język InstaLogik, którego uczysz się na konkursie, działa jak prawdziwy assembly, tylko ma mniej poleceń i cztery „pudełka” <b>A, B, C, D</b> (w prawdziwym procesorze nazywają się <b>rejestry</b>).</p>
-<p class="en">The lower you go, the closer to the processor, but the harder for a person to read. The InstaLogik language works like real assembly, with fewer commands and four “boxes” <b>A, B, C, D</b> (in a real processor they are called <b>registers</b>).</p>
+<p class="en">The lower you go, the closer to the processor, but the harder for a person to read. The InstaLogik language works like real assembly, with fewer instructions and four “boxes” <b>A, B, C, D</b> (in a real processor they are called <b>registers</b>).</p>
 
 <h2>2. Kilka faktów z historii <span class="en">/ Some history</span></h2>
 <div class="tl">
@@ -131,7 +131,7 @@ input[type=text]{width:7em}
   <p class="en">British scientist <b>Kathleen Booth</b> devised one of the first assembly languages while working on the ARC computer at Birkbeck College, London.</p></div>
  <div class="ev"><div class="yr">1949</div>
   <p>Komputer <b>EDSAC</b> na Uniwersytecie w Cambridge dostał program do tłumaczenia czytelnych poleceń na kod maszynowy, czyli wczesny assembler. Napisał go zespół z <b>Davidem Wheelerem</b>.</p>
-  <p class="en">The <b>EDSAC</b> computer at Cambridge University got a program that translated readable commands into machine code: an early assembler. It was written by a team including <b>David Wheeler</b>.</p></div>
+  <p class="en">The <b>EDSAC</b> computer at Cambridge University got a program that translated readable instructions into machine code: an early assembler. It was written by a team including <b>David Wheeler</b>.</p></div>
  <div class="ev"><div class="yr">1952</div>
   <p><b>Grace Hopper</b> stworzyła jeden z pierwszych kompilatorów. To początek języków wysokiego poziomu, z których dziś pochodzi np. Python.</p>
   <p class="en"><b>Grace Hopper</b> created one of the first compilers. This was the start of high-level languages, the family that Python belongs to today.</p></div>
@@ -207,7 +207,7 @@ input[type=text]{width:7em}
 </main>
 <footer>
 <p>Ta strona niczego nie zapisuje i nie wysyła — wszystko dzieje się w Twojej przeglądarce. Fakty historyczne podano w uproszczeniu, na poziomie szkoły podstawowej. <span class="en">This page saves and sends nothing — everything happens in your browser. Historical facts are simplified for primary level.</span></p>
-<p>Stronę opracował Andrzej Dobosz dla British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
+<p>Stronę opracował Andrzej Dobosz dla the British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
 <p>© 2026 Andrzej Dobosz, British Primary School of Wilanow. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0 — share with attribution, no changes, non-commercial use only.</span></p>
 <p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
 </footer>
@@ -293,7 +293,7 @@ function step(cb){
   Array.prototype.forEach.call(prog.children,function(li,i){li.classList.toggle('cur',i===st.pc)});
   say('<b>1. Pobierz.</b> Procesor bierze linię '+(st.pc+1)+' z pamięci.','<b>1. Fetch.</b> The processor takes line '+(st.pc+1)+' from memory.');
   setTimeout(function(){
-    stg(2);say('<b>2. Dekoduj.</b> Procesor rozpoznaje, jakie to polecenie.','<b>2. Decode.</b> The processor works out which command it is.');
+    stg(2);say('<b>2. Dekoduj.</b> Procesor rozpoznaje, jakie to polecenie.','<b>2. Decode.</b> The processor works out which instruction it is.');
     setTimeout(function(){
       stg(3);var d=exec(line);after();
       say('<b>3. Wykonaj.</b> '+d[0],'<b>3. Execute.</b> '+d[1]);render();

@@ -26,6 +26,11 @@
 .belt span{padding:2px 8px;border-radius:6px;background:var(--note)}
 .belt span.used{opacity:.3;text-decoration:line-through;background:transparent}
 .machine{border:3px solid var(--navy);border-radius:12px;padding:8px 14px;background:var(--card);font-weight:800;color:var(--navy);text-align:center}
+.inv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;padding:12px;border-radius:12px;background:var(--soft)}
+.invh{font-weight:800;color:var(--navy);text-align:center;font-size:.95rem;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.invop{border:2px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--card);text-align:center;color:var(--gold);font-weight:800}
+.invop b{color:var(--navy);font-size:1.15rem;margin:0 4px}
+.invcap{text-align:center;color:var(--mut);font-size:.92rem;margin:4px 0 0}
 .q{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0;padding:8px 10px;border-left:4px solid var(--gold);background:var(--soft);border-radius:6px}
 .q .t{flex:1 1 260px}
 .q input{width:5.5em;font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:inherit}
@@ -61,7 +66,7 @@
 <div class="box"><div class="t">L.O. – Cele lekcji / Learning objectives</div><ul>
 <li>Rozumiem, jak działają pudełka, wejście i wyjście.<br><span class="en">I understand how boxes, input and output work.</span></li>
 <li>Potrafię prześledzić program w tabeli i policzyć, ile razy wykona się pętla.<br><span class="en">I can trace a program in a table and count how many times a loop runs.</span></li>
-<li>Znam sztuczki matematyczne z konkursu: mnożenie przez dodawanie, dzielenie z resztą, największa liczba i myślenie wstecz.<br><span class="en">I know the maths tricks used in the competition: multiplying by adding, division with remainder, the biggest number and working backwards.</span></li>
+<li>Znam sztuczki matematyczne z konkursu: mnożenie przez dodawanie, dzielenie z resztą, największa liczba i myślenie wstecz.<br><span class="en">I know the maths tricks used in the competition: multiplying by adding, division with remainder, the largest number and working backwards.</span></li>
 </ul></div>
 
 <p>Osiem misji to osiem rzeczy, które pojawiają się w zadaniach InstaLogik. Za każdą poprawnie wykonaną misję dostajesz <b>odznakę</b>. Zbierz wszystkie osiem!</p>
@@ -140,7 +145,7 @@
 </section>
 
 <!-- 5 -->
-<section class="mis" id="m5"><h2><span class="ic">✖️</span>5. Mnożenie przez dodawanie <span class="en">/ Multiplying by adding</span></h2>
+<section class="mis" id="m5"><h2><span class="ic">✖️</span>5. Mnożenie przez dodawanie <span class="en">/ Multiplying by repeated addition</span></h2>
 <p>W języku InstaLogik nie ma mnożenia! Ale 3 × 4 to po prostu 4 + 4 + 4. Program dodaje tę samą liczbę kilka razy w pętli.</p>
 <p class="en">The InstaLogik language has no multiplication! But 3 × 4 is just 4 + 4 + 4. The program adds the same number several times in a loop.</p>
 <div class="vis"><div class="blocks" id="m5b"></div></div>
@@ -154,7 +159,7 @@
 <!-- 6 -->
 <section class="mis" id="m6"><h2><span class="ic">🍬</span>6. Dzielenie z resztą <span class="en">/ Division with a remainder</span></h2>
 <p>Dzielenia też nie ma! Dzielimy, <b>odejmując</b> po kawałku i licząc, ile razy się udało. To, co zostanie, to <b>reszta</b>. Przykład: 17 dni to 2 tygodnie i 3 dni.</p>
-<p class="en">There is no division either! We divide by <b>subtracting</b> a piece at a time and counting how many times it works. What is left is the <b>remainder</b>. Example: 17 days is 2 weeks and 3 days.</p>
+<p class="en">There is no division either! We divide by <b>repeated subtraction</b>: we take the same number away again and again, and count how many times we can do it. What is left is the <b>remainder</b>. Example: 17 days is 2 weeks and 3 days.</p>
 <div class="vis" style="flex-direction:column">
  <div><label>Cukierki / Sweets: <input type="number" id="m6n" value="17" min="1" max="40" style="width:4.5em"></label> <label>po / in groups of: <input type="number" id="m6k" value="5" min="1" max="10" style="width:4em"></label></div>
  <div class="groups" id="m6g"></div>
@@ -165,9 +170,9 @@
 </section>
 
 <!-- 7 -->
-<section class="mis" id="m7"><h2><span class="ic">🏆</span>7. Największa liczba <span class="en">/ The biggest number</span></h2>
+<section class="mis" id="m7"><h2><span class="ic">🏆</span>7. Największa liczba <span class="en">/ The largest number</span></h2>
 <p>Jak znaleźć największą z kilku liczb? Zapamiętaj pierwszą jako „rekord”. Każdą następną porównaj z rekordem: jeżeli jest większa, staje się nowym rekordem.</p>
-<p class="en">How do you find the biggest of several numbers? Remember the first as the “record”. Compare each next one with the record: if it is bigger, it becomes the new record.</p>
+<p class="en">How do you find the largest of several numbers? Remember the first as the “record”. Compare each next one with the record: if it is larger, it becomes the new record.</p>
 <div class="vis" style="flex-direction:column"><div class="bars" id="m7bars"></div><div class="fbk" id="m7txt"></div>
 <button id="m7step">Następna liczba / Next number</button></div>
 <div class="zap"><b>💡 Zapamiętaj!</b> Rekord to <b>król wzgórza</b>: stoi na szczycie, dopóki nie przyjdzie ktoś silniejszy.<br><span class="en"><b>Remember!</b> The record is <b>king of the hill</b>: it stays on top until someone stronger comes along.</span></div>
@@ -176,12 +181,21 @@
 
 <!-- 8 -->
 <section class="mis" id="m8"><h2><span class="ic">⏪</span>8. Myślenie wstecz <span class="en">/ Working backwards</span></h2>
-<p>Czasem znasz <b>wynik</b>, a szukasz <b>wejścia</b>. Idź od końca i rób działania odwrotne: zamiast dodawać, odejmuj; zamiast podwajać, dziel na pół.</p>
-<p class="en">Sometimes you know the <b>output</b> and need the <b>input</b>. Start from the end and do the opposite: instead of adding, subtract; instead of doubling, halve.</p>
+<p>Czasem znasz <b>wynik</b>, a szukasz <b>wejścia</b>. Idź od końca i rób <b>działania odwrotne</b>: zamiast dodawać, odejmuj; zamiast podwajać, dziel na pół.</p>
+<p class="en">Sometimes you know the <b>output</b> and need the <b>input</b>. Start from the end and use the <b>inverse operation</b> (the opposite) of each step: instead of adding, subtract; instead of doubling, halve.</p>
 <div class="vis">
  <div class="machine">? </div><div class="ar">→ ×2 →</div><div class="machine">?</div><div class="ar">→ +1 →</div><div class="machine" style="background:var(--note)">13</div>
 </div>
 <p style="text-align:center"><b>Wstecz / Backwards:</b> 13 <span class="ar">→ −1 →</span> 12 <span class="ar">→ ÷2 →</span> <b>6</b></p>
+<div class="inv">
+ <div class="invh">W przód / Forward</div>
+ <div class="invh">Wstecz / Inverse</div>
+ <div class="invop">→ <b>+ 3</b> →</div><div class="invop">← <b>− 3</b> ←</div>
+ <div class="invop">→ <b>− 5</b> →</div><div class="invop">← <b>+ 5</b> ←</div>
+ <div class="invop">→ <b>× 2</b> →</div><div class="invop">← <b>÷ 2</b> ←</div>
+ <div class="invop">→ <b>÷ 4</b> →</div><div class="invop">← <b>× 4</b> ←</div>
+</div>
+<p class="invcap">Strzałka obraca się, a znak zmienia na przeciwny. Rano: skarpetki → buty. Wieczorem: buty → skarpetki. <span class="en">The arrow turns round and the sign flips. Morning: socks → shoes. Evening: shoes → socks.</span></p>
 <div class="zap"><b>💡 Zapamiętaj!</b> Myślenie wstecz to <b>przewijanie filmu do tyłu</b>. Albo skarpetki i buty: rano zakładasz najpierw skarpetki, potem buty, a wieczorem zdejmujesz w odwrotnej kolejności.<br><span class="en"><b>Remember!</b> Working backwards is <b>rewinding a film</b>. Or socks and shoes: in the morning you put on socks, then shoes, and in the evening you take them off in the opposite order.</span></div>
 <div data-quiz="m8"></div>
 </section>
@@ -191,8 +205,8 @@
 <p style="margin-top:20px"><a href="sp-01-sciagawka.html">Dalej: Ściągawka języka / Next: Language cheat sheet &rarr;</a></p>
 </main>
 <footer>
-<p>Twoje odznaki zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nie są nigdzie wysyłane. <span class="en">Your badges are saved only in this browser, on this device — nobody sees them and they are not sent anywhere.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p>
-<p>Stronę opracował Andrzej Dobosz dla British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
+<p>Twoje odznaki zapisują się tylko w tej przeglądarce, na tym urządzeniu — nikt ich nie widzi i nikt ich nigdzie nie wysyła. Na innym komputerze ich nie będzie, a wyczyszczenie danych przeglądarki je usunie. <span class="en">Your badges are saved only in this browser, on this device — nobody sees them and nobody sends them anywhere. They will not be there on another computer, and clearing your browser data removes them.</span></p><p>To materiał do ćwiczeń, a nie oficjalny edytor konkursu. W konkursie korzystaj z edytora na platformie i stosuj się do regulaminu. <span class="en">This is practice material, not the official contest editor. In the contest use the editor on the platform and follow the rules.</span></p>
+<p>Stronę opracował Andrzej Dobosz dla the British Primary School of Wilanow. <span class="en">Created by Andrzej Dobosz for the British Primary School of Wilanow.</span></p>
 <p>© 2026 Andrzej Dobosz, British Primary School of Wilanow. Licencja <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pl" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a> — wolno rozpowszechniać z podaniem autora, bez zmian i bez celów komercyjnych. <span class="en">Licensed under CC BY-NC-ND 4.0 — share with attribution, no changes, non-commercial use only.</span></p>
 <p>Materiał przygotowany z użyciem AI na podstawie materiałów InstaLogik. <span class="en">Material prepared with the use of AI, based on InstaLogik materials.</span></p>
 </footer>
@@ -283,7 +297,7 @@ var N7=[4,9,6,12,3],i7=0;
 function d7(){var rec=null,h='';for(var i=0;i<N7.length;i++){var vis=i<i7;if(vis&&(rec===null||N7[i]>N7[rec]))rec=i;
   h+='<div class="bar1'+(vis&&false?'':'')+'" id="b7'+i+'" style="height:'+(vis?N7[i]*8+20:6)+'px;opacity:'+(vis?1:.25)+'">'+(vis?N7[i]:'')+'</div>'}
  $('m7bars').innerHTML=h;if(rec!==null)$('b7'+rec).classList.add('max');
- $('m7txt').innerHTML=i7===0?'Kliknij, żeby zobaczyć pierwszą liczbę. <span class="en">Click to see the first number.</span>':'Rekord / Record: <b>'+N7[rec]+'</b>'+(i7===N7.length?' — to największa liczba! <span class="en">— the biggest number!</span>':'')}
+ $('m7txt').innerHTML=i7===0?'Kliknij, żeby zobaczyć pierwszą liczbę. <span class="en">Click to see the first number.</span>':'Rekord / Record: <b>'+N7[rec]+'</b>'+(i7===N7.length?' — to największa liczba! <span class="en">— the largest number!</span>':'')}
 $('m7step').onclick=function(){i7=i7>=N7.length?0:i7+1;d7()};d7();
 /* reset */
 $('wyczysc').onclick=function(){S={};save(S);location.reload()};
