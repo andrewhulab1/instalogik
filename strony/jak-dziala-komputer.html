@@ -201,7 +201,7 @@ input[type=text]{width:7em}
 <details><summary>Co zamienia assembly na zera i jedynki? / What turns assembly into 0s and 1s?</summary><p>Assembler.</p></details>
 <details><summary>Jak nazywają się „pudełka” w prawdziwym procesorze? / What are the “boxes” called in a real processor?</summary><p>Rejestry / Registers.</p></details>
 <details><summary>Wymień trzy kroki procesora. / Name the three processor steps.</summary><p>Pobierz, dekoduj, wykonaj / Fetch, decode, execute.</p></details>
-<details><summary>Dlaczego ludzie wymyślili assembly? / Why did people invent assembly?</summary><p>Żeby nie pisać zer i jedynek ręcznie: nazwy poleceń łatwiej czytać i mniej się w nich pomylić. / So they would not have to write 0s and 1s by hand: command names are easier to read and make fewer mistakes.</p></details>
+<details><summary>Dlaczego ludzie wymyślili assembly? / Why did people invent assembly?</summary><p>Żeby nie pisać zer i jedynek ręcznie: nazwy poleceń łatwiej czytać i mniej się w nich pomylić. / So they would not have to write 0s and 1s by hand: instruction names are easier to read and make fewer mistakes.</p></details>
 
 <p style="margin-top:20px"><a href="niezbednik.html">Dalej: Niezbędnik – 8 misji przed konkursem / Next: Toolkit – 8 missions before the competition &rarr;</a></p>
 </main>
@@ -280,7 +280,7 @@ function exec(line){
     st.pc=tgt==='następnej'?st.pc+1:Number(tgt)-1;
     return ['Sprawdzamy: czy '+m[1]+' '+m[2]+' '+val(m[3])+'? ('+m[1]+' = '+st[m[1]]+') Odpowiedź: '+(t?'TAK':'NIE')+'. Idziemy do '+(tgt==='następnej'?'następnej linii':'linii '+tgt)+'.',
             'Check: is '+m[1]+' '+m[2]+' '+val(m[3])+'? ('+m[1]+' = '+st[m[1]]+') Answer: '+(t?'YES':'NO')+'. We go to '+(tgt==='następnej'?'the next line':'line '+tgt)+'.']}
-  st.done=true;return ['Nie rozumiem tego polecenia.','I do not understand this command.']
+  st.done=true;return ['Nie rozumiem tego polecenia.','I do not understand this instruction.']
 }
 function after(){if(!st.done&&st.pc>=PROGS[sel.value].code.length)st.done=true}
 function delay(){return [1400,1000,700,450,250][$('spd').value-1]/3}
